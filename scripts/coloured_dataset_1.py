@@ -1,17 +1,26 @@
 import random
 import os
-from PIL import Image, ImageColor
+from PIL import Image
 import numpy as np
 import copy as cp
 
 
-def permutation():
-    
+def permutation(same=False):
+    # same = False -> the permutation must be diferent from the original
     i=0
     j=1
     k=2
     
-    while i==0 and j==1 and k==2:
+    if not same:
+        while i==0 and j==1 and k==2:
+            i=random.choice([0,1,2])
+            j=random.choice([0,1,2])
+            while j==i:
+                j=random.choice([0,1,2])
+            k=random.choice([0,1,2])
+            while k==i or k==j:
+                k=random.choice([0,1,2])
+    else:
         i=random.choice([0,1,2])
         j=random.choice([0,1,2])
         while j==i:
@@ -22,9 +31,32 @@ def permutation():
     
     return i,j,k
     
+def change_color(img):
+    pixels = img.load()
+    width, height = img.size
+    
+    first = True
+    ch=np.zeros(3)
+    i=j=k=0
+    for y in range(height):
+        for x in range(width):
+            r,g,b=pixels[x,y]
+            if first:
+                i,j,k=permutation(same=False)     # compute permutation of rgb
+                first=False                     # The permutation will be the same for 
+                                                # the whole image. The image will
+                                                # always be changed due to same=False
+            ch[i]=r
+            ch[j]=g
+            ch[k]=b
+            
+            pixels[x,y]=(int(ch[0]),int(ch[1]),int(ch[2]))
+    return img
+   
     
 cartoon ='C:\\Users\\Marianna\\Desktop\\AIML_project\\AIML_project\\cartoon'
 dataset = 'C:\\Users\\Marianna\\Desktop\\coloured datasets'
+
 dog_path = cartoon+'\dog'
 elephant_path = cartoon+'\elephant'
 giraffe_path = cartoon+'\giraffe'
@@ -40,7 +72,10 @@ count1 = 0
 count2 = 0
 count3 = 0
 count4 = 0
-        
+       
+if not os.path.exists(dataset):
+                os.mkdir(dataset)
+ 
 for path1 in paths:
     
     path_len1 = len(os.listdir(path1))
@@ -52,28 +87,9 @@ for path1 in paths:
     for img_file in os.listdir(path1):
         odd = Image.open(path1 + '/' + img_file)
         img_orig = cp.copy(odd)
-        #im1.show()
-        pixels = odd.load()
-        width, height = odd.size
-        
-        first = True
-        ch=np.zeros(3)
-        i=j=k=0
-        for y in range(height):
-            for x in range(width):
-                r,g,b=pixels[x,y]
-                if first:
-                    i,j,k=permutation() # compute permutation of rgb
-                    first=False         # The permutation will be the same for 
-                                        # the whole image
-                ch[i]=r
-                ch[j]=g
-                ch[k]=b
-                
-                pixels[x,y]=(int(ch[0]),int(ch[1]),int(ch[2]))
+        odd = change_color(odd)
         #odd.show()
         #img_orig.show()
-        
     
         count = count + 1
     
