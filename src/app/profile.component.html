@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<h1>Dati personali</h1>
+<button mat-button color="primary" (click)="onClick()">
+    <mat-icon>file_upload</mat-icon>
+    Carica immagine profilo
+  </button>
+  <input type="file" id="imageUpload" accept="image/*"(change)="handleImageSelect($event)" style="display:none;">
+  <p>Nome: </p>
+  <p>Cognome: </p>
+  <p>Matricola: </p>
+  <p>Email: </p>

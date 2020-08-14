@@ -37,6 +37,7 @@ import { SuccessRegisterDialogComponent } from './auth/success-register-dialog.c
 import { CoursesComponent } from './teacher/courses.component';
 import { HomeSidevanComponent } from './home-sidevan.component';
 import { CoursesContComponent } from './teacher/courses-cont.component';
+import { ProfileComponent } from './profile.component';
 
 
 @NgModule({
@@ -53,6 +54,7 @@ import { CoursesContComponent } from './teacher/courses-cont.component';
     CoursesComponent,
     HomeSidevanComponent,
     CoursesContComponent,
+    ProfileComponent,
   ],
   entryComponents: [
     LoginDialogComponent

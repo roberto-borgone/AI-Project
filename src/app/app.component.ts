@@ -10,6 +10,7 @@ import { User } from './user.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { RegistartionForm } from './registrationForm.model';
+import { Profile } from './profile.model';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { CourseService } from './services/course.service';
 

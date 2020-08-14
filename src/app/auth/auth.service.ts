@@ -26,8 +26,8 @@ export interface TokenPayload {
 })
 export class AuthService {
 
-  API_PATH = 'https://localhost:8080/auth/signin'
-  API_PATH_REGISTER = 'https://localhost:8080/auth/register'
+  API_PATH = 'https://localhost:4200/auth/signin'
+  API_PATH_REGISTER = 'https://localhost:4200/auth/register'
 
   token: Token
   redirectUrl: string

@@ -7,6 +7,7 @@ import { StudentsContComponent } from './teacher/students-cont.component';
 import { AuthGuard } from './auth/auth.guard';
 import { HomeSidevanComponent } from './home-sidevan.component';
 import { CoursesContComponent } from './teacher/courses-cont.component';
+import { ProfileComponent } from './profile.component';
 
 const routes: Routes = [
     { 
@@ -27,6 +28,7 @@ const routes: Routes = [
             { path: '', component: CoursesContComponent, outlet: 'sidenav'}
         ]
     },
+    { path: 'profile', component: ProfileComponent},
     { path: '**', component: PageNotFoundComponent },
 ];
 
