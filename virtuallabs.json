@@ -1,0 +1,232 @@
+{
+  "students": [
+    {
+      "id": 1,
+      "serial": "213447",
+      "name": "Borgone",
+      "firstName": "Roberto",
+      "courseId": 1,
+      "groupId": 2
+    },
+    {
+      "id": 2,
+      "serial": "267571",
+      "name": "Borgone",
+      "firstName": "Andrea",
+      "courseId": 1,
+      "groupId": 2
+    },
+    {
+      "id": 3,
+      "serial": "832769",
+      "name": "Colucci",
+      "firstName": "Valeria",
+      "courseId": 1,
+      "groupId": 1
+    },
+    {
+      "id": 4,
+      "serial": "245671",
+      "name": "Corsi",
+      "firstName": "Saverio",
+      "courseId": 1,
+      "groupId": 1
+    },
+    {
+      "id": 5,
+      "serial": "765843",
+      "name": "Lanzilotti",
+      "firstName": "Enzo",
+      "courseId": 1,
+      "groupId": 3
+    },
+    {
+      "id": 6,
+      "serial": "347564",
+      "name": "Massari",
+      "firstName": "Lorenzo",
+      "courseId": 0,
+      "groupId": 3
+    },
+    {
+      "id": 7,
+      "serial": "276352",
+      "name": "Fontolan",
+      "firstName": "Luca",
+      "courseId": 0,
+      "groupId": 1
+    },
+    {
+      "id": 8,
+      "serial": "562536",
+      "name": "Caprari",
+      "firstName": "Vincenza",
+      "courseId": 1,
+      "groupId": 2
+    },
+    {
+      "id": 9,
+      "serial": "758339",
+      "name": "Rossi",
+      "firstName": "Mario",
+      "courseId": 0,
+      "groupId": 3
+    },
+    {
+      "id": 10,
+      "serial": "854893",
+      "name": "Verdi",
+      "firstName": "Giuseppe",
+      "courseId": 1,
+      "groupId": 0
+    },
+    {
+      "id": 11,
+      "serial": "743933",
+      "name": "Hendrix",
+      "firstName": "Jimi",
+      "courseId": 0,
+      "groupId": 0
+    },
+    {
+      "id": 12,
+      "serial": "647493",
+      "name": "Leone",
+      "firstName": "Sergio",
+      "courseId": 0,
+      "groupId": 0
+    },
+    {
+      "id": 13,
+      "serial": "874003",
+      "name": "Da Vinci",
+      "firstName": "Leonardo",
+      "courseId": 0,
+      "groupId": 0
+    },
+    {
+      "id": 14,
+      "serial": "983393",
+      "name": "Denito",
+      "firstName": "Renzo",
+      "courseId": 0,
+      "group": "<none>"
+    },
+    {
+      "id": 15,
+      "serial": "748493",
+      "name": "Kennedy",
+      "firstName": "John",
+      "courseId": 0,
+      "groupId": 0
+    },
+    {
+      "id": 16,
+      "serial": "373738",
+      "name": "Harambe",
+      "firstName": "Paolo",
+      "courseId": 0,
+      "group": "<none>"
+    }
+  ],
+  "courses": [
+    {
+      "id": 1,
+      "name": "Applicazioni Internet",
+      "path": "applicazioni-internet",
+      "min": 2,
+      "max": 5
+    },
+    {
+      "id": 2,
+      "name": "Programmazione di Sistema",
+      "path": "programmazione-di-sistema",
+      "min": 3,
+      "max": 4
+    }
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "name": "Calvary"
+    },
+    {
+      "id": 2,
+      "name": "PosixPosers"
+    },
+    {
+      "id": 3,
+      "name": "HashBangers"
+    }
+  ],
+  "users": [
+    {
+      "email": "olivier@mail.com",
+      "password": "$2a$10$9SFIVF0tDrwRoUlZOo9Q0urEs0cnpBXu9RWGf/TxuHjFzDteQhvDW",
+      "id": 1
+    },
+    {
+      "email": "robertoborgone@hotmail.it",
+      "password": "$2a$10$jUifxFbaDvgFnt3b/QSZ7Os.G3HZc1I3WQxdHoByTWwbOuxZ3SbkG",
+      "passwordConfirm": "roberto1",
+      "name": "Roberto",
+      "surname": "Borgone",
+      "serial": "267571",
+      "id": 2
+    },
+    {
+      "email": "s267571@studenti.polito.it",
+      "password": "$2a$10$eoO21Zog/AM38SCLBnqJBeTrf7ncSl7UFCuRz/sD3L4vDsnudV8uu",
+      "passwordConfirm": "andrea21",
+      "name": "Roberto",
+      "surname": "Borgone",
+      "serial": "267571",
+      "id": 3
+    },
+    {
+      "email": "s225854@studenti.polito.it",
+      "password": "$2a$10$L6GZg4jVjOAg2BrTrPcoDejFoDQCVrmT0ATwI.dm1guYjEsdqUzLm",
+      "passwordConfirm": "andrea21",
+      "name": "Andrea",
+      "surname": "Borgone",
+      "serial": "225854",
+      "id": 4
+    },
+    {
+      "email": "andreaborgone@polito.it",
+      "password": "$2a$10$eugSC2gQ9QjLLssX4lT58upDKGdP304udGIrQtkdxKAEJYR7FAq4W",
+      "passwordConfirm": "andrea21",
+      "name": "Andrea",
+      "surname": "Borgone",
+      "serial": "s256171",
+      "id": 5
+    },
+    {
+      "email": "carlo@polito.it",
+      "password": "$2a$10$3/4ME3wGHgwcA6lCZhcahOGZMArbtR8fRoL66w4MMgBrprAbboJbW",
+      "passwordConfirm": "andrea21",
+      "name": "Carlo",
+      "surname": "Felice",
+      "serial": "6666",
+      "id": 6
+    },
+    {
+      "email": "valeria@polito.it",
+      "password": "$2a$10$JShA5UfFJAMRnw3IzrPUz.2Zthw6Vhj5XPsqrFLQrgEIuFZ36hUW.",
+      "passwordConfirm": "andrea21",
+      "name": "valeria",
+      "surname": "valeria",
+      "serial": "2625625",
+      "id": 7
+    },
+    {
+      "email": "s123456@studenti.polito.it",
+      "password": "$2a$10$5ZqwhC8qSGAvN70TOBAzsOvZ3wJhf/PosoRhVnRTu.uEnc5/m/Rsm",
+      "passwordConfirm": "andrea21",
+      "name": "Andrea",
+      "surname": "Borgone",
+      "serial": "s123456",
+      "id": 8
+    }
+  ]
+}

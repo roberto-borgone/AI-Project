@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>Accedi</h2>
+<div mat-dialog-content>
+  <mat-form-field>
+    <input matInput placeholder="Matricola" [formControl]="data.username" required>
+    <mat-error *ngIf="data.username.invalid">{{getErrorMessageUsername(data.username)}}</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="password" placeholder="Password" [formControl]="data.password" required>
+    <mat-error *ngIf="data.password.invalid">{{getErrorMessagePassword(data.password)}}</mat-error>
+  </mat-form-field>
+  <mat-error *ngIf="data.loginInvalid">Username e Password non sono corretti</mat-error>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button 
+          color="primary" 
+          [mat-dialog-close]="data" 
+          [disabled]="data.username.invalid || data.password.invalid">
+          Login
+  </button>
+  <button mat-raised-button (click)="onNoClick()">Annulla</button>
+</div>

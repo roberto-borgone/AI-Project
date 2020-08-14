@@ -1,0 +1,30 @@
+h2 {
+    padding: 32px 0 0 0;
+}
+
+.search {
+    width: 40%;
+    text-overflow: ellipsis;
+}
+
+.container {
+    padding: 0 16px 16px 16px;
+}
+
+table {
+    width: 100%;
+    table-layout: fixed;
+    min-width: 350px;
+}
+
+th, td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.table-container{
+    overflow: auto;
+    max-height: calc(100vh - 323px);
+    min-height: 100px;
+}

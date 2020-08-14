@@ -1,26 +1,27 @@
-# Datasets
-* **dataset1**<br><img src="./img/dataset1.PNG" width="190" height="300" align='left'/>
-    Contiene la stessa immagine ripetuta tre volte + un'immagine da una classe diversa. 
-    La stessa immagine ripetuta compare in 6 set differenti, ognuno con un elemento *odd* diverso;
-    <br><br><br><br><br><br><br><br><br><br>
-    
-* **dataset2**<br><img src="./img/dataset2.PNG" width="190" height="300" align='left'/>
-    Contiene tre immagini diverse appartenenti alla stessa classe + un'immagine da una classe diversa.
-    Ogni combinazione di tre immagini della stessa classe viene ripetuta 6 volte con sei *odd* di classi diverse;
-    <br><br><br><br><br><br><br><br><br><br>
+# Ai20Lab04
 
-* **coloured_dataset_1**<br><img src="./img/coloured_dataset_1.PNG" width="180" height="100" align='left'/>
-Contiene la stessa immagine ripetuta tre volte + la stessa immagine con canali RBG invertiti;<br><br><br><br>
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.6.
 
-* **coloured_dataset_2**<br><img src="./img/coloured_dataset_2.PNG" width="180" height="300" align='left'/>
-    Contiene tre immagini diverse appartenenti alla stessa classe + un'immagine da una classe diversa.
-    I canali delle quattro immagini sono invertiti randomicamente. Vengono scelte tre immagini dalla stessa classe e viene 
-     applicata la trasformazione, al risultato si aggiunge una quarta immagine proveniente da un'altra classe.
-     Il risultato è un dataset in cui ogni combinazione di tre immagini della stessa classe viene ripetuta 6 volte
-     con sei *odd* di classi diverse;
-     <br><br><br><br><br><br><br>
-     
-* **coloured_dataset_2.2**<br><img src="./img/coloured_dataset_2.2.PNG" width="180" height="300" align='left'/>
-    E' come *coloured_dataset_2* ma la trasformazione del colore viene applicata ogni volta che viene creata una
-    combinazione di quattro immagini. La stessa combinazione di tre immagini viene ripetuta 6 volte con colori alterati
-    rendomicamente.
+## Development server
+
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+## Code scaffolding
+
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+
+## Build
+
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+
+## Running unit tests
+
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Running end-to-end tests
+
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).

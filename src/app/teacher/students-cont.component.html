@@ -1,0 +1,7 @@
+<app-students 
+    [_enrolledStudents]="enrolledStudents" 
+    [_students]="students"
+    (onDelete)="deleteStudent($event)"
+    (onAdd)="addStudent($event)"
+    (onFileUpload)="uploadFile($event)">
+</app-students>

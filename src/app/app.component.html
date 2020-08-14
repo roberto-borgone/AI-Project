@@ -1,0 +1,48 @@
+<mat-toolbar color="primary" id="main-toolbar">
+  <button mat-icon-button id="burger-menu" (click)="toggleForMenuClick()">
+    <mat-icon aria-hidden="false">menu</mat-icon>
+  </button>
+  <span><a id="title" mat-button [routerLink]="logged?'/teacher':'/home'" routerLinkActive="active" (click)="eraseCurrentCourse()">VirtualLabs</a></span>
+  <span class="spacer"></span>
+  <a mat-button (click)="logged && logout()" routerLink="/home" [queryParams]="logged? null:{doLogin: true}" routerLinkActive="active">{{logged?'Esci':'Accedi'}}</a>
+  <a mat-button *ngIf="!logged" routerLink="/home" [queryParams]="logged? null:{doRegister: true}" routerLinkActive="active">{{logged?'':'Registrati'}}</a>
+</mat-toolbar>
+
+<mat-toolbar color="secondary">
+  <span>{{this.courseService.currentCourse? this.courseService.currentCourse.name: "Home"}}</span>
+</mat-toolbar>
+
+<mat-sidenav-container>
+  
+  <mat-sidenav #sidenav mode="side" position="start" opened>
+    <div class="container-sidenav">
+      
+      <router-outlet name="sidenav"></router-outlet>
+    
+    </div>
+  </mat-sidenav>
+  
+  <mat-sidenav-content id="tab-container">
+
+    <nav mat-tab-nav-bar>
+      <a mat-tab-link 
+      *ngIf="this.courseService.currentCourse?true:false"
+      [routerLink]="this.courseService.currentCourse?'/teacher/' + this.courseService.currentCourse.path + '/students':''"
+      routerLinkActive #rlas="routerLinkActive"
+      [active]="rlas.isActive">
+      Studenti
+      </a>
+      <a mat-tab-link 
+      *ngIf="this.courseService.currentCourse?true:false"
+      [routerLink]="this.courseService.currentCourse?'/teacher/' + this.courseService.currentCourse.path + '/vms':''"
+      routerLinkActive #rlav="routerLinkActive"
+      [active]="rlav.isActive">
+      VMs
+      </a>
+    </nav>
+
+    <div id="tab"><router-outlet></router-outlet></div>
+  
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

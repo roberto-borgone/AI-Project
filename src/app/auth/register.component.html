@@ -1,0 +1,45 @@
+<h2 mat-dialog-title>Registrati</h2>
+<div mat-dialog-content>
+    <form [formGroup]="data.formGroup">
+        <mat-form-field>
+            <input matInput placeholder="Nome" formControlName="name" required>
+            <mat-error *ngIf="data.formGroup.controls.name.invalid">{{getErrorMessageName(data.formGroup)}}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Cognome" formControlName="surname" required>
+            <mat-error *ngIf="data.formGroup.controls.surname.invalid">{{getErrorMessageSurname(data.formGroup)}}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Matricola" formControlName="id" required>
+            <mat-error *ngIf="data.formGroup.controls.id.invalid">{{getErrorMessageId(data.formGroup)}}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="email" placeholder="Email" formControlName="email" required>
+            <mat-error *ngIf="data.formGroup.controls.email.invalid">{{getErrorMessageEmail(data.formGroup)}}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="password" placeholder="Password" formControlName="password" required>
+            <mat-error *ngIf="data.formGroup.controls.password.invalid">{{getErrorMessagePassword(data.formGroup)}}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="password" placeholder="Conferma password" formControlName="passwordConfirm" [errorStateMatcher]="data.matcher" required>
+            <mat-error *ngIf="data.formGroup.hasError('notSame')">Password e Conferma password devono coincidere</mat-error>
+        </mat-form-field>
+        <mat-error *ngIf="data.registrationInvalid">Uno o più campi non sono stati riempiti correttamente</mat-error>
+    </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button 
+          color="primary" 
+          [mat-dialog-close]="data" 
+          [disabled]="data.formGroup.controls.name.invalid
+          || data.formGroup.controls.surname.invalid 
+          || data.formGroup.controls.id.invalid 
+          || data.formGroup.controls.email.invalid 
+          || data.formGroup.controls.password.invalid 
+          || data.formGroup.controls.passwordConfirm.invalid 
+          || (data.formGroup.controls.password.value != data.formGroup.controls.passwordConfirm.value)">
+          Registrati
+  </button>
+  <button mat-raised-button (click)="onNoClick()">Annulla</button>
+</div>
