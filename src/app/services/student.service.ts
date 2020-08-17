@@ -24,7 +24,7 @@ export interface StudentEntity{
 })
 export class StudentService {
 
-  private API_PATH = 'https://localhost:4200/api/students'
+  private API_PATH = 'https://localhost:4200/api/API/students'
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -97,7 +97,7 @@ export class StudentService {
 
   getEnrolled(courseId: number): Observable<Student[]>{
 
-    let endpoint: string = 'https://localhost:4200/api/courses' + '/' + courseId + '/' + 'students?_expand=group'
+    let endpoint: string = 'https://localhost:4200/api/API/courses' + '/' + courseId + '/' + 'students?_expand=group'
 
     return this.http.get<StudentEntity[]>(endpoint)
     .pipe(
@@ -118,10 +118,11 @@ export class StudentService {
     )
   }
 
+  //Devo passare come parametro in ingresso a questa funzione anche il nome del corso
   uploadFile(file: any) {
     console.log("Sono in uploadFile in student service");
 
-    let endpoint: string = 'https://localhost:4200/api/courses/add';
+    let endpoint: string = 'https://localhost:4200/api/API/courses/Reti/enrollMany';
 
     this.http.post(endpoint, file);
   }

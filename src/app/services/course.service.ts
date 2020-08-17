@@ -9,7 +9,7 @@ import { Observable, throwError, from } from 'rxjs'
 })
 export class CourseService {
 
-  API_PATH = 'https://localhost:4200/api/courses'
+  API_PATH = 'https://localhost:4200/api/API/courses'
 
   currentCourse: Course
 

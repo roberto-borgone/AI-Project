@@ -15,6 +15,7 @@ export class JwtAuthInterceptor implements HttpInterceptor {
   constructor(private auth: AuthService, private router: Router) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    
     if(this.auth.isAuth()){
       // if i'm authenticated i set the auth header
       const authToken = this.auth.token.token

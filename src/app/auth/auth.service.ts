@@ -26,8 +26,8 @@ export interface TokenPayload {
 })
 export class AuthService {
 
-  API_PATH = 'https://localhost:4200/auth/signin'
-  API_PATH_REGISTER = 'https://localhost:4200/auth/register'
+  API_PATH = 'https://localhost:4200/api/auth/signin'
+  API_PATH_REGISTER = 'https://localhost:4200/api/auth/register'
 
   token: Token
   redirectUrl: string
@@ -84,7 +84,6 @@ export class AuthService {
   }
 
   register(registrationForm: RegistartionForm): Observable<Boolean>{
-    console.log("Sono quiiiiiiiiii");
     return this.http.post(this.API_PATH_REGISTER, registrationForm, this.httpOptions)
     .pipe(
       map(result => {
