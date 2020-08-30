@@ -10,11 +10,11 @@ export interface GroupEntity{
 }
 
 export interface StudentEntity{
-  id: number
-  serial: string
+  id: string
   name: string
-  firstName: string
-  courseId: number
+  surname: string
+  email: string
+  courseId: string
   groupId: number
   group: GroupEntity
 }
@@ -85,7 +85,7 @@ export class StudentService {
     )
   }
 
-  updateEnrolled(courseId: number, students: Student[]): Observable<Student[]>{
+  updateEnrolled(courseId: string, students: Student[]): Observable<Student[]>{
     return from(students).pipe(
       concatMap(student => {
         student.courseId = courseId
@@ -95,18 +95,17 @@ export class StudentService {
     )
   }
 
-  getEnrolled(courseId: number): Observable<Student[]>{
+  getEnrolled(courseId: string): Observable<Student[]>{
 
-    let endpoint: string = 'https://localhost:4200/api/API/courses' + '/' + courseId + '/' + 'students?_expand=group'
+    let endpoint: string = 'https://localhost:4200/api/API/courses' + '/' + courseId + '/' + 'enrolled'
 
     return this.http.get<StudentEntity[]>(endpoint)
     .pipe(
       map(students => { 
         let studentsDTO: Student[] = []
         students.forEach(student => studentsDTO.push(new Student(student.id, 
-                                                                 student.serial, 
                                                                  student.name, 
-                                                                 student.firstName, 
+                                                                 student.surname, 
                                                                  student.courseId, 
                                                                  student.group?student.group.name:'<none>')))
         return studentsDTO

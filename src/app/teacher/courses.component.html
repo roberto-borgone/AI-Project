@@ -1,6 +1,6 @@
 <mat-nav-list>
     <a mat-list-item *ngFor="let course of courses"
-    routerLink="/teacher/{{course.path}}/students"
+    routerLink="/teacher/{{course.name}}/students"
     routerLinkActive="active"
     (click)="this.setCurrentCourse(course)">
     {{course.name}}

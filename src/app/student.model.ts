@@ -1,18 +1,16 @@
 export class Student{
 
-    id: number
-    serial: string
+    id: string
     name: string
-    firstName: string
-    courseId: number
+    surname: string
+    courseId: string
     group: string
     
 
-    constructor(id: number, serial: string, name: string, firstName: string, courseId: number = 0, group: string){
+    constructor(id: string, name: string, surname: string, courseId: string = '', group: string){
         this.id = id
-        this.serial = serial
         this.name = name
-        this.firstName = firstName
+        this.surname = surname
         this.courseId = courseId
         this.group = group
     }

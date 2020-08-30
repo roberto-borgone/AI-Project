@@ -28,11 +28,11 @@ export class StudentsContComponent implements OnDestroy{
   }
 
   deleteStudent(students: Student[]){
-    this.subscriptions.add(this.studentService.updateEnrolled(0, students).subscribe(x => this.getEnrolledStudents()))
+    this.subscriptions.add(this.studentService.updateEnrolled('', students).subscribe(x => this.getEnrolledStudents()))
   }
 
   addStudent(students: Student[]){
-    this.subscriptions.add(this.studentService.updateEnrolled(this.courseService.currentCourse.id, students).subscribe(x => this.getEnrolledStudents()))
+    this.subscriptions.add(this.studentService.updateEnrolled(this.courseService.currentCourse.name, students).subscribe(x => this.getEnrolledStudents()))
   }
 
   getStudents(){
@@ -40,7 +40,7 @@ export class StudentsContComponent implements OnDestroy{
   }
 
   getEnrolledStudents(){
-    this.subscriptions.add(this.studentService.getEnrolled(this.courseService.currentCourse.id).subscribe(students => this.enrolledStudents = students))
+    this.subscriptions.add(this.studentService.getEnrolled(this.courseService.currentCourse.name).subscribe(students => this.enrolledStudents = students))
   }
 
   uploadFile(file: any) {
