@@ -4,7 +4,7 @@
   </button>
   <span><a id="title" mat-button [routerLink]="logged?'/teacher':'/home'" routerLinkActive="active" (click)="eraseCurrentCourse()">VirtualLabs</a></span>
   <span class="spacer"></span>
-  <a mat-button (click)="logged && logout()" routerLink="/profile"  routerLinkActive="active">{{logged?'Profilo':''}}</a>
+  <a mat-button (click)="logged" routerLink="/profile"  routerLinkActive="active">{{logged?'Profilo':''}}</a>
   <a mat-button (click)="logged && logout()" routerLink="/home" [queryParams]="logged? null:{doLogin: true}" routerLinkActive="active">{{logged?'Esci':'Accedi'}}</a>
   <a mat-button *ngIf="!logged" routerLink="/home" [queryParams]="logged? null:{doRegister: true}" routerLinkActive="active">{{logged?'':'Registrati'}}</a>
 </mat-toolbar>

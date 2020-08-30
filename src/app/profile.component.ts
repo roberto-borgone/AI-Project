@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Profile } from './profile.model';
+import { ProfileService } from './services/profile.service';
 
 
 @Component({
@@ -11,9 +12,10 @@ export class ProfileComponent implements OnInit {
 
   profile: Profile;
 
-  constructor() {}
+  constructor(private service: ProfileService) {}
 
   ngOnInit(): void {
+    this.service.getProfile()
   }
 
   onClick() { 
