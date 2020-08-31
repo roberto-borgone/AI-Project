@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Profile } from './profile.model';
 import { ProfileService } from './services/profile.service';
+import { Profile } from './profile.model';
 
 
 @Component({
@@ -12,10 +12,13 @@ export class ProfileComponent implements OnInit {
 
   profile: Profile;
 
-  constructor(private service: ProfileService) {}
+  constructor(private profileService : ProfileService) {
+    this.profile = new Profile('','','','');
+  }
 
   ngOnInit(): void {
-    this.service.getProfile()
+    this.profileService.getProfile().subscribe(res => this.profile = res);
+    this.profileService.getImg().subscribe(res => console.log("Ciaooo"));
   }
 
   onClick() { 
@@ -27,7 +30,10 @@ export class ProfileComponent implements OnInit {
     console.log("Sono in handleFileSelect");
     var files = event.target.files; // FileList object
     var file = files[0];
+    console.log(file);
+    this.profileService.sendImg(file);
     var reader = new FileReader();
+    
 
     reader.readAsText(file);
     reader.onload = (event: any) => {
@@ -36,3 +42,4 @@ export class ProfileComponent implements OnInit {
     }
   }
 }
+

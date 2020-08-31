@@ -4,8 +4,10 @@
     <mat-icon>file_upload</mat-icon>
     Carica immagine profilo
   </button>
+  
   <input type="file" id="imageUpload" accept="image/*"(change)="handleImageSelect($event)" style="display:none;">
-  <p>Nome: </p>
-  <p>Cognome: </p>
-  <p>Matricola: </p>
-  <p>Email: </p>
+  <br><br>
+  <p>Nome: {{profile.name}}</p>
+  <p>Cognome: {{profile.surname}}</p>
+  <p>Matricola: {{profile.id}}</p>
+  <p>Email: {{profile.email}}</p>
