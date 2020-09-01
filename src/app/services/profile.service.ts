@@ -14,6 +14,8 @@ export class ProfileService {
 
   sendImg(img : File){
 
+    console.log("Sono in sendImg")
+
     const API_PATH = 'https://localhost:4200/api/API/students/'+this.authService.token.username+'/addPhoto';
 
     const formData = new FormData();
@@ -25,16 +27,20 @@ export class ProfileService {
         console.error(err)
         return throwError(err.message)
       })
-    ) 
+    ).subscribe() 
   }
 
-  getImg() : Observable<File> {
+  getImg() : Observable<any> {
 
     console.log("Sono in getImg");
 
+    const requestOptions: Object = {
+      responseType: 'blob'
+    }
+
     const API_PATH = 'https://localhost:4200/api/API/students/'+this.authService.token.username+'/getPhoto';
 
-    return this.http.get<File>(API_PATH)
+    return this.http.get<any>(API_PATH, requestOptions)
     .pipe(
       catchError( err => {
         console.error(err)

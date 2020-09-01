@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <h1>Dati personali</h1>
+<img [src]="url" *ngIf="url" style="max-width: 200px; height: auto;">
+<br>
 <button mat-button color="primary" (click)="onClick()">
     <mat-icon>file_upload</mat-icon>
     Carica immagine profilo

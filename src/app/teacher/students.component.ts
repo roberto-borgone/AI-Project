@@ -33,7 +33,7 @@ export class StudentsComponent {
   onFileUpload: EventEmitter<any>
 
   // column to display in table
-  colsToDisplay: string[] = ['select', 'serial', 'name', 'firstName', 'group']
+  colsToDisplay: string[] = ['select', 'id', 'name', 'surname', 'group']
 
   // selected student
   selectedStudent: Student
@@ -119,7 +119,7 @@ export class StudentsComponent {
 
   // string representation of a student
   studentToString(student: Student): string {
-    return student.name.toUpperCase() + ' ' + student.firstName.toUpperCase() + ' (' + student.serial + ')'
+    return student.name.toUpperCase() + ' ' + student.name.toUpperCase() + ' (' + student.id + ')'
   }
 
   // filter options in autocomplete
@@ -132,8 +132,8 @@ export class StudentsComponent {
     filter = filter.toUpperCase()
     this.filteredStudents = this.students.filter(s => 
       (s.name.toUpperCase().includes(filter) || 
-      s.firstName.toUpperCase().includes(filter) || 
-      s.serial.startsWith(filter)))
+      s.name.toUpperCase().includes(filter) || 
+      s.id.startsWith(filter)))
   }
 
   // retrieve user option selection
