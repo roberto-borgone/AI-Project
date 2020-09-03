@@ -1,9 +1,12 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Student} from 'src/app/student.model'
 import { StudentService } from '../services/student.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { CourseService } from '../services/course.service';
 import { Router, NavigationEnd } from '@angular/router';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { CsvUploadDialogComponent } from './csv-upload-dialog.component';
+import { CsvStudent } from '../csv-student.model';
 
 @Component({
   selector: 'app-students-cont',
@@ -15,8 +18,9 @@ export class StudentsContComponent implements OnDestroy{
   enrolledStudents: Student[]
   students: Student[]
   subscriptions: Subscription = new Subscription()
+  csvResult : CsvStudent[]
 
-  constructor(private studentService: StudentService, private courseService: CourseService, private router: Router) {
+  constructor(private studentService: StudentService, private courseService: CourseService, private router: Router, public dialog: MatDialog) {
     this.getStudents()
     this.getEnrolledStudents()
     this.subscriptions.add(this.router.events.subscribe(val => {
@@ -45,9 +49,23 @@ export class StudentsContComponent implements OnDestroy{
 
   uploadFile(file: any) {
     console.log("Sono in uploadFile in students-cont");
-    console.log(file);
-    this.studentService.uploadFile(file);
+    this.subscriptions.add(this.studentService.uploadFile(file).subscribe(uploadResult => {
+      console.log(uploadResult);
+      this.csvResult = uploadResult;
+      this.openDialog();
+    }));
   }
+
+  openDialog() {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    dialogConfig.data = this.csvResult;
+
+    this.dialog.open(CsvUploadDialogComponent, dialogConfig);
+}
 
   ngOnDestroy(){
     this.subscriptions.unsubscribe()
