@@ -54,7 +54,13 @@ export class CourseService {
 
   query(): Observable<Course[]>{
 
-    let PATH = 'https://localhost:4200/api/API/students/' + this.auth.token.username + '/courses'
+    let PATH : string;
+
+    if(this.auth.token.username[0]=='s')
+      PATH = 'https://localhost:4200/api/API/students/' + this.auth.token.username + '/courses'
+    else
+      PATH = 'https://localhost:4200/api/API/docents/' + this.auth.token.username + '/courses'
+
     //return of(this.students)
     return this.http.get<Course[]>(PATH)
     .pipe(

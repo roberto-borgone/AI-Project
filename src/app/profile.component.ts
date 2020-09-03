@@ -39,16 +39,7 @@ export class ProfileComponent implements OnInit {
     console.log("Sono in handleImageSelect");
     var files = event.target.files; // FileList object
     var file = files[0];
-    console.log(file);
     this.profileService.sendImg(file);
-    var reader = new FileReader();
-    
-
-    reader.readAsText(file);
-    reader.onload = (event: any) => {
-      var img = event.target.result; // Content of image file
-      console.log(img);
-    }
   }
 }
 

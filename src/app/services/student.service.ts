@@ -121,8 +121,17 @@ export class StudentService {
   uploadFile(file: any) {
     console.log("Sono in uploadFile in student service");
 
-    let endpoint: string = 'https://localhost:4200/api/API/courses/Reti/enrollMany';
+    const formData = new FormData();
+    formData.append('file', new Blob([file], { type: 'text/csv' }), file.name);
 
-    this.http.post(endpoint, file);
+    const API_PATH = 'https://localhost:4200/api/API/courses/Reti/enrollMany';
+
+    this.http.post(API_PATH, formData)
+    .pipe(
+      catchError( err => {
+        console.error(err)
+        return throwError(err.message)
+      })
+    ).subscribe()
   }
 }

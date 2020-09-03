@@ -164,13 +164,16 @@ export class StudentsComponent {
     console.log("Sono in handleFileSelect");
     var files = event.target.files; // FileList object
     var file = files[0];
+    this.onFileUpload.emit(file);
+    
+    /*
     var reader = new FileReader();
 
     reader.readAsText(file);
     reader.onload = (event: any) => {
       var csv = event.target.result; // Content of CSV file
-      console.log(csv);
-      this.onFileUpload.emit(csv);
+      console.log(csv);        
     }
+    */ 
   }
 }
