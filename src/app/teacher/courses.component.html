@@ -10,6 +10,10 @@
             <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="toggleCourse(course)">
+                <mat-icon>{{course.enabled?'remove_circle':'check_circle'}}</mat-icon>
+                <span>{{course.enabled?'Disabilita':'Abilita'}}</span>
+                </button>
             <button mat-menu-item>
             <mat-icon>create</mat-icon>
             <span>Modifica</span>

@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { Course } from '../course.model';
 import { CourseService } from '../services/course.service';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-courses',
@@ -16,10 +17,19 @@ export class CoursesComponent {
     this.courses = courses
   }
 
-  constructor(private courseService: CourseService) { }
+  @Output()
+  toggleCourseEvent: EventEmitter<Course>
+
+  constructor(private courseService: CourseService) {
+    this.toggleCourseEvent = new EventEmitter()
+   }
 
   setCurrentCourse(course: Course){
     this.courseService.currentCourse = course;
+  }
+
+  toggleCourse(course: Course){
+    this.toggleCourseEvent.emit(course)
   }
 
 }

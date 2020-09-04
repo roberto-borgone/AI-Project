@@ -27,6 +27,10 @@ export class CoursesContComponent implements OnDestroy {
     this.subscriptions.add(this.courseService.query().subscribe(courses => this.courses = courses))
   }
 
+  toggleCourse(course: Course){
+    this.subscriptions.add(this.courseService.updateStatus(course).subscribe(course => this.getCourses()))
+  }
+
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe()
   }

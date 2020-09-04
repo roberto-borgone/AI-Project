@@ -83,4 +83,16 @@ export class CourseService {
     )
   }
 
+  updateStatus(course: Course): Observable<boolean>{
+    return this.http.post(this.API_PATH + '/' + course.name + '/updateStatus', {enabled: !course.enabled}, this.httpOptions)
+    .pipe(
+      map(result => {
+        return true}),
+      catchError( err => {
+        console.log(err)
+        return of(false)
+      })
+    )
+  }
+
 }
