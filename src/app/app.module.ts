@@ -41,6 +41,7 @@ import { HomeSidevanComponent } from './home-sidevan.component';
 import { CoursesContComponent } from './teacher/courses-cont.component';
 import { ProfileComponent } from './profile.component';
 import { AddCourseDialogComponent } from './teacher/add-course-dialog.component';
+import { CsvUploadDialogComponent } from './teacher/csv-upload-dialog.component';
 
 
 @NgModule({
@@ -59,6 +60,7 @@ import { AddCourseDialogComponent } from './teacher/add-course-dialog.component'
     CoursesContComponent,
     ProfileComponent,
     AddCourseDialogComponent,
+    CsvUploadDialogComponent,
   ],
   entryComponents: [
     LoginDialogComponent
