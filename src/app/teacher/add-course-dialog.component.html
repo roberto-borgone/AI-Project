@@ -19,7 +19,7 @@
     <mat-error *ngIf="data.courseMax.invalid">{{getErrorMessageMax(data.courseMax)}}</mat-error>
   </mat-form-field>
   <mat-form-field floatLabel="always" appearance="none">
-    <mat-slide-toggle [formControl]="data.courseEnabled" required>{{data.courseEnabled.value == true?'Abilitato':'Disabilitato'}}</mat-slide-toggle>
+    <mat-slide-toggle color="primary" [formControl]="data.courseEnabled" required>{{data.courseEnabled.value == true?'Abilitato':'Disabilitato'}}</mat-slide-toggle>
     <textarea matInput hidden></textarea>
   </mat-form-field>
   <mat-error *ngIf="data.addCourseInvalid">La modifica del corso non è possibile con questi dati</mat-error>
