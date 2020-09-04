@@ -13,6 +13,8 @@ import { RegistartionForm } from './registrationForm.model';
 import { Profile } from './profile.model';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { CourseService } from './services/course.service';
+import { AddCourseDialogComponent } from './teacher/add-course-dialog.component';
+import { Course } from './course.model';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -55,6 +57,12 @@ export class AppComponent implements OnDestroy{
   }, this.checkPasswords)
   registrationInvalid: Boolean = false
 
+  courseName: FormControl = new FormControl('', [Validators.required])
+  courseAcronimo: FormControl = new FormControl('', [Validators.required])
+  courseMin: FormControl = new FormControl('', [Validators.min(1)])
+  courseMax: FormControl = new FormControl('', [Validators.min(1)])
+  courseEnabled: FormControl = new FormControl(true)
+  addCourseInvalid: boolean = false
 
   constructor(public dialog: MatDialog, private auth: AuthService, private route: ActivatedRoute, private router: Router, public courseService: CourseService) {
     this.subscriptions.add(this.route.queryParams.subscribe(params => {
@@ -64,6 +72,9 @@ export class AppComponent implements OnDestroy{
       }
       if(params['doRegister'] === 'true'){
         this.openDialogRegistration()
+      }
+      if(params['addCourse'] === 'true'){
+        this.openDialogAddCourse()
       }
     }))
   }
@@ -170,6 +181,46 @@ export class AppComponent implements OnDestroy{
     let dialogRef = this.dialog.open(SuccessRegisterDialogComponent, {
       width: '400px'
     });
+  }
+
+  openDialogAddCourse(): void {
+    let dialogRef = this.dialog.open(AddCourseDialogComponent, {
+      width: '400px',
+      data: {courseName: this.courseName, courseAcronimo: this.courseAcronimo, courseMin: this.courseMin, courseMax: this.courseMax, courseEnabled: this.courseEnabled, addCourseInvalid: this.addCourseInvalid}
+    });
+
+    this.subscriptions.add(dialogRef.afterClosed().subscribe(result => {
+      if(result && result.courseName.valid && result.courseAcronimo.valid && result.courseMin.valid && result.courseMax.valid && result.courseEnabled.valid){
+
+        // nested observables.. i could have found a more elegant solution to this
+        this.subscriptions.add(this.courseService.create(new Course(result.courseName.value, result.courseAcronimo.value, result.courseMin.value, result.courseMax.value, result.courseEnabled.value))
+        .subscribe(authResult => {
+            
+          if(authResult === false){
+            // not logged error message display
+            this.addCourseInvalid = true
+            this.openDialogAddCourse()
+          }else{
+            // created
+            this.addCourseInvalid = false
+            this.courseName.reset()
+            this.courseAcronimo.reset()
+            this.courseMin.reset()
+            this.courseMax.reset()
+            this.courseEnabled.reset()
+          }
+        }))
+      }else if(!result){
+        // dialog closed i remove data
+        this.addCourseInvalid = false
+        this.courseName.reset()
+        this.courseAcronimo.reset()
+        this.courseMin.reset()
+        this.courseMax.reset()
+        this.courseEnabled.reset()
+        this.router.navigate(['/teacher'])
+      }
+    }));
   }
 
   logout(){

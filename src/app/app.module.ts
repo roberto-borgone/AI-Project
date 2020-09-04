@@ -10,10 +10,12 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatButtonModule} from '@angular/material/button';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatTableModule} from '@angular/material/table';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
+import {MatMenuModule} from '@angular/material/menu';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { StudentsComponent } from './teacher/students.component';
@@ -38,6 +40,7 @@ import { CoursesComponent } from './teacher/courses.component';
 import { HomeSidevanComponent } from './home-sidevan.component';
 import { CoursesContComponent } from './teacher/courses-cont.component';
 import { ProfileComponent } from './profile.component';
+import { AddCourseDialogComponent } from './teacher/add-course-dialog.component';
 
 
 @NgModule({
@@ -55,6 +58,7 @@ import { ProfileComponent } from './profile.component';
     HomeSidevanComponent,
     CoursesContComponent,
     ProfileComponent,
+    AddCourseDialogComponent,
   ],
   entryComponents: [
     LoginDialogComponent
@@ -66,7 +70,7 @@ import { ProfileComponent } from './profile.component';
     MatListModule, MatTabsModule, MatButtonModule, MatTableModule,
     MatCheckboxModule, MatAutocompleteModule, MatInputModule, 
     MatSortModule, MatPaginatorModule, AppRoutingModule, HttpClientModule,
-    MatDialogModule, FormsModule, ReactiveFormsModule
+    MatDialogModule, FormsModule, ReactiveFormsModule, MatMenuModule, MatSlideToggleModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass:JwtAuthInterceptor, multi: true }, StudentService, AuthService],
   bootstrap: [AppComponent]

@@ -1,0 +1,10 @@
+.courseItem{
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: row;
+    align-items: center;
+}
+
+.addCourse{
+    margin-right: 8px;
+}

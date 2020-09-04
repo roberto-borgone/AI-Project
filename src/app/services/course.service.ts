@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Course } from '../course.model';
-import { catchError } from 'rxjs/operators';
-import { Observable, throwError, from } from 'rxjs'
+import { catchError, map } from 'rxjs/operators';
+import { Observable, throwError, of } from 'rxjs'
 import { AuthService } from '../auth/auth.service';
 
 @Injectable({
@@ -22,12 +22,14 @@ export class CourseService {
      
   constructor(private http: HttpClient, private auth: AuthService) {}
 
-  create(course: Course){
-    this.http.post<Course>(this.API_PATH, course, this.httpOptions)
+  create(course: Course): Observable<Boolean>{
+    return this.http.post<Course>(this.API_PATH, course, this.httpOptions)
     .pipe(
+      map(result => {
+        return true}),
       catchError( err => {
-        console.error(err)
-        return throwError(err.message)
+        console.log(err)
+        return of(false)
       })
     )
   }

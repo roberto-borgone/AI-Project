@@ -1,0 +1,35 @@
+<h2 mat-dialog-title>Crea nuovo corso</h2>
+<div mat-dialog-content>
+  <mat-form-field>
+    <input matInput placeholder="Nome" [formControl]="data.courseName" required>
+    <mat-error *ngIf="data.courseName.invalid">{{getErrorMessageName(data.courseName)}}</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Acronimo" [formControl]="data.courseAcronimo" required>
+    <mat-error *ngIf="data.courseAcronimo.invalid">{{getErrorMessageAcronimo(data.courseAcronimo)}}</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Min</mat-label>
+    <input matInput type="number" placeholder="1" [formControl]="data.courseMin" required>
+    <mat-error *ngIf="data.courseMin.invalid">{{getErrorMessageMin(data.courseMin)}}</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Max</mat-label>
+    <input matInput type="number" placeholder="1" [formControl]="data.courseMax" required>
+    <mat-error *ngIf="data.courseMax.invalid">{{getErrorMessageMax(data.courseMax)}}</mat-error>
+  </mat-form-field>
+  <mat-form-field floatLabel="always" appearance="none">
+    <mat-slide-toggle [formControl]="data.courseEnabled" required>{{data.courseEnabled.value == true?'Abilitato':'Disabilitato'}}</mat-slide-toggle>
+    <textarea matInput hidden></textarea>
+  </mat-form-field>
+  <mat-error *ngIf="data.addCourseInvalid">La modifica del corso non è possibile con questi dati</mat-error>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button 
+          color="primary" 
+          [mat-dialog-close]="data" 
+          [disabled]="data.courseName.invalid || data.courseAcronimo.invalid || data.courseMin.invalid || data.courseMax.invalid || data.courseEnabled.invalid">
+          Crea
+  </button>
+  <button mat-raised-button (click)="onNoClick()">Annulla</button>
+</div>
