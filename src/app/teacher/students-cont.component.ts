@@ -49,9 +49,9 @@ export class StudentsContComponent implements OnDestroy{
 
   uploadFile(file: any) {
     console.log("Sono in uploadFile in students-cont");
-    this.subscriptions.add(this.studentService.uploadFile(file).subscribe(uploadResult => {
-      console.log(uploadResult);
+    this.subscriptions.add(this.courseService.uploadFile(file).subscribe(uploadResult => {
       this.csvResult = uploadResult;
+      console.log(this.csvResult);
       this.openDialog();
     }));
   }
@@ -63,6 +63,7 @@ export class StudentsContComponent implements OnDestroy{
     dialogConfig.autoFocus = true;
 
     dialogConfig.data = this.csvResult;
+    dialogConfig.width = '800px';
 
     this.dialog.open(CsvUploadDialogComponent, dialogConfig);
 }
