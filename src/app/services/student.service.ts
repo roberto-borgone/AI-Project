@@ -86,17 +86,16 @@ export class StudentService {
     )
   }
 
-  enroll(courseId: string, student: Student): Observable<boolean>{
+  enroll(student: Student): Observable<boolean>{
     return this.http.post<Object>(this.courseService.API_PATH + '/' + this.courseService.currentCourse.name + '/enrollOne', {id: student.id}, this.httpOptions)
     .pipe(
       map(result => {return true})
     )
   }
 
-  deleteFromCourse(courseId: string, students: Student[]): Observable<Student[]>{
+  deleteFromCourse(students: Student[]): Observable<Student[]>{
     return from(students).pipe(
       concatMap(student => {
-        student.courseId = courseId
         return this.http.post<Student>(this.courseService.API_PATH + '/' + this.courseService.currentCourse.name + '/deleteStudentFromCourse/' + student.id, student, this.httpOptions)
       }),
       toArray()
@@ -113,8 +112,7 @@ export class StudentService {
         let studentsDTO: Student[] = []
         students.forEach(student => studentsDTO.push(new Student(student.id, 
                                                                  student.name, 
-                                                                 student.surname, 
-                                                                 student.courseId, 
+                                                                 student.surname,
                                                                  student.group?student.group.name:'<none>')))
         return studentsDTO
       }),
