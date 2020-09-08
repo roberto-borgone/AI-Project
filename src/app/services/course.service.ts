@@ -34,12 +34,15 @@ export class CourseService {
     )
   }
 
-  update(course: Course){
-    this.http.put<Course>(this.API_PATH, course, this.httpOptions)
+  update(course: Course): Observable<boolean>{
+    return this.http.put<Course>(this.API_PATH + '/' + course.name, course, this.httpOptions)
     .pipe(
+      map(result => {
+        return true
+      }),
       catchError( err => {
         console.error(err)
-        return throwError(err.message)
+        return of(false)
       })
     )
   }
@@ -73,21 +76,23 @@ export class CourseService {
     )
   }
 
-  delete(id: number){
-    this.http.delete(this.API_PATH + '/' + id)
-    .pipe(
-      catchError( err => {
-        console.error(err)
-        return throwError(err.message)
-      })
-    )
-  }
-
   updateStatus(course: Course): Observable<boolean>{
     return this.http.post(this.API_PATH + '/' + course.name + '/updateStatus', {enabled: !course.enabled}, this.httpOptions)
     .pipe(
       map(result => {
         return true}),
+      catchError( err => {
+        console.log(err)
+        return of(false)
+      })
+    )
+  }
+
+  deleteCourse(course: Course): Observable<boolean>{
+    return this.http.delete<boolean>(this.API_PATH + '/' + course.name, this.httpOptions)
+    .pipe(
+      map(result => {
+        return result}),
       catchError( err => {
         console.log(err)
         return of(false)

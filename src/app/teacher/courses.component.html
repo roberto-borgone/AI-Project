@@ -14,11 +14,11 @@
                 <mat-icon>{{course.enabled?'remove_circle':'check_circle'}}</mat-icon>
                 <span>{{course.enabled?'Disabilita':'Abilita'}}</span>
                 </button>
-            <button mat-menu-item>
+            <button mat-menu-item (click)="modifyCourse(course)">
             <mat-icon>create</mat-icon>
             <span>Modifica</span>
             </button>
-            <button mat-menu-item>
+            <button mat-menu-item (click)="deleteCourse(course)">
               <mat-icon>delete</mat-icon>
               <span>Elimina</span>
             </button>

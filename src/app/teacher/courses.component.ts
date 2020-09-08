@@ -20,8 +20,16 @@ export class CoursesComponent {
   @Output()
   toggleCourseEvent: EventEmitter<Course>
 
+  @Output()
+  deleteCourseEvent: EventEmitter<Course>
+
+  @Output()
+  modifyCourseEvent: EventEmitter<Course>
+
   constructor(private courseService: CourseService) {
     this.toggleCourseEvent = new EventEmitter()
+    this.deleteCourseEvent = new EventEmitter()
+    this.modifyCourseEvent = new EventEmitter()
    }
 
   setCurrentCourse(course: Course){
@@ -30,6 +38,14 @@ export class CoursesComponent {
 
   toggleCourse(course: Course){
     this.toggleCourseEvent.emit(course)
+  }
+
+  deleteCourse(course: Course){
+    this.deleteCourseEvent.emit(course)
+  }
+
+  modifyCourse(course: Course){
+    this.modifyCourseEvent.emit(course)
   }
 
 }
