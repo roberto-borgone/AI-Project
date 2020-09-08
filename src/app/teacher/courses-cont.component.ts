@@ -31,11 +31,6 @@ export class CoursesContComponent implements OnDestroy {
 
   constructor(private courseService: CourseService, private router: Router, private route: ActivatedRoute, private dialog: MatDialog) { 
     this.getCourses()
-    this.subscriptions.add(this.router.events.subscribe(val => {
-      if(val instanceof NavigationEnd){
-        this.getCourses()
-      }
-    }))
     this.subscriptions.add(this.route.queryParams.subscribe(params => {
       if(params['addCourse'] === 'true'){
         this.openDialogAddCourse()

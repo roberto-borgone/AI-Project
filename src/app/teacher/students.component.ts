@@ -27,7 +27,7 @@ export class StudentsComponent {
   onDelete: EventEmitter<Student[]>
 
   @Output()
-  onAdd: EventEmitter<Student[]>
+  onAdd: EventEmitter<Student>
 
   @Output()
   onFileUpload: EventEmitter<any>
@@ -146,7 +146,7 @@ export class StudentsComponent {
 
     // avoid multiple insertion
     if(this.selectedStudent != null && this.enrolledStudents.data.findIndex(d => d.id == this.selectedStudent.id) === -1) {
-      this.onAdd.emit([this.selectedStudent])
+      this.onAdd.emit(this.selectedStudent)
       // clear the input field
       this.input.nativeElement.value = ''
       // update the autocomplete options and invalidate the selection

@@ -1,7 +1,7 @@
 export class Course{
 
     name: string
-    aconimo: string
+    acronimo: string
     min: number
     max: number
     enabled: boolean
@@ -14,7 +14,7 @@ export class Course{
 
     constructor(name: string, acronimo: string, min: number, max: number, enabled: boolean){
         this.name = name
-        this.aconimo = acronimo
+        this.acronimo = acronimo
         this.min = min
         this.max = max
         this.enabled = enabled

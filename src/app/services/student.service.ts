@@ -3,6 +3,7 @@ import { Student} from 'src/app/student.model'
 import { Observable, throwError, from } from 'rxjs'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { catchError, concatMap, toArray, map } from 'rxjs/operators';
+import { CourseService } from './course.service';
 
 export interface GroupEntity{
   id: number
@@ -32,7 +33,7 @@ export class StudentService {
     })
   }
                    
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private courseService: CourseService) {}
 
   create(student: Student){
     this.http.post<Student>(this.API_PATH, student, this.httpOptions)
@@ -85,11 +86,18 @@ export class StudentService {
     )
   }
 
-  updateEnrolled(courseId: string, students: Student[]): Observable<Student[]>{
+  enroll(courseId: string, student: Student): Observable<boolean>{
+    return this.http.post<Object>(this.courseService.API_PATH + '/' + this.courseService.currentCourse.name + '/enrollOne', {id: student.id}, this.httpOptions)
+    .pipe(
+      map(result => {return true})
+    )
+  }
+
+  deleteFromCourse(courseId: string, students: Student[]): Observable<Student[]>{
     return from(students).pipe(
       concatMap(student => {
         student.courseId = courseId
-        return this.http.put<Student>(this.API_PATH + '/' + student.id, student, this.httpOptions)
+        return this.http.post<Student>(this.courseService.API_PATH + '/' + this.courseService.currentCourse.name + '/deleteStudentFromCourse/' + student.id, student, this.httpOptions)
       }),
       toArray()
     )
