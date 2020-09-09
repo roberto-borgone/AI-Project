@@ -9,6 +9,8 @@ export interface DialogData {
   courseMin: FormControl;
   courseMax: FormControl;
   courseEnabled: FormControl;
+  courseNameVM: FormControl;
+  courseVersionVM: FormControl;
   addCourseInvalid: boolean; 
 }
 
@@ -48,6 +50,18 @@ export class AddCourseDialogComponent {
   getErrorMessageMax(courseMax: FormControl) {
     if (courseMax.hasError('min')) {
       return 'Inserisci un numero valido di studenti';
+    }
+  }
+
+  getErrorMessageNameVM(courseNameVM: FormControl) {
+    if (courseNameVM.hasError('required')) {
+      return 'Inserisci un sistema operativo';
+    }
+  }
+
+  getErrorMessageVersionVM(courseVersionVM: FormControl) {
+    if (courseVersionVM.hasError('required')) {
+      return 'Inserisci una versione';
     }
   }
 

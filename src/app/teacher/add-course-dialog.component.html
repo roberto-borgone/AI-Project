@@ -22,7 +22,16 @@
     <mat-slide-toggle color="primary" [formControl]="data.courseEnabled">{{data.courseEnabled.value == true?'Abilitato':'Disabilitato'}}</mat-slide-toggle>
     <textarea matInput hidden></textarea>
   </mat-form-field>
-  <mat-error *ngIf="data.addCourseInvalid">La modifica del corso non è possibile con questi dati</mat-error>
+  <h2 mat-dialog-title>Modello VM</h2>
+  <mat-form-field>
+    <input matInput placeholder="Sistema Operativo" [formControl]="data.courseNameVM" required>
+    <mat-error *ngIf="data.courseNameVM.invalid">{{getErrorMessageNameVM(data.courseNameVM)}}</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Versione" [formControl]="data.courseVersionVM" required>
+    <mat-error *ngIf="data.courseVersionVM.invalid">{{getErrorMessageVersionVM(data.courseVersionVM)}}</mat-error>
+  </mat-form-field>
+  <mat-error *ngIf="data.addCourseInvalid">La creazione del corso non è possibile con questi dati</mat-error>
 </div>
 <div mat-dialog-actions>
   <button mat-raised-button 

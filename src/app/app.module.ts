@@ -43,6 +43,8 @@ import { ProfileComponent } from './profile.component';
 import { AddCourseDialogComponent } from './teacher/add-course-dialog.component';
 import { CsvUploadDialogComponent } from './teacher/csv-upload-dialog.component';
 import { ModifyCourseDialogComponent } from './teacher/modify-course-dialog.component';
+import { VmsComponent } from './teacher/vms.component';
+import { UpdateVMDialogComponent } from './teacher/update-vm-dialog.component';
 
 
 @NgModule({
@@ -63,6 +65,8 @@ import { ModifyCourseDialogComponent } from './teacher/modify-course-dialog.comp
     AddCourseDialogComponent,
     CsvUploadDialogComponent,
     ModifyCourseDialogComponent,
+    VmsComponent,
+    UpdateVMDialogComponent,
   ],
   entryComponents: [
     LoginDialogComponent

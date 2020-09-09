@@ -23,6 +23,8 @@ export class CoursesContComponent implements OnDestroy {
   courseMin: FormControl = new FormControl('', [Validators.min(1)])
   courseMax: FormControl = new FormControl('', [Validators.min(1)])
   courseEnabled: FormControl = new FormControl(true)
+  courseNameVM: FormControl = new FormControl('', [Validators.required])
+  courseVersionVM: FormControl = new FormControl('', [Validators.required])
   addCourseInvalid: boolean = false
 
   mcourseAcronimo: FormControl = new FormControl('', [Validators.required])
@@ -53,11 +55,11 @@ export class CoursesContComponent implements OnDestroy {
   openDialogAddCourse(): void {
     let dialogRef = this.dialog.open(AddCourseDialogComponent, {
       width: '400px',
-      data: {courseName: this.courseName, courseAcronimo: this.courseAcronimo, courseMin: this.courseMin, courseMax: this.courseMax, courseEnabled: this.courseEnabled, addCourseInvalid: this.addCourseInvalid}
+      data: {courseName: this.courseName, courseAcronimo: this.courseAcronimo, courseMin: this.courseMin, courseMax: this.courseMax, courseEnabled: this.courseEnabled, courseNameVM: this.courseNameVM, courseVersionVM: this.courseVersionVM, addCourseInvalid: this.addCourseInvalid}
     });
 
     this.subscriptions.add(dialogRef.afterClosed().subscribe(result => {
-      if(result && result.courseName.valid && result.courseAcronimo.valid && result.courseMin.valid && result.courseMax.valid && result.courseEnabled.valid){
+      if(result && result.courseName.valid && result.courseAcronimo.valid && result.courseMin.valid && result.courseMax.valid && result.courseNameVM.valid && result.courseVersionVM.valid && result.courseEnabled.valid){
 
         // nested observables.. i could have found a more elegant solution to this
         this.subscriptions.add(this.courseService.create(new Course(result.courseName.value, result.courseAcronimo.value, result.courseMin.value, result.courseMax.value, result.courseEnabled.value))
@@ -68,6 +70,8 @@ export class CoursesContComponent implements OnDestroy {
             this.addCourseInvalid = true
             this.openDialogAddCourse()
           }else{
+
+            this.subscriptions.add(this.courseService.createModelVM(result.courseName.value, result.courseNameVM.value, result.courseVersionVM.value).subscribe())
             // created
             this.addCourseInvalid = false
             this.courseName.reset()

@@ -117,4 +117,17 @@ export class CourseService {
     )
   }
 
+  createModelVM(course: string, courseNameVM: string, courseVersionVM: string): Observable<boolean>{
+    return this.http.post<Object>(this.API_PATH + '/' + course + '/modelVM', {name: courseNameVM, version: courseVersionVM}, this.httpOptions)
+    .pipe(
+      map(result => {
+        return true
+      }),
+      catchError( err => {
+        console.error(err)
+        return of(false)
+      })
+    )
+  }
+
 }
