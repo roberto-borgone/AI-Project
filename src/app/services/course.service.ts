@@ -100,4 +100,21 @@ export class CourseService {
     )
   }
 
+  uploadFile(file: any) : Observable<any> {
+    console.log("Sono in uploadFile in student service");
+
+    const formData = new FormData();
+    formData.append('file', new Blob([file], { type: 'text/csv' }), file.name);
+
+    const API_PATH = 'https://localhost:4200/api/API/courses/'+this.currentCourse.name+'/enrollMany';
+
+    return this.http.post<any>(API_PATH, formData)
+    .pipe(
+      catchError( err => {
+        console.error(err)
+        return throwError(err.message)
+      })
+    )
+  }
+
 }

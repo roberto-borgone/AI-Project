@@ -59,13 +59,14 @@ export class StudentsContComponent implements OnDestroy{
   openDialog() {
     const dialogConfig = new MatDialogConfig();
 
-    dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
 
     dialogConfig.data = this.csvResult;
     dialogConfig.width = '800px';
 
-    this.dialog.open(CsvUploadDialogComponent, dialogConfig);
+    const dialogRef = this.dialog.open(CsvUploadDialogComponent, dialogConfig);
+
+    //this.subscriptions.add(dialogRef.afterClosed().subscribe());
 }
 
   ngOnDestroy(){
