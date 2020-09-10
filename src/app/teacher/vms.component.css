@@ -27,3 +27,11 @@ th, td {
     max-height: calc(100vh - 323px);
     min-height: 100px;
 }
+
+.red{
+    color: red;
+}
+
+.green{
+    color: greenyellow;
+}

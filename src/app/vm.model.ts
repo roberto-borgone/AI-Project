@@ -6,7 +6,7 @@ export class VM{
     ram: number 
     disk: number
     virtualCpu: number
-    isOn: boolean
+    on: boolean
     path: string
     teamID: number
     owners: Student[] 
@@ -17,7 +17,7 @@ export class VM{
         this.ram = ram
         this.disk = disk
         this.virtualCpu = virtualCpu
-        this.isOn = isOn
+        this.on = isOn
         this.path = path
         this.teamID = teamID
         this.owners = owners

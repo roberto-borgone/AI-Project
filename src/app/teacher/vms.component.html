@@ -71,9 +71,11 @@
     <div class="table-container">
         <table mat-table [dataSource]="vms" matSort #sort2="matSort">
 
-          <ng-container matColumnDef="isOn">
+          <ng-container matColumnDef="on">
             <th mat-header-cell *matHeaderCellDef> Status </th>
-            <td mat-cell *matCellDef="let element"> {{element.isOn}} </td>
+            <td mat-cell *matCellDef="let element">
+              <mat-icon [class]="element.on?'green':'red'">fiber_manual_record</mat-icon>
+            </td>
           </ng-container>
           
           <ng-container matColumnDef="id">

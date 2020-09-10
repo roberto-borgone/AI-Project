@@ -28,33 +28,23 @@ export class UpdateVMDialogComponent {
   }
 
   getErrorMessageMaxRAM(maxRAM: FormControl) {
-    if (maxRAM.hasError('min')) {
-      return 'Inserisci un valore valido per la RAM';
-    }
+    return 'Inserisci un valore valido per la RAM'
   }
 
   getErrorMessageMaxDisk(maxDisk: FormControl) {
-    if (maxDisk.hasError('min')) {
-      return 'Inserisci un valore valido per il disco';
-    }
+    return 'Inserisci un valore valido per il disco';
   }
 
   getErrorMessageMaxVCPU(maxVCPU: FormControl) {
-    if (maxVCPU.hasError('min')) {
-      return 'Inserisci un valore valido per le VCPU';
-    }
+    return 'Inserisci un valore valido per le VCPU';
   }
 
   getErrorMessageMaxTotVM(maxTotVM: FormControl) {
-    if (maxTotVM.hasError('min')) {
-      return 'Inserisci un numero valido di VM';
-    }
+    return 'Inserisci un numero valido di VM';
   }
 
   getErrorMessageMaxActiveVM(maxActiveVM: FormControl) {
-    if (maxActiveVM.hasError('min')) {
-      return 'Inserisci un numero valido di VM';
-    }
+    return 'Inserisci un numero valido di VM';
   }
 
 }

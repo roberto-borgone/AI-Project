@@ -39,7 +39,7 @@ export class VmsComponent {
   onUpdateCourseVM: EventEmitter<any>
 
   colsToDisplay: string[] = ['id', 'name', 'maxRAM', 'maxDisk', 'maxVCPU', 'maxActiveVM', 'maxTotVM', 'buttons']
-  colsToDisplayVM: string[] = ['isOn', 'id', 'ram', 'virtualCpu', 'disk', 'teamID', 'owners', 'path']
+  colsToDisplayVM: string[] = ['on', 'id', 'ram', 'virtualCpu', 'disk', 'teamID', 'owners', 'path']
 
   teams: MatTableDataSource<Team>
   vms: MatTableDataSource<VM>

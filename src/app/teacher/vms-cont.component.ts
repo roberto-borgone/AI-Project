@@ -10,6 +10,7 @@ import { CourseService } from '../services/course.service';
 import { VM } from '../vm.model';
 import { Course } from '../course.model';
 import { ModelVM } from './modelVM.model';
+import { VmService } from '../services/vm.service';
 
 @Component({
   selector: 'app-vms-cont',
@@ -20,10 +21,7 @@ export class VmsContComponent implements OnDestroy {
 
   subsciptions: Subscription = new Subscription()
   teams: Team[]
-  vms: VM[] = [
-    {id: 1, ram: 2, disk: 200, virtualCpu: 1, isOn: true, path: 'ciao', teamID: 1, owners: []},
-    {id: 2, ram: 2, disk: 200, virtualCpu: 1, isOn: true, path: 'ciao', teamID: 1, owners: []},
-  ]
+  vms: VM[]
   modelVM: ModelVM
   course: Course
 
@@ -36,12 +34,13 @@ export class VmsContComponent implements OnDestroy {
 
   subscriptions: Subscription = new Subscription()
 
-  constructor(private teamService: TeamService, private dialog: MatDialog, private router: Router, private courseService: CourseService) {
+  constructor(private vmService: VmService, private teamService: TeamService, private dialog: MatDialog, private router: Router, private courseService: CourseService) {
     this.modelVM = new ModelVM('','');
     this.course = new Course('','',0,0,false);
     this.getTeams()
     this.getModelVM()
     this.getCourse()
+    this.getVM()
   }
 
   getTeams(){
@@ -54,6 +53,10 @@ export class VmsContComponent implements OnDestroy {
 
   getCourse() {
     this.subsciptions.add(this.courseService.getCourse().subscribe(result => { this.course = result }))
+  }
+
+  getVM(){
+    this.subsciptions.add(this.vmService.query().subscribe(result => this.vms = result))
   }
 
   openUpdateVMDialog(team: Team){
