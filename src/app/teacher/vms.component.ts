@@ -74,7 +74,7 @@ export class VmsComponent {
 
   constructor(public courseService: CourseService) { 
     this.onUpdateVM = new EventEmitter()
-    this.onShowOwners = new EventEmitter()
+    this.onShowOwners = new EventEmitter<Student[]>()
     this.onUpdateCourseVM = new EventEmitter()
   }
 
@@ -83,6 +83,7 @@ export class VmsComponent {
   }
 
   showOwners(students: Student[]){
+    console.log(students)
     this.onShowOwners.emit(students)
   }
 
