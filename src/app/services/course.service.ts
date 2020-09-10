@@ -4,6 +4,7 @@ import { Course } from '../course.model';
 import { catchError, map } from 'rxjs/operators';
 import { Observable, throwError, of } from 'rxjs'
 import { AuthService } from '../auth/auth.service';
+import { ModelVM } from '../teacher/modelVM.model';
 
 @Injectable({
   providedIn: 'root'
@@ -130,4 +131,21 @@ export class CourseService {
     )
   }
 
+  getModelVM() : Observable<any> {
+    return this.http.get<ModelVM>(this.API_PATH + '/' + this.currentCourse.name + '/getModelVM')
+    .pipe(
+      catchError( err => {
+        console.error(err)
+        return throwError(err.message)
+      }))
+    }
+
+  getCourse() : Observable<any> {
+    return this.http.get<Course>(this.API_PATH + '/' + this.currentCourse.name)
+    .pipe(
+      catchError( err => {
+        console.error(err)
+        return throwError(err.message)
+      }))
+    }
 }
