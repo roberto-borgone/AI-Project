@@ -45,4 +45,20 @@ export class TeamService {
       })
     )
   }
+
+  updateCourseVM(maxRAM : number, maxDisk : number, maxVCPU : number, maxActiveVM : number, maxTotVM : number): Observable<boolean>{
+
+    let PATH = 'https://localhost:4200/api/API/courses'
+
+    return this.http.post<Object>(PATH + '/' + this.courseService.currentCourse.name + '/updateLimits', {maxRAM: maxRAM, maxDisk: maxDisk, maxVCPU: maxVCPU, maxTotVM: maxTotVM, maxActiveVM: maxActiveVM}, this.httpOptions)
+    .pipe(
+      map(result => {
+        return true
+      }),
+      catchError(err => {
+        console.error(err)
+        return of(false)
+      })
+    )
+  }
 }

@@ -1,6 +1,14 @@
 <div class="container">
     <h2>Virtual Machines</h2>
-    <button mat-raised-button color="primary" [routerLink]="'/teacher/' + this.courseService.currentCourse.name + '/vms'" [queryParams]="{doUpdateVM: true}" routerLinkActive="active">Modifica vincoli</button>
+    <p>Sistema Operativo: {{modelVM.name}}</p>
+    <p>Versione: {{modelVM.version}}</p>
+    <h3>Vincoli</h3>
+    <p>Max RAM: {{course.maxRAM}}GB</p>
+    <p>Max Disk: {{course.maxDisk}}GB</p>
+    <p>Max VCPU: {{course.maxVirtualCPU}}</p>
+    <p>Max Active VM: {{course.maxActiveVM}}</p>
+    <p>Max Tot VM: {{course.maxTotVM}}</p>
+    <button style="margin-bottom: 20px" mat-raised-button color="primary" (click)="updateCourseVM()">Modifica vincoli</button>
     
     <h3>Gruppi</h3>
     <div class="table-container">

@@ -6,6 +6,9 @@ import { Team } from '../team.model';
 import { CourseService } from '../services/course.service';
 import { VM } from '../vm.model';
 import { Student } from '../student.model';
+import { throwIfEmpty } from 'rxjs/operators';
+import { ModelVM } from './modelVM.model';
+import { Course } from '../course.model';
 
 @Component({
   selector: 'app-vms',
@@ -31,12 +34,17 @@ export class VmsComponent {
 
   @Output()
   onShowOwners: EventEmitter<Student[]>
+  onUpdateCourseVM: EventEmitter<any>
 
   colsToDisplay: string[] = ['id', 'name', 'maxRAM', 'maxDisk', 'maxVCPU', 'maxActiveVM', 'maxTotVM', 'buttons']
   colsToDisplayVM: string[] = ['isOn', 'id', 'ram', 'virtualCpu', 'disk', 'teamID', 'owners', 'path']
 
   teams: MatTableDataSource<Team>
   vms: MatTableDataSource<VM>
+
+  modelVM: ModelVM
+
+  course: Course
 
   @Input()
   set _teams(teams: Team[]){
@@ -52,9 +60,20 @@ export class VmsComponent {
     this.vms.paginator = this.paginator2
   }
 
+  @Input()
+  set _modelVM(modelVM: ModelVM) {
+    this.modelVM = modelVM
+  }
+
+  @Input()
+  set _course(course: Course) {
+    this.course = course
+  }
+
   constructor(public courseService: CourseService) { 
     this.onUpdateVM = new EventEmitter()
     this.onShowOwners = new EventEmitter()
+    this.onUpdateCourseVM = new EventEmitter()
   }
 
   updateVM(team: Team){
@@ -67,6 +86,10 @@ export class VmsComponent {
 
   startVM(vm: VM){
     console.log("VM " + vm.id + " has started")
+  }
+  
+  updateCourseVM() {
+    this.onUpdateCourseVM.emit();
   }
 
 }
