@@ -10,6 +10,8 @@ import { CourseService } from '../services/course.service';
 import { VM } from '../vm.model';
 import { Course } from '../course.model';
 import { ModelVM } from './modelVM.model';
+import { Student } from '../student.model';
+import { OwnerDialogComponent } from './owner-dialog.component';
 
 @Component({
   selector: 'app-vms-cont',
@@ -145,6 +147,17 @@ export class VmsContComponent implements OnDestroy {
         this.router.navigate(['/teacher/' + this.courseService.currentCourse.name + '/vms'])
       }
     }));
+    
+  }
+
+  showOwnersDialog(students : Student[]){
+
+    let dialogRef = this.dialog.open(OwnerDialogComponent, {
+      width: '400px',
+      data: {students: Array.of(students)}
+    });
+
+    this.subscriptions.add(dialogRef.afterClosed().subscribe());
     
   }
 
