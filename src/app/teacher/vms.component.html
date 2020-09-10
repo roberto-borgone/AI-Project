@@ -4,7 +4,7 @@
     
     <h3>Gruppi</h3>
     <div class="table-container">
-        <table mat-table [dataSource]="teams" matSort>
+        <table mat-table [dataSource]="teams" matSort #sort1="matSort">
           
           <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
@@ -53,9 +53,70 @@
           <tr mat-header-row *matHeaderRowDef="colsToDisplay; sticky: true"></tr>
           <tr mat-row *matRowDef="let row; columns: colsToDisplay;"></tr>
         </table>
-      </div>
-      <mat-paginator [pageSize]="5"
-                     [pageSizeOptions]="[5, 10, 25, 100]"
-                     showFirstLastButtons="true">
-      </mat-paginator>
     </div>
+    <mat-paginator #pag1 [pageSize]="5"
+                   [pageSizeOptions]="[5, 10, 25, 100]"
+                   showFirstLastButtons="true">
+    </mat-paginator>
+
+    <h3>VM</h3>
+    <div class="table-container">
+        <table mat-table [dataSource]="vms" matSort #sort2="matSort">
+
+          <ng-container matColumnDef="isOn">
+            <th mat-header-cell *matHeaderCellDef> Status </th>
+            <td mat-cell *matCellDef="let element"> {{element.isOn}} </td>
+          </ng-container>
+          
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="ram">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> RAM (GB)</th>
+            <td mat-cell *matCellDef="let element"> {{element.ram}} </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="virtualCpu">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> VCPU </th>
+            <td mat-cell *matCellDef="let element"> {{element.virtualCpu}} </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="disk">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Disk (GB)</th>
+            <td mat-cell *matCellDef="let element"> {{element.disk}} </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="teamID">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Team Id </th>
+            <td mat-cell *matCellDef="let element"> {{element.teamID}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="owners">
+            <th mat-header-cell *matHeaderCellDef> Owners </th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-icon-button (click)="showOwners(element.owners)">
+                    <mat-icon>groups</mat-icon>
+                </button>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="path">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-icon-button (click)="startVM(element)">
+                    <mat-icon>play_circle_outline</mat-icon>
+                </button>
+            </td>
+          </ng-container>
+    
+          <tr mat-header-row *matHeaderRowDef="colsToDisplayVM; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: colsToDisplayVM;"></tr>
+        </table>
+    </div>
+    <mat-paginator #pag2 [pageSize]="5"
+                   [pageSizeOptions]="[5, 10, 25, 100]"
+                   showFirstLastButtons="true">
+    </mat-paginator>
+</div>

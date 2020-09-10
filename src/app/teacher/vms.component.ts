@@ -1,9 +1,11 @@
-import { Component, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+import { Component, ViewChild, Input, Output, EventEmitter, QueryList } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Team } from '../team.model';
 import { CourseService } from '../services/course.service';
+import { VM } from '../vm.model';
+import { Student } from '../student.model';
 
 @Component({
   selector: 'app-vms',
@@ -12,18 +14,29 @@ import { CourseService } from '../services/course.service';
 })
 export class VmsComponent {
 
-  @ViewChild(MatSort, {static: true})
+  @ViewChild('sort1', {read: MatSort, static: true})
   sort: MatSort
 
-  @ViewChild(MatPaginator) 
+  @ViewChild('pag1', {read: MatPaginator}) 
   paginator: MatPaginator
+
+  @ViewChild('sort2', {read: MatSort, static: true})
+  sort2: MatSort
+
+  @ViewChild('pag2', {read: MatPaginator}) 
+  paginator2: MatPaginator
 
   @Output()
   onUpdateVM: EventEmitter<Team>
 
+  @Output()
+  onShowOwners: EventEmitter<Student[]>
+
   colsToDisplay: string[] = ['id', 'name', 'maxRAM', 'maxDisk', 'maxVCPU', 'maxActiveVM', 'maxTotVM', 'buttons']
+  colsToDisplayVM: string[] = ['isOn', 'id', 'ram', 'virtualCpu', 'disk', 'teamID', 'owners', 'path']
 
   teams: MatTableDataSource<Team>
+  vms: MatTableDataSource<VM>
 
   @Input()
   set _teams(teams: Team[]){
@@ -32,12 +45,28 @@ export class VmsComponent {
     this.teams.paginator = this.paginator
   }
 
+  @Input()
+  set _vms(vms: VM[]){
+    this.vms = new MatTableDataSource(vms)
+    this.vms.sort = this.sort2
+    this.vms.paginator = this.paginator2
+  }
+
   constructor(public courseService: CourseService) { 
     this.onUpdateVM = new EventEmitter()
+    this.onShowOwners = new EventEmitter()
   }
 
   updateVM(team: Team){
     this.onUpdateVM.emit(team)
+  }
+
+  showOwners(students: Student[]){
+    this.onShowOwners.emit(students)
+  }
+
+  startVM(vm: VM){
+    console.log("VM " + vm.id + " has started")
   }
 
 }

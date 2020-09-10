@@ -7,6 +7,7 @@ import { UpdateVMDialogComponent } from './update-vm-dialog.component';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CourseService } from '../services/course.service';
+import { VM } from '../vm.model';
 
 @Component({
   selector: 'app-vms-cont',
@@ -17,6 +18,10 @@ export class VmsContComponent implements OnDestroy {
 
   subsciptions: Subscription = new Subscription()
   teams: Team[]
+  vms: VM[] = [
+    {id: 1, ram: 2, disk: 200, virtualCpu: 1, isOn: true, path: 'ciao', teamID: 1, owners: []},
+    {id: 2, ram: 2, disk: 200, virtualCpu: 1, isOn: true, path: 'ciao', teamID: 1, owners: []},
+  ]
 
   maxRAM: FormControl = new FormControl('', [Validators.min(1)])
   maxDisk: FormControl = new FormControl('', [Validators.min(1)])
