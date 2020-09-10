@@ -1,4 +1,9 @@
-<mat-list role="list" *ngFor="let student of data">
-    <mat-list-item role="listitem">{{student}}</mat-list-item>
+<h2 mat-dialog-title>Owners</h2>
+<mat-divider></mat-divider>
+<mat-list role="list">
+    <mat-list-item role="listitem" *ngFor="let student of data.students">
+        <mat-icon matListIcon>arrow_right</mat-icon>
+        {{student.id + ' ' + student.surname + ' ' + student.name}}
+    </mat-list-item>
 </mat-list>
   

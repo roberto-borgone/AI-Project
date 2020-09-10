@@ -1,6 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DialogData } from '../auth/login-dialog.component';
+import { Student } from '../student.model';
+
+export interface DialogData{
+  students: Student[]
+}
 
 @Component({
   selector: 'app-owner-dialog',

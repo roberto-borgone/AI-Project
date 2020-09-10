@@ -157,11 +157,8 @@ export class VmsContComponent implements OnDestroy {
 
     let dialogRef = this.dialog.open(OwnerDialogComponent, {
       width: '400px',
-      data: {students: Array.of(students)}
+      data: {students: students}
     });
-
-    this.subscriptions.add(dialogRef.afterClosed().subscribe());
-    
   }
 
   ngOnDestroy(){
