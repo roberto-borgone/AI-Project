@@ -46,6 +46,7 @@ import { ModifyCourseDialogComponent } from './teacher/modify-course-dialog.comp
 import { VmsComponent } from './teacher/vms.component';
 import { UpdateVMDialogComponent } from './teacher/update-vm-dialog.component';
 import { OwnerDialogComponent } from './teacher/owner-dialog.component';
+import { StudentCourseComponent } from './student/student-course.component';
 
 
 @NgModule({
@@ -69,6 +70,7 @@ import { OwnerDialogComponent } from './teacher/owner-dialog.component';
     VmsComponent,
     UpdateVMDialogComponent,
     OwnerDialogComponent,
+    StudentCourseComponent,
   ],
   entryComponents: [
     LoginDialogComponent

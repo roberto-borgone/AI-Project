@@ -62,9 +62,9 @@ export class CourseService {
 
     let PATH : string;
 
-    if(this.auth.token.username[0]=='s')
+    if(this.auth.token.role == 'student')
       PATH = 'https://localhost:4200/api/API/students/' + this.auth.token.username + '/courses'
-    else
+    else if(this.auth.token.role == 'teacher')
       PATH = 'https://localhost:4200/api/API/docents/' + this.auth.token.username + '/courses'
 
     //return of(this.students)
