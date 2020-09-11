@@ -69,7 +69,7 @@ export class VmsContComponent implements OnDestroy {
     });
 
     this.subscriptions.add(dialogRef.afterClosed().subscribe(result => {
-      if(result && result.maxRAM.valid, result.maxDisk.valid, result.maxVCPU.valid, result.maxActiveVM.valid, result.maxTotVM.valid){
+      if(result && result.maxRAM.valid && result.maxDisk.valid && result.maxVCPU.valid && result.maxActiveVM.valid && result.maxTotVM.valid){
 
         // nested observables.. i could have found a more elegant solution to this
         this.subscriptions.add(this.teamService.updateVM(new Team(team.id, team.name, result.maxRAM.value, result.maxDisk.value, result.maxVCPU.value, result.maxActiveVM.value, result.maxTotVM.value))
@@ -88,7 +88,6 @@ export class VmsContComponent implements OnDestroy {
             this.maxTotVM.reset()
             this.maxVCPU.reset()
             this.maxActiveVM.reset()
-            this.router.navigate(['/teacher/' + this.courseService.currentCourse.name + '/vms'])
             this.getTeams()
           }
         }))
@@ -101,7 +100,6 @@ export class VmsContComponent implements OnDestroy {
         this.maxTotVM.reset()
         this.maxVCPU.reset()
         this.maxActiveVM.reset()
-        this.router.navigate(['/teacher/' + this.courseService.currentCourse.name + '/vms'])
       }
     }));
     
@@ -134,7 +132,6 @@ export class VmsContComponent implements OnDestroy {
             this.maxTotVM.reset()
             this.maxVCPU.reset()
             this.maxActiveVM.reset()
-            this.router.navigate(['/teacher/' + this.courseService.currentCourse.name + '/vms'])
             this.getCourse()
           }
         }))
@@ -147,7 +144,6 @@ export class VmsContComponent implements OnDestroy {
         this.maxTotVM.reset()
         this.maxVCPU.reset()
         this.maxActiveVM.reset()
-        this.router.navigate(['/teacher/' + this.courseService.currentCourse.name + '/vms'])
       }
     }));
     

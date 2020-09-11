@@ -8,7 +8,7 @@
   <mat-form-field>
     <mat-label>Max Disk (GB)</mat-label>
     <input matInput type="number" placeholder="1" [formControl]="data.maxDisk" required>
-    <mat-error *ngIf="data.maxRAM.invalid">{{getErrorMessageMaxDisk(data.maxDisk)}}</mat-error>
+    <mat-error *ngIf="data.maxDisk.invalid">{{getErrorMessageMaxDisk(data.maxDisk)}}</mat-error>
   </mat-form-field>
   <mat-form-field>
     <mat-label>Max VCPU</mat-label>

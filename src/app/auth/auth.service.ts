@@ -12,6 +12,7 @@ export interface Token {
   accessToken: string;
   token: string;
   username: string;
+  role: string;
 }
 
 export interface TokenPayload {
@@ -48,6 +49,10 @@ export class AuthService {
     .pipe(
       map(token => {
         this.token = token
+        if(token.username.startsWith('s'))
+          this.token.role = 'student'
+        else if(token.username.startsWith('d'))
+          this.token.role = 'teacher'
         if(this.redirectUrl)
           this.router.navigate([this.redirectUrl])
         return true}),

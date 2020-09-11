@@ -54,7 +54,7 @@ export class AppComponent implements OnDestroy{
   }, this.checkPasswords)
   registrationInvalid: Boolean = false
 
-  constructor(public dialog: MatDialog, private auth: AuthService, private route: ActivatedRoute, private router: Router, public courseService: CourseService) {
+  constructor(public dialog: MatDialog, public auth: AuthService, private route: ActivatedRoute, private router: Router, public courseService: CourseService) {
     this.subscriptions.add(this.route.queryParams.subscribe(params => {
       if(params['doLogin'] === 'true'){
         this.logged = false
@@ -75,10 +75,6 @@ export class AppComponent implements OnDestroy{
     this.subscriptions.add(dialogRef.afterClosed().subscribe(result => {
       if(result && result.username.valid && result.password.valid){
 
-        // if i do not remove doLogin from url and the jwt expires i'm not able to login anymore
-        if(!this.auth.redirectUrl){
-          this.auth.redirectUrl= '/teacher'
-        }
         // nested observables.. i could have found a more elegant solution to this
         this.subscriptions.add(this.auth.login(new User(result.username.value, result.password.value))
         .subscribe(authResult => {
@@ -94,6 +90,7 @@ export class AppComponent implements OnDestroy{
             this.password.reset()
             this.logged = true
             this.auth.redirectUrl = undefined
+            this.router.navigate(['/' + this.auth.token.role])
           }
         }))
       }else if(!result){
@@ -176,8 +173,10 @@ export class AppComponent implements OnDestroy{
     this.username.reset()
     this.password.reset()
     this.loginInvalid = false
+    this.router.navigate(['/home'])
     //remove token and an eventual stored url (the user decided to logout, the application is reset)
-    this.auth.logout() 
+    this.auth.logout()
+    this.courseService.currentCourse = undefined 
   }
 
   ngOnDestroy(){

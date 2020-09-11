@@ -27,14 +27,14 @@
 
     <nav mat-tab-nav-bar>
       <a mat-tab-link 
-      *ngIf="this.courseService.currentCourse?true:false"
+      *ngIf="(this.courseService.currentCourse && this.auth.token && this.auth.token.role == 'teacher')?true:false"
       [routerLink]="this.courseService.currentCourse?'/teacher/' + this.courseService.currentCourse.name + '/students':''"
       routerLinkActive #rlas="routerLinkActive"
       [active]="rlas.isActive">
       Studenti
       </a>
       <a mat-tab-link 
-      *ngIf="this.courseService.currentCourse?true:false"
+      *ngIf="(this.courseService.currentCourse && this.auth.token && this.auth.token.role == 'teacher')?true:false"
       [routerLink]="this.courseService.currentCourse?'/teacher/' + this.courseService.currentCourse.name + '/vms':''"
       routerLinkActive #rlav="routerLinkActive"
       [active]="rlav.isActive">

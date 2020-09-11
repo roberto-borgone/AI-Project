@@ -2,7 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { Course } from '../course.model';
 import { Subscription } from 'rxjs';
 import { CourseService } from '../services/course.service';
-import { NavigationEnd, Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { FormControl, Validators } from '@angular/forms';
 import { AddCourseDialogComponent } from './add-course-dialog.component';
