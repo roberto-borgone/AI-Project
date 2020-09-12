@@ -4,6 +4,7 @@ import { Observable, throwError, from } from 'rxjs'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { catchError, concatMap, toArray, map } from 'rxjs/operators';
 import { CourseService } from './course.service';
+import { Team } from '../team.model';
 
 export interface GroupEntity{
   id: number
@@ -17,7 +18,7 @@ export interface StudentEntity{
   email: string
   courseId: string
   groupId: number
-  group: GroupEntity
+  group: string
 }
 
 @Injectable({
@@ -32,7 +33,7 @@ export class StudentService {
       'Content-Type': 'application/json'
     })
   }
-                   
+
   constructor(private http: HttpClient, private courseService: CourseService) {}
 
   create(student: Student){
@@ -106,14 +107,37 @@ export class StudentService {
 
     let endpoint: string = 'https://localhost:4200/api/API/courses' + '/' + courseId + '/' + 'enrolled'
 
-    return this.http.get<StudentEntity[]>(endpoint)
+    /*return this.http.get<StudentEntity[]>(endpoint)
     .pipe(
-      map(students => { 
+      map(students => {
         let studentsDTO: Student[] = []
         students.forEach(student => studentsDTO.push(new Student(student.id, 
                                                                  student.name, 
                                                                  student.surname,
                                                                  student.group?student.group.name:'<none>')))
+        return studentsDTO
+      }),
+      catchError( err => {
+        console.error(err)
+        return throwError(err.message)
+      })
+    ) */
+
+    return this.http.get<StudentEntity[]>(endpoint)
+    .pipe(
+      map(students => {
+        let studentsDTO: Student[] = []
+
+        students.forEach(student => {
+          this.http.get<GroupEntity>(this.API_PATH + '/' + courseId + '/' + student.id + '/getTeam')
+            .subscribe(team => {
+              studentsDTO.push(new Student(student.id,
+              student.name,
+              student.surname,
+              team.name)); });
+        }
+        )
+        studentsDTO.forEach(student => console.log(student));
         return studentsDTO
       }),
       catchError( err => {

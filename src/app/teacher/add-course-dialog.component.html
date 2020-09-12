@@ -22,11 +22,22 @@
     <mat-slide-toggle color="primary" [formControl]="data.courseEnabled">{{data.courseEnabled.value == true?'Abilitato':'Disabilitato'}}</mat-slide-toggle>
     <textarea matInput hidden></textarea>
   </mat-form-field>
+
   <h2 mat-dialog-title>Modello VM</h2>
-  <mat-form-field>
-    <input matInput placeholder="Sistema Operativo" [formControl]="data.courseNameVM" required>
+  
+  <mat-form-field >
+    <!--<input matInput [formControl]="data.courseNameVM" required> -->
+      <mat-label>Sistema Operativo</mat-label>
+      <mat-select matInput [formControl]="data.courseNameVM" required>
+        <mat-option
+          *ngFor="let option of sistemiOp"
+          value="{{ option }}">
+        {{ option }}
+      </mat-option>
+      </mat-select>
     <mat-error *ngIf="data.courseNameVM.invalid">{{getErrorMessageNameVM(data.courseNameVM)}}</mat-error>
   </mat-form-field>
+
   <mat-form-field>
     <input matInput placeholder="Versione" [formControl]="data.courseVersionVM" required>
     <mat-error *ngIf="data.courseVersionVM.invalid">{{getErrorMessageVersionVM(data.courseVersionVM)}}</mat-error>
@@ -37,7 +48,7 @@
   <button mat-raised-button 
           color="primary" 
           [mat-dialog-close]="data" 
-          [disabled]="data.courseName.invalid || data.courseAcronimo.invalid || data.courseMin.invalid || data.courseMax.invalid || data.courseEnabled.invalid">
+          [disabled]="data.courseName.invalid || data.courseAcronimo.invalid || data.courseMin.invalid || data.courseMax.invalid || data.courseEnabled.invalid || data.courseNameVM.invalid || data.courseVersionVM.invalid">
           Crea
   </button>
   <button mat-raised-button (click)="onNoClick()">Annulla</button>
