@@ -1,0 +1,19 @@
+h2 {
+    padding: 32px 0 0 0;
+}
+
+.container {
+    padding: 0 16px 16px 16px;
+}
+
+table {
+    width: 100%;
+    table-layout: fixed;
+    min-width: 350px;
+}
+
+th, td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

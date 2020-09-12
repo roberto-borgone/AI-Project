@@ -119,7 +119,7 @@ export class StudentsComponent {
 
   // string representation of a student
   studentToString(student: Student): string {
-    return student.name.toUpperCase() + ' ' + student.name.toUpperCase() + ' (' + student.id + ')'
+    return student.name.toUpperCase() + ' ' + student.surname.toUpperCase() + ' (' + student.id + ')'
   }
 
   // filter options in autocomplete
@@ -165,7 +165,6 @@ export class StudentsComponent {
     var files = event.target.files; // FileList object
     var file = files[0];
     this.onFileUpload.emit(file);
-    
     /*
     var reader = new FileReader();
 
