@@ -47,4 +47,3 @@ export class ProfileComponent implements OnInit {
     this.subscriptions.unsubscribe();
   }
 }
-

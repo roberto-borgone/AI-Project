@@ -33,31 +33,29 @@ export class TeamService {
     )
   }
 
-  updateVM(team: Team): Observable<boolean>{
+  updateVM(team: Team): Observable<any>{
     return this.http.post<Object>(this.API_PATH + '/' + team.id + '/newTeamLimits', {maxRAM: team.maxRAM, maxDisk: team.maxDisk, maxVCPU: team.maxVCPU, maxTotVM: team.maxTotVM, maxActiveVM: team.maxActiveVM}, this.httpOptions)
     .pipe(
       map(result => {
-        return true
+        return of(result)
       }),
       catchError(err => {
-        console.error(err)
-        return of(false)
+        return of(err)
       })
     )
   }
 
-  updateCourseVM(maxRAM : number, maxDisk : number, maxVCPU : number, maxActiveVM : number, maxTotVM : number): Observable<boolean>{
+  updateCourseVM(maxRAM : number, maxDisk : number, maxVCPU : number, maxActiveVM : number, maxTotVM : number): Observable<any>{
 
     let PATH = 'https://localhost:4200/api/API/courses'
 
     return this.http.post<Object>(PATH + '/' + this.courseService.currentCourse.name + '/updateLimits', {maxRAM: maxRAM, maxDisk: maxDisk, maxVCPU: maxVCPU, maxTotVM: maxTotVM, maxActiveVM: maxActiveVM}, this.httpOptions)
     .pipe(
       map(result => {
-        return true
+        return of(result)
       }),
       catchError(err => {
-        console.error(err)
-        return of(false)
+        return of(err)
       })
     )
   }

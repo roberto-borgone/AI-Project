@@ -44,3 +44,8 @@ mat-sidenav-container {
     max-width: 20vw;
     text-overflow: ellipsis;
 }
+
+p.error{
+    color: red;
+    
+}
