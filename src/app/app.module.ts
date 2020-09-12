@@ -48,6 +48,9 @@ import { UpdateVMDialogComponent } from './teacher/update-vm-dialog.component';
 import { OwnerDialogComponent } from './teacher/owner-dialog.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
+import { StudentCourseComponent } from './student/student-course.component';
+import { AssignmentsContComponent } from './teacher/assignments-cont.component';
+import { AssignmentsComponent } from './teacher/assignments.component';
 
 
 @NgModule({
@@ -71,6 +74,9 @@ import {MatSelectModule} from '@angular/material/select';
     VmsComponent,
     UpdateVMDialogComponent,
     OwnerDialogComponent,
+    StudentCourseComponent,
+    AssignmentsContComponent,
+    AssignmentsComponent,
   ],
   entryComponents: [
     LoginDialogComponent
