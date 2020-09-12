@@ -6,7 +6,6 @@ import { Team } from '../team.model';
 import { CourseService } from '../services/course.service';
 import { VM } from '../vm.model';
 import { Student } from '../student.model';
-import { throwIfEmpty } from 'rxjs/operators';
 import { ModelVM } from './modelVM.model';
 import { Course } from '../course.model';
 

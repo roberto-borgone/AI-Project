@@ -9,6 +9,7 @@ import { HomeSidevanComponent } from './home-sidevan.component';
 import { CoursesContComponent } from './teacher/courses-cont.component';
 import { ProfileComponent } from './profile.component';
 import { StudentCourseComponent } from './student/student-course.component';
+import { AssignmentsContComponent } from './teacher/assignments-cont.component';
 
 const routes: Routes = [
     { 
@@ -26,6 +27,7 @@ const routes: Routes = [
             { path: '', component: HomeComponent },
             { path: ':id/students', component: StudentsContComponent },
             { path: ':id/vms', component: VmsContComponent },
+            { path: ':id/assignments', component: AssignmentsContComponent },
             { path: '', component: CoursesContComponent, outlet: 'sidenav'}
         ]
     },
@@ -36,6 +38,7 @@ const routes: Routes = [
             { path: '', component: HomeComponent },
             { path: ':id/students', component: StudentsContComponent },
             { path: ':id/vms', component: VmsContComponent },
+            { path: ':id/assignments', component: AssignmentsContComponent },
             { path: '', component: StudentCourseComponent, outlet: 'sidenav'}
         ]
     },
