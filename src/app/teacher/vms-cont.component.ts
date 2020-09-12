@@ -33,6 +33,7 @@ export class VmsContComponent implements OnDestroy {
   maxActiveVM: FormControl = new FormControl('', [Validators.min(1)])
   maxTotVM: FormControl = new FormControl('', [Validators.min(1)])
   updateVMInvalid: boolean = false
+  message: String = ""
 
   subscriptions: Subscription = new Subscription()
 
@@ -75,10 +76,11 @@ export class VmsContComponent implements OnDestroy {
         this.subscriptions.add(this.teamService.updateVM(new Team(team.id, team.name, result.maxRAM.value, result.maxDisk.value, result.maxVCPU.value, result.maxActiveVM.value, result.maxTotVM.value))
         .subscribe(authResult => {
             
-          if(authResult === false){
+          if(authResult.ok == false){
             // not logged error message display
             this.updateVMInvalid = true
-            this.openUpdateVMDialog(team)
+            this.message = authResult.error.message
+            this.openUpdateCourseVMDialog()
           }else{
 
             // created
@@ -109,7 +111,7 @@ export class VmsContComponent implements OnDestroy {
 
     let dialogRef = this.dialog.open(UpdateVMDialogComponent, {
       width: '400px',
-      data: {maxRAM: this.maxRAM, maxDisk: this.maxDisk, maxVCPU: this.maxVCPU, maxActiveVM: this.maxActiveVM, maxTotVM: this.maxTotVM, updateVMInvalid: this.updateVMInvalid}
+      data: {maxRAM: this.maxRAM, maxDisk: this.maxDisk, maxVCPU: this.maxVCPU, maxActiveVM: this.maxActiveVM, maxTotVM: this.maxTotVM, updateVMInvalid: this.updateVMInvalid, message : this.message}
     });
 
     this.subscriptions.add(dialogRef.afterClosed().subscribe(result => {
@@ -118,10 +120,10 @@ export class VmsContComponent implements OnDestroy {
         // nested observables.. i could have found a more elegant solution to this
         this.subscriptions.add(this.teamService.updateCourseVM(result.maxRAM.value, result.maxDisk.value, result.maxVCPU.value, result.maxActiveVM.value, result.maxTotVM.value)
         .subscribe(authResult => {
-            
-          if(authResult === false){
+          if(authResult.ok == false){
             // not logged error message display
             this.updateVMInvalid = true
+            this.message = authResult.error.message
             this.openUpdateCourseVMDialog()
           }else{
 
