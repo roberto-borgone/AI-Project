@@ -2,6 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { Course } from '../course.model';
 import { Subscription } from 'rxjs';
 import { CourseService } from '../services/course.service';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-student-course',
@@ -13,7 +14,7 @@ export class StudentCourseComponent implements OnDestroy {
   subscriptions: Subscription = new Subscription()
   courses: Course[]
 
-  constructor(private courseService: CourseService) { 
+  constructor(private courseService: CourseService, private auth: AuthService) { 
     this.getCourses()
   }
 

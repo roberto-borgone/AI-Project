@@ -6,6 +6,7 @@ import { Observable, throwError, of } from 'rxjs'
 import { AuthService } from '../auth/auth.service';
 import { ModelVM } from '../teacher/modelVM.model';
 import { Assignment } from '../assignment.model';
+import { Team } from '../team.model';
 
 @Injectable({
   providedIn: 'root'
@@ -157,6 +158,28 @@ export class CourseService {
       catchError( err => {
         console.error(err)
         return throwError(err.message)
+      })
+    )
+  }
+
+  getGroup(): Observable<boolean>{
+
+    let PATH = 'https://localhost:4200/api/API/students/' + this.currentCourse.name + '/' + this.auth.token.username + '/getTeam'
+    return this.http.get<Team>(PATH, this.httpOptions)
+    .pipe(
+      map(result => {
+        
+        if(result){
+          this.auth.token.group = result
+          return true
+        }else{
+          this.auth.token.group = undefined
+          return false
+        }
+      }),
+      catchError( err => {
+        console.error(err)
+        return of(false)
       })
     )
   }

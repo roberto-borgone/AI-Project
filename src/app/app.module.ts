@@ -49,6 +49,8 @@ import { OwnerDialogComponent } from './teacher/owner-dialog.component';
 import { StudentCourseComponent } from './student/student-course.component';
 import { AssignmentsContComponent } from './teacher/assignments-cont.component';
 import { AssignmentsComponent } from './teacher/assignments.component';
+import { TeamComponent } from './student/team.component';
+import { TeamContComponent } from './student/team-cont.component';
 
 
 @NgModule({
@@ -75,6 +77,8 @@ import { AssignmentsComponent } from './teacher/assignments.component';
     StudentCourseComponent,
     AssignmentsContComponent,
     AssignmentsComponent,
+    TeamComponent,
+    TeamContComponent,
   ],
   entryComponents: [
     LoginDialogComponent

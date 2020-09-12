@@ -1,7 +1,7 @@
 <mat-nav-list>
     <div class="courseItem" *ngFor="let course of courses">
         <a mat-list-item
-        routerLink="/student/{{course.name}}/students"
+        routerLink="/student/{{course.name}}/teams"
         routerLinkActive="active"
         (click)="this.setCurrentCourse(course)">
         {{course.name}}

@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import { CourseService } from './course.service';
 import { Team } from '../team.model';
 import { Observable, throwError, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, concatMap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Student } from '../student.model';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +20,7 @@ export class TeamService {
     })
   }
 
-  constructor(private http: HttpClient,private courseService: CourseService) { }
+  constructor(private http: HttpClient,private courseService: CourseService, private auth: AuthService) { }
 
   query(): Observable<Team[]>{
 
@@ -59,6 +61,20 @@ export class TeamService {
         console.error(err)
         return of(false)
       })
+    )
+  }
+
+  getMembers(): Observable<Student[]>{
+    return this.courseService.getGroup().pipe(
+      concatMap(result => {
+        if(result){
+          let resultQuery: Student[]
+          return this.http.get<Student[]>(this.API_PATH + '/' + this.auth.token.group.id, this.httpOptions)
+        }else{
+          let resultQuery: Student[] = []
+          return of(resultQuery)
+        }
+        })
     )
   }
 }
