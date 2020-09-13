@@ -1,4 +1,5 @@
 import { Component, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+import { Proposal } from './../proposal.model';
 import { AuthService } from '../auth/auth.service';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
@@ -12,6 +13,8 @@ import { SelectionModel } from '@angular/cdk/collections';
   styleUrls: ['./team.component.css']
 })
 export class TeamComponent {
+
+  
 
   @ViewChild('sort1', {read: MatSort, static: true})
   sort: MatSort
@@ -32,6 +35,7 @@ export class TeamComponent {
   onTeamUp: EventEmitter<Student[]>
 
   selection: SelectionModel<Student>
+  teamProposal: MatTableDataSource<Proposal>
 
   @Input()
   set _team(team: Student[]){
@@ -47,12 +51,28 @@ export class TeamComponent {
     this.enrolledStudents.paginator = this.paginator2
   }
 
+  @Input()
+  set _proposal(propose: Proposal[]){
+    this.teamProposal = new MatTableDataSource(propose)
+    this.teamProposal.sort = this.sort
+    this.teamProposal.paginator = this.paginator
+  }
+
+  @Output()
+  onAccept: EventEmitter<any>
+  @Output()
+  onReject: EventEmitter<any>
+
   colsToDisplay: string[] = ['id', 'name', 'surname', 'email']
   colsToDisplay2: string[] = ['select', 'id', 'name', 'surname']
+  colsToDisplayProposal: string[] = ['nomegruppo', 'creator','button']
+  
   
   constructor(public auth: AuthService) {
     this.selection = new SelectionModel<Student>(true, [])
     this.onTeamUp = new EventEmitter()
+    this.onAccept = new EventEmitter()
+    this.onReject = new EventEmitter()
   }
 
   teamUpSelected(){
@@ -64,6 +84,17 @@ export class TeamComponent {
 
   toggleSelectionRow(event: Event, student: Student) {
     this.selection.toggle(student)
+  }
+
+  arrayOne(n: number): any[] {
+    return Array(n);
+  }
+
+  accept(id) { 
+    this.onAccept.emit(id);
+  }
+  reject(id) { 
+    this.onReject.emit(id);
   }
 
   isRowSelected(student: Student): boolean {

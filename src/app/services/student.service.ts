@@ -122,7 +122,7 @@ export class StudentService {
             if(team)
               student.group = team.name
             else
-              student.group = '<none>'
+              student.group = ''
             return student
           })
       )}),

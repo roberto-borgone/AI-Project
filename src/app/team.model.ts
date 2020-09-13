@@ -2,6 +2,7 @@ export class Team{
 
     id: number
     name: string
+    status: number
     maxRAM: number 
     maxDisk: number
     maxVCPU: number
