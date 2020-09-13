@@ -21,8 +21,6 @@ export class StudentsContComponent implements OnDestroy{
   csvResult : CsvStudent[]
 
   constructor(private studentService: StudentService, private courseService: CourseService, private router: Router, public dialog: MatDialog) {
-    this.getStudents()
-    this.getEnrolledStudents()
     this.subscriptions.add(this.router.events.subscribe(val => {
       if(val instanceof NavigationEnd){
         this.getStudents()
