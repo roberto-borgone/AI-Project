@@ -75,4 +75,43 @@ export class TeamService {
         })
     )
   }
+
+  getStudents(): Observable<Student[]>{
+    
+    let PATH = 'https://localhost:4200/api/API/courses'
+    
+    return this.courseService.getGroup().pipe(
+      concatMap(result => {
+        if(result){
+          let resultQuery: Student[] = []
+          return of(resultQuery)
+        }else{
+          return this.http.get<Student[]>(PATH + '/' + this.courseService.currentCourse.name + '/availablestudents', this.httpOptions)
+        }
+        })
+    )
+  }
+
+  newTeam(name: string, students: Student[]){
+    
+    let PATH = 'https://localhost:4200/api/API/courses'
+
+    let studentsID: string[] = []
+
+    for(let student of students){
+      studentsID.push(student.id)
+    }
+
+    studentsID.push(this.auth.token.username)
+
+    return this.http.post<Object>(PATH + '/' + this.courseService.currentCourse.name + '/proposeTeam', {nameTeam: name, memberIds: studentsID, timeout: 10}, this.httpOptions)
+    .pipe(
+      map(result => {
+        return of(result)
+      }),
+      catchError(err => {
+        return of(err)
+      })
+    )
+  }
 }

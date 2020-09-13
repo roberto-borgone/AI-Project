@@ -1,16 +1,17 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { Student } from '../student.model';
 import { MatTableDataSource } from '@angular/material/table';
+import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-team',
   templateUrl: './team.component.html',
   styleUrls: ['./team.component.css']
 })
-export class TeamComponent implements OnInit {
+export class TeamComponent {
 
   @ViewChild('sort1', {read: MatSort, static: true})
   sort: MatSort
@@ -25,6 +26,12 @@ export class TeamComponent implements OnInit {
   paginator2: MatPaginator
 
   myTeam: MatTableDataSource<Student>
+  enrolledStudents: MatTableDataSource<Student>
+
+  @Output()
+  onTeamUp: EventEmitter<Student[]>
+
+  selection: SelectionModel<Student>
 
   @Input()
   set _team(team: Student[]){
@@ -33,11 +40,34 @@ export class TeamComponent implements OnInit {
     this.myTeam.paginator = this.paginator
   }
 
-  colsToDisplay: string[] = ['id', 'name', 'surname', 'email']
-  
-  constructor(public auth: AuthService) { }
+  @Input()
+  set _enrolledStudents(students: Student[]){
+    this.enrolledStudents = new MatTableDataSource(students)
+    this.enrolledStudents.sort = this.sort2
+    this.enrolledStudents.paginator = this.paginator2
+  }
 
-  ngOnInit(): void {
+  colsToDisplay: string[] = ['id', 'name', 'surname', 'email']
+  colsToDisplay2: string[] = ['select', 'id', 'name', 'surname']
+  
+  constructor(public auth: AuthService) {
+    this.selection = new SelectionModel<Student>(true, [])
+    this.onTeamUp = new EventEmitter()
+  }
+
+  teamUpSelected(){
+    if(this.selection.selected.length != 0){
+      this.onTeamUp.emit(this.selection.selected)
+      this.selection = new SelectionModel<Student>(true, [])
+    }
+  }
+
+  toggleSelectionRow(event: Event, student: Student) {
+    this.selection.toggle(student)
+  }
+
+  isRowSelected(student: Student): boolean {
+    return this.selection.isSelected(student)
   }
 
 }

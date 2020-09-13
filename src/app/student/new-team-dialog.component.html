@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>Proponi un gruppo</h2>
+<div mat-dialog-content>
+    <h3>Nome</h3>
+    <mat-form-field>
+        <input matInput placeholder="Nome" [formControl]="data.newTeamName" required>
+        <mat-error *ngIf="data.newTeamName.invalid">{{getErrorMessageName(data.newTeamName)}}</mat-error>
+    </mat-form-field>
+    <mat-divider></mat-divider>
+    <h3>Membri</h3>
+    <mat-list role="list">
+        <mat-list-item role="listitem">{{'Tu (' + this.auth.token.username + ')'}}</mat-list-item>
+        <mat-list-item role="listitem" *ngFor="let student of data.students">
+            <mat-icon matListIcon>arrow_right</mat-icon>
+            {{student.id + ' ' + student.surname + ' ' + student.name}}
+        </mat-list-item>
+    </mat-list>
+    <mat-error *ngIf="data.newTeamInvalid">{{getMessage()}}</mat-error>
+</div>
+<div mat-dialog-actions>
+    <button mat-raised-button 
+            color="primary" 
+            [mat-dialog-close]="data" 
+            [disabled]="data.newTeamName.invalid">
+            Crea
+    </button>
+    <button mat-raised-button (click)="onNoClick()">Annulla</button>
+  </div>
