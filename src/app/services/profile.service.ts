@@ -14,7 +14,6 @@ export class ProfileService {
 
   sendImg(img : File){
 
-    console.log("Sono in sendImg")
 
     const API_PATH = 'https://localhost:4200/api/API/students/'+this.authService.token.username+'/addPhoto';
 
@@ -32,7 +31,6 @@ export class ProfileService {
 
   getImg() : Observable<any> {
 
-    console.log("Sono in getImg");
 
     const requestOptions: Object = {
       responseType: 'blob'
@@ -50,7 +48,11 @@ export class ProfileService {
   }
 
   getProfile() : Observable<Profile> {
-    const API_PATH = 'https://localhost:4200/api/API/students/'+this.authService.token.username;
+    if(this.authService.token.role === "student"){
+      var API_PATH = 'https://localhost:4200/api/API/students/'+this.authService.token.username;
+    } else {
+      var API_PATH = 'https://localhost:4200/api/API/docents/'+this.authService.token.username;
+    }
 
     return this.http.get<Profile>(API_PATH)
     .pipe(

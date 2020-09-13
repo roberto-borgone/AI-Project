@@ -37,7 +37,6 @@ export class ProfileComponent implements OnInit {
 }
 
   handleImageSelect(event: any) {
-    console.log("Sono in handleImageSelect");
     var files = event.target.files; // FileList object
     var file = files[0];
     this.profileService.sendImg(file);
