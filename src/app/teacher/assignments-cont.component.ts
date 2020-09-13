@@ -26,7 +26,7 @@ export class AssignmentsContComponent implements OnDestroy {
   }
 
   openStudentsDialog(assignmentId : number){
-    console.log("Open students dialog");
+    this.subscriptions.add(this.courseService.getAssignmentsService().subscribe(assignments => this.assignments = assignments));
   }
 
   ngOnDestroy(): void {
