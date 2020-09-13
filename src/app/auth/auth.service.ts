@@ -15,6 +15,7 @@ export interface Token {
   username: string;
   role: string;
   group: Team;
+  groupStatus: number;
 }
 
 export interface TokenPayload {

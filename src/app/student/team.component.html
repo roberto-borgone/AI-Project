@@ -3,6 +3,8 @@
 
     <div class="table-container" *ngIf="this.auth.token.group">
         <h3>{{this.auth.token.group.name}}</h3>
+        <h5 style="color:Tomato;" *ngIf="this.auth.token.groupStatus === 0">Il gruppo non è ancora attivo, non tutti gli studenti hanno accettato la proposta.</h5>
+
         <table mat-table [dataSource]="myTeam" matSort #sort1="matSort">
           
           <ng-container matColumnDef="id">
@@ -27,6 +29,51 @@
     
           <tr mat-header-row *matHeaderRowDef="colsToDisplay; sticky: true"></tr>
           <tr mat-row *matRowDef="let row; columns: colsToDisplay;"></tr>
+        </table>
+        <mat-paginator #pag1 [pageSize]="5"
+                   [pageSizeOptions]="[5, 10, 25, 100]"
+                   showFirstLastButtons="true">
+        </mat-paginator>
+
+    </div>
+
+
+    <div class="table-container" *ngIf="!this.auth.token.group">
+        <h2>Proposte a gruppi</h2>
+        <table mat-table [dataSource]="teamProposal" matSort #sort1="matSort">
+          
+          <ng-container matColumnDef="nomegruppo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome Gruppo </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="creator">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Creatore </th>
+            <td mat-cell *matCellDef="let element"> {{element.creator}} </td>
+          </ng-container>
+<!--
+          <ng-container matColumnDef="members">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Membri </th>
+            <td mat-cell *matCellDef="let element"> 
+              <span ng-repeat="let list in element.accepted">{{list}}</span> 
+            </td>
+          </ng-container>
+
+-->
+          <ng-container matColumnDef="button">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>  </th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-icon-button color="primary" aria-label="Accept" (click)="accept(element.id)">
+                  <mat-icon >check_circle_outline</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" aria-label="Reject" (click)="reject(element.id)">
+                  <mat-icon >highlight_off</mat-icon>
+                </button>
+              </td>
+          </ng-container>
+    
+          <tr mat-header-row *matHeaderRowDef="colsToDisplayProposal; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: colsToDisplayProposal;"></tr>
         </table>
         <mat-paginator #pag1 [pageSize]="5"
                    [pageSizeOptions]="[5, 10, 25, 100]"

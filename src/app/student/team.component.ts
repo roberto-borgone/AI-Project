@@ -1,4 +1,6 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { TeamService } from './../services/team.service';
+import { Proposal } from './../proposal.model';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
@@ -11,6 +13,8 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./team.component.css']
 })
 export class TeamComponent implements OnInit {
+
+  
 
   @ViewChild('sort1', {read: MatSort, static: true})
   sort: MatSort
@@ -25,6 +29,7 @@ export class TeamComponent implements OnInit {
   paginator2: MatPaginator
 
   myTeam: MatTableDataSource<Student>
+  teamProposal: MatTableDataSource<Proposal>
 
   @Input()
   set _team(team: Student[]){
@@ -33,9 +38,39 @@ export class TeamComponent implements OnInit {
     this.myTeam.paginator = this.paginator
   }
 
+  @Input()
+  set _proposal(propose: Proposal[]){
+    this.teamProposal = new MatTableDataSource(propose)
+    this.teamProposal.sort = this.sort
+    this.teamProposal.paginator = this.paginator
+  }
+
+  @Output()
+  onAccept: EventEmitter<any>
+  @Output()
+  onReject: EventEmitter<any>
+
+  arrayOne(n: number): any[] {
+    return Array(n);
+  }
+
+
   colsToDisplay: string[] = ['id', 'name', 'surname', 'email']
+
+  colsToDisplayProposal: string[] = ['nomegruppo', 'creator','button']
   
-  constructor(public auth: AuthService) { }
+  constructor(
+    public auth: AuthService) {
+      this.onAccept = new EventEmitter()
+      this.onReject = new EventEmitter()
+     }
+
+  accept(id) { 
+    this.onAccept.emit(id);
+  }
+  reject(id) { 
+    this.onReject.emit(id);
+  }
 
   ngOnInit(): void {
   }

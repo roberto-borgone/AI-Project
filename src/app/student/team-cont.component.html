@@ -1,3 +1,7 @@
 <app-team
     [_team] = "team"
+    [_proposal] = "proposal"
+
+    (onAccept) = "onAccept($event)"
+    (onReject) = "onReject($event)"
 ></app-team>

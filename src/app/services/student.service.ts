@@ -97,22 +97,6 @@ export class StudentService {
 
     let endpoint: string = 'https://localhost:4200/api/API/courses' + '/' + courseId + '/' + 'enrolled'
 
-    /*return this.http.get<StudentEntity[]>(endpoint)
-    .pipe(
-      map(students => {
-        let studentsDTO: Student[] = []
-        students.forEach(student => studentsDTO.push(new Student(student.id, 
-                                                                 student.name, 
-                                                                 student.surname,
-                                                                 student.group?student.group.name:'<none>')))
-        return studentsDTO
-      }),
-      catchError( err => {
-        console.error(err)
-        return throwError(err.message)
-      })
-    ) */
-
     return this.http.get<Student[]>(endpoint)
     .pipe(
       concatMap(students => students),
@@ -122,7 +106,7 @@ export class StudentService {
             if(team)
               student.group = team.name
             else
-              student.group = '<none>'
+              student.group = ''
             return student
           })
         )

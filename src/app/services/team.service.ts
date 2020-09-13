@@ -1,3 +1,4 @@
+import { Proposal } from './../proposal.model';
 import { Injectable } from '@angular/core';
 import { CourseService } from './course.service';
 import { Team } from '../team.model';
@@ -73,6 +74,52 @@ export class TeamService {
           return of(resultQuery)
         }
         })
+    )
+  }
+
+  getProposal(): Observable<Proposal[]>{
+    let PATH = 'https://localhost:4200/api/API/students'
+
+    return this.courseService.getGroup().pipe(
+      concatMap(result => {
+        if(!result){
+          let resultQuery: Proposal[]
+          return this.http.get<Proposal[]>(PATH + "/" + this.courseService.currentCourse.name + "/proposal", this.httpOptions)
+        }else{
+          let resultQuery: Proposal[] = []
+          return of(resultQuery)
+        }
+        })
+    )
+  }
+
+  accept(id: number): Observable<any>{
+    let PATH = 'https://localhost:4200/api/API/teams/accept'
+
+    return this.http.get<Object>(PATH + '/' + id)
+    .pipe(
+      map(result => {
+        console.log(result)
+        return of(result)
+      }),
+      catchError(err => {
+        console.log(err)
+        return of(err)
+      })
+    )
+  }
+
+  reject(id: number): Observable<any>{
+    let PATH = 'https://localhost:4200/api/API/teams/reject'
+
+    return this.http.get<Object>(PATH + '/' + id)
+    .pipe(
+      map(result => {
+        return of(result)
+      }),
+      catchError(err => {
+        return of(err)
+      })
     )
   }
 }
