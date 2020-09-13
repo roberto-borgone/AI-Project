@@ -22,6 +22,10 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscriptions.add(this.profileService.getProfile().subscribe(res => this.profile = res));
+    this.getImg()
+  }
+
+  getImg(){
     this.subscriptions.add(this.profileService.getImg().subscribe((baseImage : any) => {
       var reader = new FileReader();
       reader.readAsDataURL(baseImage);
@@ -39,7 +43,9 @@ export class ProfileComponent implements OnInit {
   handleImageSelect(event: any) {
     var files = event.target.files; // FileList object
     var file = files[0];
-    this.profileService.sendImg(file);
+    this.subscriptions.add(this.profileService.sendImg(file).subscribe(result => {
+      this.getImg()
+    }))
   }
 
   ngOnDestroy(){
