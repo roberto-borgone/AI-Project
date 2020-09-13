@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileService } from './services/profile.service';
 import { Profile } from './profile.model';
-import { DomSanitizer } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 
 

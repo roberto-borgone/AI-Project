@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { Student} from 'src/app/student.model'
 import { Observable, throwError, from } from 'rxjs'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { catchError, concatMap, toArray, map, flatMap } from 'rxjs/operators';
+import { catchError, concatMap, toArray, map, flatMap, mergeAll } from 'rxjs/operators';
 import { CourseService } from './course.service';
 import { Team } from '../team.model';
 
@@ -112,10 +112,10 @@ export class StudentService {
         return throwError(err.message)
       })
     ) */
-
+    
     return this.http.get<Student[]>(endpoint)
     .pipe(
-      concatMap(students => students),
+      mergeAll(),
       concatMap(student => {
         return this.http.get<GroupEntity>(this.API_PATH + '/' + courseId + '/' + student.id + '/getTeam').pipe(
           map(team => {
@@ -125,8 +125,7 @@ export class StudentService {
               student.group = '<none>'
             return student
           })
-        )
-      }),
+      )}),
       toArray(),
       catchError( err => {
         console.error(err)
