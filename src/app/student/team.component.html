@@ -1,35 +1,9 @@
 <div class="container">
-    <h2>Virtual Machines</h2>
-    <p *ngIf="modelVM.name != ''">Sistema Operativo: {{modelVM.name}}</p>
-    <p *ngIf="modelVM.name == ''">Sistema Operativo: Non ancora settato</p>
+    <h2>Gruppi</h2>
 
-    <p *ngIf="modelVM.version != ''">Versione: {{modelVM.version}}</p>
-    <p *ngIf="modelVM.version == ''">Versione: Non ancora settata</p>
-    <h3>Vincoli</h3>
-
-    <p *ngIf="course.maxRAM == -1" >Max RAM: Non ancora settata</p>
-    <p *ngIf="course.maxRAM != -1" >Max RAM: {{course.maxRAM}}GB</p>
-
-    <p *ngIf="course.maxDisk == -1">Max Disk: Non ancora settata</p>
-    <p *ngIf="course.maxDisk != -1">Max Disk: {{course.maxDisk}}GB</p>
-
-    <p *ngIf="course.maxVirtualCPU == -1">Max VCPU: Non ancora settata</p>
-    <p *ngIf="course.maxVirtualCPU != -1">Max VCPU: {{course.maxVirtualCPU}}GB</p>
-
-    <p *ngIf="course.maxActiveVM == -1">Max Active VM: Non ancora settata</p>
-    <p *ngIf="course.maxActiveVM != -1">Max Active VM: {{course.maxActiveVM}}</p>
-
-
-    <p *ngIf="course.maxTotVM == -1">Max Tot VM: Non ancora settata</p>
-    <p *ngIf="course.maxTotVM != -1">Max Tot VM: {{course.maxTotVM}}</p>
-
-    <p class="error" *ngIf="course.maxActiveVM == -1 || course.maxTotVM == -1 || course.maxRAM == -1 || course.maxDisk == -1 || course.maxVirtualCPU == -1">Modificare queste informazioni per permetere agli studenti di creare delle VM</p>
-    
-    <button style="margin-bottom: 20px" mat-raised-button color="primary" (click)="updateCourseVM()">Modifica vincoli</button>
-    
-    <h3>Gruppi</h3>
-    <div class="table-container">
-        <table mat-table [dataSource]="teams" matSort #sort1="matSort">
+    <div class="table-container" *ngIf="this.auth.token.group">
+        <h3>{{this.auth.token.group.name}}</h3>
+        <table mat-table [dataSource]="myTeam" matSort #sort1="matSort">
           
           <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
@@ -41,49 +15,25 @@
             <td mat-cell *matCellDef="let element"> {{element.name.toUpperCase()}} </td>
           </ng-container>
     
-          <ng-container matColumnDef="maxRAM">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> maxRAM </th>
-            <td mat-cell *matCellDef="let element"> {{element.maxRAM}} </td>
+          <ng-container matColumnDef="surname">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Cognome </th>
+            <td mat-cell *matCellDef="let element"> {{element.surname.toUpperCase()}} </td>
           </ng-container>
     
-          <ng-container matColumnDef="maxDisk">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> maxDisk </th>
-            <td mat-cell *matCellDef="let element"> {{element.maxDisk}} </td>
-          </ng-container>
-    
-          <ng-container matColumnDef="maxVCPU">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> maxVCPU </th>
-            <td mat-cell *matCellDef="let element"> {{element.maxVCPU}} </td>
-          </ng-container>
-    
-          <ng-container matColumnDef="maxActiveVM">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> maxActiveVM </th>
-            <td mat-cell *matCellDef="let element"> {{element.maxActiveVM}} </td>
-          </ng-container>
-    
-          <ng-container matColumnDef="maxTotVM">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> maxTotVM </th>
-            <td mat-cell *matCellDef="let element"> {{element.maxTotVM}} </td>
-          </ng-container>
-
-          <ng-container matColumnDef="buttons">
-            <th mat-header-cell *matHeaderCellDef></th>
-            <td mat-cell *matCellDef="let element">
-                <button mat-icon-button (click)="updateVM(element)">
-                    <mat-icon>settings</mat-icon>
-                </button>
-            </td>
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
           </ng-container>
     
           <tr mat-header-row *matHeaderRowDef="colsToDisplay; sticky: true"></tr>
           <tr mat-row *matRowDef="let row; columns: colsToDisplay;"></tr>
         </table>
-    </div>
-    <mat-paginator #pag1 [pageSize]="5"
+        <mat-paginator #pag1 [pageSize]="5"
                    [pageSizeOptions]="[5, 10, 25, 100]"
                    showFirstLastButtons="true">
-    </mat-paginator>
-
+        </mat-paginator>
+    </div>
+<!--
     <h3>VM</h3>
     <div class="table-container">
         <table mat-table [dataSource]="vms" matSort #sort2="matSort">
@@ -147,3 +97,5 @@
                    showFirstLastButtons="true">
     </mat-paginator>
 </div>
+-->
+

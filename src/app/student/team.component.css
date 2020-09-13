@@ -1,0 +1,29 @@
+h2, h3, mat-raised-button{
+    padding: 20px 0 0 0
+}
+
+h3{
+    font-weight: bold;
+}
+
+.container {
+    padding: 0 16px 16px 16px;
+}
+
+table {
+    width: 100%;
+    table-layout: fixed;
+    min-width: 350px;
+}
+
+th, td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.table-container{
+    overflow: auto;
+    max-height: calc(100vh - 323px);
+    min-height: 100px;
+}

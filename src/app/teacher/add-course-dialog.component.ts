@@ -11,8 +11,9 @@ export interface DialogData {
   courseEnabled: FormControl;
   courseNameVM: FormControl;
   courseVersionVM: FormControl;
-  addCourseInvalid: boolean; 
+  addCourseInvalid: boolean;
 }
+
 
 @Component({
   selector: 'app-add-course-dialog',
@@ -24,6 +25,8 @@ export class AddCourseDialogComponent {
   constructor(private router: Router,
     public dialogRef: MatDialogRef<AddCourseDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+  sistemiOp: string[] = ['ios', 'ububtu', 'windows'];
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -42,13 +45,13 @@ export class AddCourseDialogComponent {
   }
 
   getErrorMessageMin(courseMin: FormControl) {
-    if (courseMin.hasError('min')) {
+    if (courseMin.hasError('required')) {
       return 'Inserisci un numero valido di studenti';
     }
   }
 
   getErrorMessageMax(courseMax: FormControl) {
-    if (courseMax.hasError('min')) {
+    if (courseMax.hasError('required')) {
       return 'Inserisci un numero valido di studenti';
     }
   }

@@ -10,6 +10,7 @@ export interface DialogData {
   maxTotVM: FormControl;
   maxActiveVM: FormControl;
   updateVMInvalid: boolean; 
+  message: String;
 }
 
 @Component({
@@ -19,9 +20,13 @@ export interface DialogData {
 })
 export class UpdateVMDialogComponent {
 
+  message: String
+
   constructor(private router: Router,
     public dialogRef: MatDialogRef<UpdateVMDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+      this.message = data.message
+    }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -45,6 +50,10 @@ export class UpdateVMDialogComponent {
 
   getErrorMessageMaxActiveVM(maxActiveVM: FormControl) {
     return 'Inserisci un numero valido di VM';
+  }
+
+  getMessage(){
+    return this.message;
   }
 
 }

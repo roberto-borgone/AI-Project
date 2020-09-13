@@ -10,6 +10,7 @@ import { CoursesContComponent } from './teacher/courses-cont.component';
 import { ProfileComponent } from './profile.component';
 import { StudentCourseComponent } from './student/student-course.component';
 import { AssignmentsContComponent } from './teacher/assignments-cont.component';
+import { TeamContComponent } from './student/team-cont.component';
 
 const routes: Routes = [
     { 
@@ -36,7 +37,7 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         children: [
             { path: '', component: HomeComponent },
-            { path: ':id/students', component: StudentsContComponent },
+            { path: ':id/teams', component: TeamContComponent },
             { path: ':id/vms', component: VmsContComponent },
             { path: ':id/assignments', component: AssignmentsContComponent },
             { path: '', component: StudentCourseComponent, outlet: 'sidenav'}

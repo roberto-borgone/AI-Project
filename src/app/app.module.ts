@@ -46,11 +46,14 @@ import { ModifyCourseDialogComponent } from './teacher/modify-course-dialog.comp
 import { VmsComponent } from './teacher/vms.component';
 import { UpdateVMDialogComponent } from './teacher/update-vm-dialog.component';
 import { OwnerDialogComponent } from './teacher/owner-dialog.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
 import { StudentCourseComponent } from './student/student-course.component';
 import { AssignmentsContComponent } from './teacher/assignments-cont.component';
 import { AssignmentsComponent } from './teacher/assignments.component';
 import { WorkDialogComponent } from './work-dialog.component';
-
+import { TeamComponent } from './student/team.component';
+import { TeamContComponent } from './student/team-cont.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +80,8 @@ import { WorkDialogComponent } from './work-dialog.component';
     AssignmentsContComponent,
     AssignmentsComponent,
     WorkDialogComponent,
+    TeamComponent,
+    TeamContComponent,
   ],
   entryComponents: [
     LoginDialogComponent
@@ -88,7 +93,8 @@ import { WorkDialogComponent } from './work-dialog.component';
     MatListModule, MatTabsModule, MatButtonModule, MatTableModule,
     MatCheckboxModule, MatAutocompleteModule, MatInputModule, 
     MatSortModule, MatPaginatorModule, AppRoutingModule, HttpClientModule,
-    MatDialogModule, FormsModule, ReactiveFormsModule, MatMenuModule, MatSlideToggleModule
+    MatDialogModule, FormsModule, ReactiveFormsModule, MatMenuModule, MatSlideToggleModule, MatFormFieldModule,
+    MatSelectModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass:JwtAuthInterceptor, multi: true }, StudentService, AuthService],
   bootstrap: [AppComponent]

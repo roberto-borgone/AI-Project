@@ -6,6 +6,7 @@ import { Observable, of } from 'rxjs';
 import * as moment from 'moment';
 import { Router } from '@angular/router';
 import { RegistartionForm } from '../registrationForm.model';
+import { Team } from '../team.model';
 
 export interface Token {
   //accessToken is for the mock server
@@ -13,6 +14,7 @@ export interface Token {
   token: string;
   username: string;
   role: string;
+  group: Team;
 }
 
 export interface TokenPayload {
