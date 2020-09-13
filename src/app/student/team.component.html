@@ -1,7 +1,7 @@
 <div class="container">
     <h2>Gruppi</h2>
 
-    <div class="table-container" *ngIf="this.auth.token.role == 'student' && this.auth.token.group">
+    <div class="table-container" *ngIf="this.auth.token.group">
         <h3>{{this.auth.token.group.name}}</h3>
         <table mat-table [dataSource]="myTeam" matSort #sort1="matSort">
           
@@ -28,11 +28,11 @@
           <tr mat-header-row *matHeaderRowDef="colsToDisplay; sticky: true"></tr>
           <tr mat-row *matRowDef="let row; columns: colsToDisplay;"></tr>
         </table>
-    </div>
-    <mat-paginator #pag1 [pageSize]="5"
+        <mat-paginator #pag1 [pageSize]="5"
                    [pageSizeOptions]="[5, 10, 25, 100]"
                    showFirstLastButtons="true">
-    </mat-paginator>
+        </mat-paginator>
+    </div>
 <!--
     <h3>VM</h3>
     <div class="table-container">
