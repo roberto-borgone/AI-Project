@@ -2,23 +2,13 @@ import { Injectable } from '@angular/core'
 import { Student} from 'src/app/student.model'
 import { Observable, throwError, from } from 'rxjs'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { catchError, concatMap, toArray, map } from 'rxjs/operators';
+import { catchError, concatMap, toArray, map, flatMap, mergeAll } from 'rxjs/operators';
 import { CourseService } from './course.service';
 import { Team } from '../team.model';
 
 export interface GroupEntity{
   id: number
   name: string
-}
-
-export interface StudentEntity{
-  id: string
-  name: string
-  surname: string
-  email: string
-  courseId: string
-  groupId: number
-  group: string
 }
 
 @Injectable({
@@ -122,25 +112,21 @@ export class StudentService {
         return throwError(err.message)
       })
     ) */
-
-    return this.http.get<StudentEntity[]>(endpoint)
+    
+    return this.http.get<Student[]>(endpoint)
     .pipe(
-      map(students => {
-        let studentsDTO: Student[] = []
-
-        students.forEach(student => {
-          this.http.get<GroupEntity>(this.API_PATH + '/' + courseId + '/' + student.id + '/getTeam')
-            .subscribe(team => {if(team != null) {
-              studentsDTO.push(new Student(student.id,
-              student.name,
-              student.surname,
-              team.name)); 
-            }});
-          }
-        )
-        studentsDTO.forEach(student => console.log(student));
-        return studentsDTO
-      }),
+      mergeAll(),
+      concatMap(student => {
+        return this.http.get<GroupEntity>(this.API_PATH + '/' + courseId + '/' + student.id + '/getTeam').pipe(
+          map(team => {
+            if(team)
+              student.group = team.name
+            else
+              student.group = ''
+            return student
+          })
+      )}),
+      toArray(),
       catchError( err => {
         console.error(err)
         return throwError(err.message)

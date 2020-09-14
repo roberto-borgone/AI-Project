@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileService } from './services/profile.service';
 import { Profile } from './profile.model';
-import { DomSanitizer } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 
 
@@ -22,6 +21,10 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscriptions.add(this.profileService.getProfile().subscribe(res => this.profile = res));
+    this.getImg()
+  }
+
+  getImg(){
     this.subscriptions.add(this.profileService.getImg().subscribe((baseImage : any) => {
       var reader = new FileReader();
       reader.readAsDataURL(baseImage);
@@ -37,10 +40,11 @@ export class ProfileComponent implements OnInit {
 }
 
   handleImageSelect(event: any) {
-    console.log("Sono in handleImageSelect");
     var files = event.target.files; // FileList object
     var file = files[0];
-    this.profileService.sendImg(file);
+    this.subscriptions.add(this.profileService.sendImg(file).subscribe(result => {
+      this.getImg()
+    }))
   }
 
   ngOnDestroy(){

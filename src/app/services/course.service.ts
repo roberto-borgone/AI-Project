@@ -172,6 +172,7 @@ export class CourseService {
         
         if(result){
           this.auth.token.group = result
+          this.auth.token.groupStatus = result.status
           return true
         }else{
           this.auth.token.group = undefined

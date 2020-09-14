@@ -59,6 +59,8 @@ import { NewAssignmentDialogComponent } from './teacher/new-assignment-dialog.co
 import {MatDatepickerModule} from '@angular/material/datepicker'; 
 import { MatNativeDateModule } from '@angular/material/core';
 import { ContentDialogComponent } from './content-dialog.component';
+import { NewTeamDialogComponent } from './student/new-team-dialog.component';
+
 
 @NgModule({
   declarations: [
@@ -90,6 +92,7 @@ import { ContentDialogComponent } from './content-dialog.component';
     HistoryDialogComponent,
     NewAssignmentDialogComponent,
     ContentDialogComponent,
+    NewTeamDialogComponent,
   ],
   entryComponents: [
     LoginDialogComponent

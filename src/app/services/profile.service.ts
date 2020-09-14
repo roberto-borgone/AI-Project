@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { throwError, Observable } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { Profile } from '../profile.model';
@@ -12,27 +12,26 @@ export class ProfileService {
 
   constructor(private http: HttpClient, private authService : AuthService) { }
 
-  sendImg(img : File){
+  sendImg(img : File): Observable<boolean>{
 
-    console.log("Sono in sendImg")
 
     const API_PATH = 'https://localhost:4200/api/API/students/'+this.authService.token.username+'/addPhoto';
 
     const formData = new FormData();
     formData.append('imagefile', img);
 
-    this.http.post(API_PATH, formData)
+    return this.http.post(API_PATH, formData)
     .pipe(
+      map(result => true),
       catchError( err => {
         console.error(err)
         return throwError(err.message)
       })
-    ).subscribe() 
+    ) 
   }
 
   getImg() : Observable<any> {
 
-    console.log("Sono in getImg");
 
     const requestOptions: Object = {
       responseType: 'blob'
@@ -50,7 +49,11 @@ export class ProfileService {
   }
 
   getProfile() : Observable<Profile> {
-    const API_PATH = 'https://localhost:4200/api/API/students/'+this.authService.token.username;
+    if(this.authService.token.role === "student"){
+      var API_PATH = 'https://localhost:4200/api/API/students/'+this.authService.token.username;
+    } else {
+      var API_PATH = 'https://localhost:4200/api/API/docents/'+this.authService.token.username;
+    }
 
     return this.http.get<Profile>(API_PATH)
     .pipe(
