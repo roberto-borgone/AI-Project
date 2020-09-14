@@ -57,7 +57,9 @@ export class TeamComponent implements OnInit {
 
   colsToDisplay: string[] = ['id', 'name', 'surname', 'email']
 
-  colsToDisplayProposal: string[] = ['nomegruppo', 'creator','button']
+  colsToDisplayProposal: string[] = ['nomegruppo', 'creator','members','button']
+
+  colsToDisplaySospeso: string[] = ['nomegruppo','members']
   
   constructor(
     public auth: AuthService) {

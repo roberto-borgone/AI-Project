@@ -35,6 +35,38 @@
                    showFirstLastButtons="true">
         </mat-paginator>
 
+
+
+        <div class="table-container">
+        <h2>Richieste in sospeso</h2>
+        <table mat-table [dataSource]="teamProposal" matSort #sort1="matSort">
+
+          <ng-container matColumnDef="nomegruppo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Gruppo </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="members">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> In sospeso </th>
+            <td mat-cell *matCellDef="let element">
+              <tr *ngFor="let s of element.proposals">
+                <td>{{s.id}} {{s.name.toUpperCase()}} {{s.surname.toUpperCase()}}</td> 
+                <mat-icon color="warn" aria-hidden="false" aria-label="icon_hour">hourglass_top</mat-icon>
+              </tr>
+            </td> 
+          </ng-container>
+    
+          <tr mat-header-row *matHeaderRowDef="colsToDisplaySospeso; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: colsToDisplaySospeso;"></tr>
+        </table>
+        <mat-paginator #pag1 [pageSize]="5"
+                   [pageSizeOptions]="[5, 10, 25, 100]"
+                   showFirstLastButtons="true">
+        </mat-paginator>
+
+      </div>
+
+
     </div>
 
 
@@ -43,23 +75,30 @@
         <table mat-table [dataSource]="teamProposal" matSort #sort1="matSort">
           
           <ng-container matColumnDef="nomegruppo">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome Gruppo </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Gruppo </th>
             <td mat-cell *matCellDef="let element"> {{element.name}} </td>
           </ng-container>
     
           <ng-container matColumnDef="creator">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Creatore </th>
-            <td mat-cell *matCellDef="let element"> {{element.creator}} </td>
-          </ng-container>
-<!--
-          <ng-container matColumnDef="members">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Membri </th>
-            <td mat-cell *matCellDef="let element"> 
-              <span ng-repeat="let list in element.accepted">{{list}}</span> 
-            </td>
+            <td mat-cell *matCellDef="let element"> {{element.creator.toUpperCase()}} </td>
           </ng-container>
 
--->
+          <ng-container matColumnDef="members">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Membri </th>
+            <td mat-cell *matCellDef="let element">
+              <tr *ngFor="let s of element.accepted">
+                <td>{{s.id}} {{s.name.toUpperCase()}} {{s.surname.toUpperCase()}}</td> 
+                <mat-icon color="primary" aria-hidden="false" aria-label="icon_add">add_task</mat-icon>
+              </tr>
+              <tr *ngFor="let s of element.proposals">
+                <td>{{s.id}} {{s.name.toUpperCase()}} {{s.surname.toUpperCase()}}</td> 
+                <mat-icon color="warn" aria-hidden="false" aria-label="icon_hour">hourglass_top</mat-icon>
+              </tr>
+            </td> 
+          </ng-container>
+
+
           <ng-container matColumnDef="button">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>  </th>
               <td mat-cell *matCellDef="let element">
