@@ -7,6 +7,7 @@ import { AuthService } from '../auth/auth.service';
 import { ModelVM } from '../teacher/modelVM.model';
 import { Assignment } from '../assignment.model';
 import { Team } from '../team.model';
+import { LastWork } from '../last-work.model';
 
 @Injectable({
   providedIn: 'root'

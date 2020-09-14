@@ -45,7 +45,7 @@
       [routerLink]="this.courseService.currentCourse?'/teacher/' + this.courseService.currentCourse.name + '/assignments':''"
       routerLinkActive #rlav="routerLinkActive"
       [active]="rlav.isActive">
-      Elaborati
+      Consegne
       </a>
       <a mat-tab-link 
       *ngIf="(this.courseService.currentCourse && this.auth.token && this.auth.token.role == 'student')?true:false"

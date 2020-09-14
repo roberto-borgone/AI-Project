@@ -130,12 +130,13 @@ export class StudentService {
 
         students.forEach(student => {
           this.http.get<GroupEntity>(this.API_PATH + '/' + courseId + '/' + student.id + '/getTeam')
-            .subscribe(team => {
+            .subscribe(team => {if(team != null) {
               studentsDTO.push(new Student(student.id,
               student.name,
               student.surname,
-              team.name)); });
-        }
+              team.name)); 
+            }});
+          }
         )
         studentsDTO.forEach(student => console.log(student));
         return studentsDTO

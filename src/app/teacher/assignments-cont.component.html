@@ -1,5 +1,6 @@
 <app-assignments 
     [_assignments]="assignments"
     (onShowContent) = "openContentDialog($event)"
-    (onShowStudents) = "openStudentsDialog($event)">
+    (onShowStudents) = "openStudentsDialog($event)"
+    (onCreateAssignment) = "openAssignmentDialog()">
 </app-assignments>

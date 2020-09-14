@@ -1,7 +1,8 @@
 <div class="container">
-    <h2>Elenco elaborati</h2>
-    <p>
-
+    <h2>Elenco consegne</h2>
+    <br>
+    <button mat-raised-button color="primary" (click)='createAssignment()'>Crea consegna</button>
+    <br>
     <div class="table-container">
       <table mat-table [dataSource]="assignments" matSort>
 

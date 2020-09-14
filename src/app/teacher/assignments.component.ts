@@ -36,9 +36,13 @@ export class AssignmentsComponent implements OnInit {
   @Output()
   onShowStudents: EventEmitter<any>;
 
+  @Output()
+  onCreateAssignment: EventEmitter<any>;
+
   constructor() { 
     this.onShowContent = new EventEmitter<any>();
     this.onShowStudents = new EventEmitter<any>();
+    this.onCreateAssignment = new EventEmitter();
   }
 
   showContent(assignmentId : number){
@@ -47,6 +51,10 @@ export class AssignmentsComponent implements OnInit {
 
   showStudents(assignmentId : number){
     this.onShowStudents.emit(assignmentId);
+  }
+
+  createAssignment() {
+    this.onCreateAssignment.emit();
   }
 
   ngOnInit(): void {

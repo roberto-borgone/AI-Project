@@ -26,8 +26,8 @@ export class ProfileComponent implements OnInit {
       var reader = new FileReader();
       reader.readAsDataURL(baseImage);
       reader.onload = (_event) => {
-			this.url = reader.result; 
-		}
+      this.url = reader.result;
+      }
     }));
   }
 

@@ -14,7 +14,6 @@ export interface DialogData {
   addCourseInvalid: boolean;
 }
 
-
 @Component({
   selector: 'app-add-course-dialog',
   templateUrl: './add-course-dialog.component.html',

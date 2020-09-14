@@ -26,7 +26,7 @@ import { PageNotFoundComponent } from './page-not-found.component';
 import { VmsContComponent } from './teacher/vms-cont.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginDialogComponent } from './auth/login-dialog.component';
-import {MatDialogModule} from '@angular/material/dialog';
+import {MatDialog, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -54,6 +54,11 @@ import { AssignmentsComponent } from './teacher/assignments.component';
 import { WorkDialogComponent } from './work-dialog.component';
 import { TeamComponent } from './student/team.component';
 import { TeamContComponent } from './student/team-cont.component';
+import { HistoryDialogComponent } from './history-dialog.component';
+import { NewAssignmentDialogComponent } from './teacher/new-assignment-dialog.component';
+import {MatDatepickerModule} from '@angular/material/datepicker'; 
+import { MatNativeDateModule } from '@angular/material/core';
+import { ContentDialogComponent } from './content-dialog.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +87,9 @@ import { TeamContComponent } from './student/team-cont.component';
     WorkDialogComponent,
     TeamComponent,
     TeamContComponent,
+    HistoryDialogComponent,
+    NewAssignmentDialogComponent,
+    ContentDialogComponent,
   ],
   entryComponents: [
     LoginDialogComponent
@@ -94,7 +102,7 @@ import { TeamContComponent } from './student/team-cont.component';
     MatCheckboxModule, MatAutocompleteModule, MatInputModule, 
     MatSortModule, MatPaginatorModule, AppRoutingModule, HttpClientModule,
     MatDialogModule, FormsModule, ReactiveFormsModule, MatMenuModule, MatSlideToggleModule, MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule, MatDatepickerModule, MatNativeDateModule,
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass:JwtAuthInterceptor, multi: true }, StudentService, AuthService],
   bootstrap: [AppComponent]
