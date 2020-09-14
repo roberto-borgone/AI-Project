@@ -65,7 +65,8 @@ export class TeamComponent {
 
   colsToDisplay: string[] = ['id', 'name', 'surname', 'email']
   colsToDisplay2: string[] = ['select', 'id', 'name', 'surname']
-  colsToDisplayProposal: string[] = ['nomegruppo', 'creator','button']
+  colsToDisplayProposal: string[] = ['nomegruppo', 'creator','members','button']
+  colsToDisplaySospeso: string[] = ['nomegruppo','members']
   
   
   constructor(public auth: AuthService) {
@@ -86,15 +87,6 @@ export class TeamComponent {
     this.selection.toggle(student)
   }
 
-  colsToDisplayProposal: string[] = ['nomegruppo', 'creator','members','button']
-
-  colsToDisplaySospeso: string[] = ['nomegruppo','members']
-  
-  constructor(
-    public auth: AuthService) {
-      this.onAccept = new EventEmitter()
-      this.onReject = new EventEmitter()
-     }
   arrayOne(n: number): any[] {
     return Array(n);
   }
