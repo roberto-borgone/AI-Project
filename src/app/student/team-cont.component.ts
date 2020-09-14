@@ -80,6 +80,7 @@ export class TeamContComponent implements OnDestroy{
             this.message = undefined
             this.getTeamMembers()
             this.getStudents()
+            this.getProposals()
           }
         }))
       }else if(!result){

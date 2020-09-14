@@ -28,6 +28,12 @@ export class TeamComponent {
   @ViewChild('pag2', {read: MatPaginator}) 
   paginator2: MatPaginator
 
+  @ViewChild('sort3', {read: MatSort, static: true})
+  sort3: MatSort
+
+  @ViewChild('pag3', {read: MatPaginator}) 
+  paginator3: MatPaginator
+
   myTeam: MatTableDataSource<Student>
   enrolledStudents: MatTableDataSource<Student>
 
@@ -54,8 +60,8 @@ export class TeamComponent {
   @Input()
   set _proposal(propose: Proposal[]){
     this.teamProposal = new MatTableDataSource(propose)
-    this.teamProposal.sort = this.sort
-    this.teamProposal.paginator = this.paginator
+    this.teamProposal.sort = this.sort3
+    this.teamProposal.paginator = this.paginator3
   }
 
   @Output()

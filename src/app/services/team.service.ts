@@ -98,7 +98,7 @@ export class TeamService {
 
     return this.courseService.getGroup().pipe(
       concatMap(result => {
-        if(!result){
+        if(!result || this.auth.token.groupStatus == 0){
           let resultQuery: Proposal[]
           return this.http.get<Proposal[]>(PATH + "/" + this.courseService.currentCourse.name + "/proposal", this.httpOptions)
         }else{
