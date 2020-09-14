@@ -53,6 +53,7 @@ import { AssignmentsContComponent } from './teacher/assignments-cont.component';
 import { AssignmentsComponent } from './teacher/assignments.component';
 import { TeamComponent } from './student/team.component';
 import { TeamContComponent } from './student/team-cont.component';
+import { NewTeamDialogComponent } from './student/new-team-dialog.component';
 
 
 @NgModule({
@@ -81,6 +82,7 @@ import { TeamContComponent } from './student/team-cont.component';
     AssignmentsComponent,
     TeamComponent,
     TeamContComponent,
+    NewTeamDialogComponent,
   ],
   entryComponents: [
     LoginDialogComponent

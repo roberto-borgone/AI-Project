@@ -1,5 +1,7 @@
 <app-team
     [_team] = "team"
+    [_enrolledStudents]="enrolledStudents" 
+    (onTeamUp)="openDialogTeamUp($event)"
     [_proposal] = "proposal"
 
     (onAccept) = "onAccept($event)"

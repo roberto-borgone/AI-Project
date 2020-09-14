@@ -1,18 +1,18 @@
-import { TeamService } from './../services/team.service';
+import { Component, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { Proposal } from './../proposal.model';
-import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { Student } from '../student.model';
 import { MatTableDataSource } from '@angular/material/table';
+import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-team',
   templateUrl: './team.component.html',
   styleUrls: ['./team.component.css']
 })
-export class TeamComponent implements OnInit {
+export class TeamComponent {
 
   
 
@@ -29,6 +29,12 @@ export class TeamComponent implements OnInit {
   paginator2: MatPaginator
 
   myTeam: MatTableDataSource<Student>
+  enrolledStudents: MatTableDataSource<Student>
+
+  @Output()
+  onTeamUp: EventEmitter<Student[]>
+
+  selection: SelectionModel<Student>
   teamProposal: MatTableDataSource<Proposal>
 
   @Input()
@@ -36,6 +42,13 @@ export class TeamComponent implements OnInit {
     this.myTeam = new MatTableDataSource(team)
     this.myTeam.sort = this.sort
     this.myTeam.paginator = this.paginator
+  }
+
+  @Input()
+  set _enrolledStudents(students: Student[]){
+    this.enrolledStudents = new MatTableDataSource(students)
+    this.enrolledStudents.sort = this.sort2
+    this.enrolledStudents.paginator = this.paginator2
   }
 
   @Input()
@@ -50,12 +63,28 @@ export class TeamComponent implements OnInit {
   @Output()
   onReject: EventEmitter<any>
 
-  arrayOne(n: number): any[] {
-    return Array(n);
+  colsToDisplay: string[] = ['id', 'name', 'surname', 'email']
+  colsToDisplay2: string[] = ['select', 'id', 'name', 'surname']
+  colsToDisplayProposal: string[] = ['nomegruppo', 'creator','button']
+  
+  
+  constructor(public auth: AuthService) {
+    this.selection = new SelectionModel<Student>(true, [])
+    this.onTeamUp = new EventEmitter()
+    this.onAccept = new EventEmitter()
+    this.onReject = new EventEmitter()
   }
 
+  teamUpSelected(){
+    if(this.selection.selected.length != 0){
+      this.onTeamUp.emit(this.selection.selected)
+      this.selection = new SelectionModel<Student>(true, [])
+    }
+  }
 
-  colsToDisplay: string[] = ['id', 'name', 'surname', 'email']
+  toggleSelectionRow(event: Event, student: Student) {
+    this.selection.toggle(student)
+  }
 
   colsToDisplayProposal: string[] = ['nomegruppo', 'creator','members','button']
 
@@ -66,6 +95,9 @@ export class TeamComponent implements OnInit {
       this.onAccept = new EventEmitter()
       this.onReject = new EventEmitter()
      }
+  arrayOne(n: number): any[] {
+    return Array(n);
+  }
 
   accept(id) { 
     this.onAccept.emit(id);
@@ -74,7 +106,8 @@ export class TeamComponent implements OnInit {
     this.onReject.emit(id);
   }
 
-  ngOnInit(): void {
+  isRowSelected(student: Student): boolean {
+    return this.selection.isSelected(student)
   }
 
 }

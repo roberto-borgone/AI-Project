@@ -77,6 +77,22 @@ export class TeamService {
     )
   }
 
+  getStudents(): Observable<Student[]>{
+    
+    let PATH = 'https://localhost:4200/api/API/courses'
+    
+    return this.courseService.getGroup().pipe(
+      concatMap(result => {
+        if(result){
+          let resultQuery: Student[] = []
+          return of(resultQuery)
+        }else{
+          return this.http.get<Student[]>(PATH + '/' + this.courseService.currentCourse.name + '/availablestudents', this.httpOptions)
+        }
+      })
+    )
+  }
+  
   getProposal(): Observable<Proposal[]>{
     let PATH = 'https://localhost:4200/api/API/students'
 
@@ -93,6 +109,31 @@ export class TeamService {
     )
   }
 
+  newTeam(name: string, students: Student[]){
+    
+    let PATH = 'https://localhost:4200/api/API/courses'
+
+    let studentsID: string[] = []
+
+    for(let student of students){
+      studentsID.push(student.id)
+    }
+
+    studentsID.push(this.auth.token.username)
+
+    return this.http.post<Object>(PATH + '/' + this.courseService.currentCourse.name + '/proposeTeam', {nameTeam: name, memberIds: studentsID, timeout: 10}, this.httpOptions)
+    .pipe(
+      map(result => {
+        console.log(result)
+        return of(result)
+      }),
+      catchError(err => {
+        console.log(err)
+        return of(err)
+      })
+    )
+  }
+  
   accept(id: number): Observable<any>{
     let PATH = 'https://localhost:4200/api/API/teams/accept'
 
