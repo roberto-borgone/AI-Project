@@ -77,6 +77,20 @@ export class TeamService {
     )
   }
 
+  getTeamPropStudent(): Observable<Student[]>{
+    return this.courseService.getGroup().pipe(
+      concatMap(result => {
+        if(result){
+          let resultQuery: Student[]
+          return this.http.get<Student[]>(this.API_PATH + '/' + this.auth.token.group.id + "/" + "teamProposal", this.httpOptions)
+        }else{
+          let resultQuery: Student[] = []
+          return of(resultQuery)
+        }
+        })
+    )
+  }
+
   getStudents(): Observable<Student[]>{
     
     let PATH = 'https://localhost:4200/api/API/courses'

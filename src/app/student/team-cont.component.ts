@@ -8,6 +8,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { FormControl, Validators } from '@angular/forms';
 import { NewTeamDialogComponent } from './new-team-dialog.component';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-team-cont',
@@ -17,6 +18,7 @@ import { NewTeamDialogComponent } from './new-team-dialog.component';
 export class TeamContComponent implements OnDestroy{
 
   team: Student[]
+  studentInProposal: Student[]
   enrolledStudents: Student[]
 
   proposal: Proposal[]
@@ -32,6 +34,7 @@ export class TeamContComponent implements OnDestroy{
           this.getStudents()
           this.getTeamMembers()
           this.getProposals()
+          this.getTeamPropStudent()
         }
       }))
   }
@@ -39,6 +42,12 @@ export class TeamContComponent implements OnDestroy{
   getTeamMembers(){
     this.subscriptions.add(this.teamService.getMembers().subscribe(result => {
       this.team = result
+    }))
+  }
+
+  getTeamPropStudent(){
+    this.subscriptions.add(this.teamService.getTeamPropStudent().subscribe(result => {
+      this.studentInProposal = result
     }))
   }
 
@@ -81,6 +90,7 @@ export class TeamContComponent implements OnDestroy{
             this.getTeamMembers()
             this.getStudents()
             this.getProposals()
+            this.getTeamPropStudent()
           }
         }))
       }else if(!result){
@@ -108,6 +118,7 @@ export class TeamContComponent implements OnDestroy{
       console.log(result)
       this.getTeamMembers()
       this.getProposals()
+      this.getTeamPropStudent()
     }))
     
   }
@@ -119,6 +130,7 @@ export class TeamContComponent implements OnDestroy{
       console.log(result)
       this.getTeamMembers()
       this.getProposals()
+      this.getTeamPropStudent()
 
     }))
     

@@ -36,6 +36,7 @@ export class TeamComponent {
 
   myTeam: MatTableDataSource<Student>
   enrolledStudents: MatTableDataSource<Student>
+  studentInProposal: MatTableDataSource<Student>
 
   @Output()
   onTeamUp: EventEmitter<Student[]>
@@ -48,6 +49,12 @@ export class TeamComponent {
     this.myTeam = new MatTableDataSource(team)
     this.myTeam.sort = this.sort
     this.myTeam.paginator = this.paginator
+  }
+
+  @Input()set _studentInProposal(inProposal: Student[]){
+    this.studentInProposal = new MatTableDataSource(inProposal)
+    this.studentInProposal.sort = this.sort
+    this.studentInProposal.paginator = this.paginator
   }
 
   @Input()
@@ -64,6 +71,8 @@ export class TeamComponent {
     this.teamProposal.paginator = this.paginator3
   }
 
+
+
   @Output()
   onAccept: EventEmitter<any>
   @Output()
@@ -72,7 +81,7 @@ export class TeamComponent {
   colsToDisplay: string[] = ['id', 'name', 'surname', 'email']
   colsToDisplay2: string[] = ['select', 'id', 'name', 'surname']
   colsToDisplayProposal: string[] = ['nomegruppo', 'creator','members','button']
-  colsToDisplaySospeso: string[] = ['nomegruppo','members']
+  colsToDisplaySospeso: string[] = ['button_p','id_p','name_p','surname_p']
   
   
   constructor(public auth: AuthService) {
