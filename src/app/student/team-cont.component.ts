@@ -44,7 +44,13 @@ export class TeamContComponent implements OnDestroy{
 
   getStudents(){
     this.subscriptions.add(this.teamService.getStudents().subscribe(result => {
-      this.enrolledStudents = result
+      var s: Student[] = new Array()
+      result.forEach(element => {
+        if(element.id != this.auth.token.username){
+          s.push(element)
+        }
+      });
+      this.enrolledStudents = s
     }))
   }
 
@@ -97,16 +103,24 @@ export class TeamContComponent implements OnDestroy{
 
   onAccept(id: number){
     console.log(id)
-    this.subscriptions.add(this.teamService.accept(id).subscribe(result => console.log(result)))
-    this.getTeamMembers()
-    this.getProposals()
+    this.subscriptions.add(this.teamService.accept(id).subscribe(result => {
+      console.log(result)
+      this.getTeamMembers()
+      this.getProposals()
+    }))
+    
   }
 
   onReject(id: number){
     console.log(id)
-    this.subscriptions.add(this.teamService.reject(id).subscribe(result => console.log(result)))
-    this.getTeamMembers()
-    this.getProposals()
+    this.subscriptions.add(this.teamService.reject(id).subscribe(result => {
+      
+      console.log(result)
+      this.getTeamMembers()
+      this.getProposals()
+
+    }))
+    
 
   }
 
