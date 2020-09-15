@@ -8,3 +8,13 @@
 .addCourse{
     margin-right: 8px;
 }
+
+.red{
+    color: red;
+    padding-right: 8px;
+}
+
+.green{
+    color: greenyellow;
+    padding-right: 8px;
+}

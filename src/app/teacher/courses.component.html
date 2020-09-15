@@ -4,6 +4,7 @@
         routerLink="/teacher/{{course.name}}/students"
         routerLinkActive="active"
         (click)="this.setCurrentCourse(course)">
+        <mat-icon [class]="course.enabled?'green':'red'">{{course.enabled?'check_circle':'remove_circle'}}</mat-icon>
         {{course.name}}
         </a>
         <button mat-icon-button [matMenuTriggerFor]="menu">
