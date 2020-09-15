@@ -101,4 +101,36 @@ export class AssignmentService {
       })
     )
   }
+
+  giveVote(assignmentId: number, studentId: string, vote: number, laude: boolean) {
+
+    let PATH = 'https://localhost:4200/api/API/consegne/';
+    
+    return this.http.post<any>(PATH + assignmentId + '/' + studentId + '/' + this.auth.token.username + '/setVoto', vote)
+    .pipe(
+      map(result => {
+        return true}),
+      catchError( err => {
+        console.log(err)
+        return of(false)
+      })
+    )
+  }
+
+  getWorkContent(workId: number) {
+
+    let PATH = 'https://localhost:4200/api/API/consegne/';
+
+    const requestOptions: Object = {
+      responseType: 'blob'
+    }
+
+    return this.http.get<any>(PATH + workId + '/getElaborato', requestOptions)
+    .pipe(
+      catchError( err => {
+        console.error(err)
+        return throwError(err.message)
+      })
+    )
+  }
 }

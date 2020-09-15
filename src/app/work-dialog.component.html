@@ -27,19 +27,19 @@
     </ng-container>
 
     <ng-container matColumnDef="timestamp">
-        <th mat-header-cell *matHeaderCellDef> Timestamp </th>
-        <td mat-cell *matCellDef="let element"> {{element.date | date:"MM/dd/yyyy 'at' h:mma"}} </td>
+        <th mat-header-cell *matHeaderCellDef> Data </th>
+        <td mat-cell *matCellDef="let element"> {{element.date | date:"MM/dd/yyyy"}} </td>
     </ng-container>
 
     <ng-container matColumnDef="voto">
         <th mat-header-cell *matHeaderCellDef> Voto </th>
-        <td mat-cell *matCellDef="let element"> {{-1 == element.voto? "" : element.voto}} </td>
+        <td mat-cell *matCellDef="let element"> {{-1 == element.voto || 0 == element.voto? "" : element.voto}} </td>
     </ng-container>
 
 
     <ng-container matColumnDef="lode">
-        <th mat-header-cell *matHeaderCellDef> Voto </th>
-        <td mat-cell *matCellDef="let element"> {{true == element.lode ? 'Yes' : '' }} </td>
+        <th mat-header-cell *matHeaderCellDef> Lode </th>
+        <td mat-cell *matCellDef="let element"> {{true == element.lode? 'Yes' : '' }} </td>
     </ng-container>
 
     <ng-container matColumnDef="history">
