@@ -22,12 +22,12 @@ export class HistoryDialogComponent implements OnInit {
   @ViewChild(MatPaginator) 
   paginator: MatPaginator
 
-  displayedColumns: string[] = ['timestamp', 'type', 'vote', 'laude'];
+  displayedColumns: string[] = ['timestamp', 'type']; //, 'vote', 'laude'];
   dataSource: MatTableDataSource<Work>
 
   subscriptions: Subscription = new Subscription()
 
-  constructor(public dialogRef: MatDialogRef<HistoryDialogComponent>,
+  constructor(public dialogHistory: MatDialogRef<HistoryDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData, private assignmentService: AssignmentService) {
       
       console.log("Sono nel costruttore di history dialog");

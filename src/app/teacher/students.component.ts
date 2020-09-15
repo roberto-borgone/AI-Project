@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, Input, Output } from '@angular/core';
+import { Component, ViewChild, ElementRef, Input, Output, OnInit } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
@@ -43,11 +43,16 @@ export class StudentsComponent {
   // table data supplied by enrolledStudentSource
   enrolledStudents: MatTableDataSource<Student>
 
+  //array of enrolled students
+  enrolledStudentInCourse: Student[]
+
   @Input()
   set _enrolledStudents(students: Student[]){
+    console.log(students)
     this.enrolledStudents = new MatTableDataSource(students)
     this.enrolledStudents.sort = this.sort
     this.enrolledStudents.paginator = this.paginator
+    this.enrolledStudentInCourse = students
   }
 
   students: Student[]
@@ -56,6 +61,7 @@ export class StudentsComponent {
 
   @Input()
   set _students(students: Student[]){
+    console.log(students)
     this.students = students
     this.filteredStudents = this.students
   }

@@ -49,3 +49,16 @@ p.error{
     color: red;
     
 }
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+  }
+
+.close-button{
+    float: right;
+    top:-24px;
+    right:-24px;
+  }
