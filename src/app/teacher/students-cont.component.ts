@@ -30,11 +30,11 @@ export class StudentsContComponent implements OnDestroy{
   }
 
   deleteStudent(students: Student[]){
-    this.subscriptions.add(this.studentService.deleteFromCourse(students).subscribe(x => this.getEnrolledStudents()))
+    this.subscriptions.add(this.studentService.deleteFromCourse(students).subscribe(x => {this.getStudents(); this.getEnrolledStudents()}))
   }
 
   addStudent(student: Student){
-    this.subscriptions.add(this.studentService.enroll(student).subscribe(x => this.getEnrolledStudents()))
+    this.subscriptions.add(this.studentService.enroll(student).subscribe(x => {this.getStudents(); this.getEnrolledStudents()}))
   }
 
   getStudents(){

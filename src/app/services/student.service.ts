@@ -57,8 +57,10 @@ export class StudentService {
   }
 
   query(): Observable<Student[]>{
+
+    let PATH = 'https://localhost:4200/api/API/courses/' + this.courseService.currentCourse.name + '/freeStudents'
     //return of(this.students)
-    return this.http.get<Student[]>(this.API_PATH)
+    return this.http.get<Student[]>(PATH)
     .pipe(
       catchError( err => {
         console.error(err)

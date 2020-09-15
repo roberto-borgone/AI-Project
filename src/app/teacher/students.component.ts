@@ -48,7 +48,6 @@ export class StudentsComponent {
 
   @Input()
   set _enrolledStudents(students: Student[]){
-    console.log(students)
     this.enrolledStudents = new MatTableDataSource(students)
     this.enrolledStudents.sort = this.sort
     this.enrolledStudents.paginator = this.paginator
@@ -61,7 +60,6 @@ export class StudentsComponent {
 
   @Input()
   set _students(students: Student[]){
-    console.log(students)
     this.students = students
     this.filteredStudents = this.students
   }
