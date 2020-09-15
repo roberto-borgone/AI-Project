@@ -53,7 +53,7 @@ export class AssignmentsContComponent implements OnDestroy {
     this.subscriptions.add(this.assignmentService.getStudentsWorks(assignmentId).subscribe(works => {
       console.log(works); 
       const dialogConfig = new MatDialogConfig();
-      dialogConfig.width = '80%';
+      dialogConfig.width = '98%';
       dialogConfig.height = '70%';
       dialogConfig.data = works;
   

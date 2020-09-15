@@ -9,3 +9,19 @@ th, td {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
+button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 20px;
+}
+
+.mat-form-field {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+.mat-checkbox {
+    margin-right: 10px;
+}
