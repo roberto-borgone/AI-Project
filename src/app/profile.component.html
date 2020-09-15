@@ -6,6 +6,8 @@
     <mat-icon>file_upload</mat-icon>
     Carica immagine profilo
   </button>
+
+  <mat-error *ngIf="uploadFail">La dimensione del file non deve superare i 10MB</mat-error>
   
   <input type="file" id="imageUpload" accept="image/*"(change)="handleImageSelect($event)" style="display:none;">
   <br><br>

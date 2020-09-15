@@ -14,6 +14,7 @@ export class ProfileComponent implements OnInit {
   profile: Profile;
   url: any;
   subscriptions: Subscription = new Subscription();
+  uploadFail: boolean = false
 
   constructor(private profileService : ProfileService) {
     this.profile = new Profile('','','','');
@@ -44,6 +45,7 @@ export class ProfileComponent implements OnInit {
     var file = files[0];
     this.subscriptions.add(this.profileService.sendImg(file).subscribe(result => {
       this.getImg()
+      this.uploadFail = !result
     }))
   }
 
