@@ -40,8 +40,7 @@ mat-sidenav-container {
 }
 
 .container-sidenav{
-    min-width: 20vw;
-    max-width: 20vw;
+    width: 250px;
     text-overflow: ellipsis;
 }
 

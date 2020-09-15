@@ -6,10 +6,11 @@
         (click)="this.setCurrentCourse(course)">
         <mat-icon [class]="course.enabled?'green':'red'">{{course.enabled?'check_circle':'remove_circle'}}</mat-icon>
         {{course.name}}
-        </a>
+        <span class="spacer"></span>
         <button mat-icon-button [matMenuTriggerFor]="menu">
             <mat-icon>more_vert</mat-icon>
         </button>
+        </a>
         <mat-menu #menu="matMenu">
             <button mat-menu-item (click)="toggleCourse(course)">
                 <mat-icon>{{course.enabled?'remove_circle':'check_circle'}}</mat-icon>
