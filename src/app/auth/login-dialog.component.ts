@@ -6,7 +6,8 @@ import { Router } from '@angular/router';
 export interface DialogData {
   username: FormControl;
   password: FormControl;
-  loginInvalid: Boolean 
+  loginInvalid: Boolean
+  message: string
 }
 
 @Component({

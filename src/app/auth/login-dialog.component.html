@@ -8,7 +8,7 @@
     <input matInput type="password" placeholder="Password" [formControl]="data.password" required>
     <mat-error *ngIf="data.password.invalid">{{getErrorMessagePassword(data.password)}}</mat-error>
   </mat-form-field>
-  <mat-error *ngIf="data.loginInvalid">Username e Password non sono corretti</mat-error>
+  <mat-error *ngIf="data.loginInvalid">{{data.message}}</mat-error>
 </div>
 <div mat-dialog-actions>
   <button mat-raised-button 

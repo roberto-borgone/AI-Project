@@ -44,7 +44,7 @@ export class AuthService {
     })
   }
 
-  login(user: User): Observable<Boolean>{
+  login(user: User): Observable<any>{
     // i remove an eventual stored token, otherwise the interceptor fails
     this.token = undefined
     // login
@@ -58,9 +58,9 @@ export class AuthService {
           this.token.role = 'teacher'
         if(this.redirectUrl)
           this.router.navigate([this.redirectUrl])
-        return true}),
+        return token}),
       catchError( err => {
-        return of(false)
+        return of(err)
       })
     )
   }

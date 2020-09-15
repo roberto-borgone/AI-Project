@@ -41,6 +41,7 @@ export class AppComponent implements OnDestroy{
   username: FormControl = new FormControl('', [Validators.required])
   password: FormControl = new FormControl('', [Validators.required, Validators.minLength(6)])
   loginInvalid: Boolean = false
+  message: string
   logged: boolean = false
 
   matcher = new MyErrorStateMatcher()
@@ -69,7 +70,7 @@ export class AppComponent implements OnDestroy{
   openDialog(): void {
     let dialogRef = this.dialog.open(LoginDialogComponent, {
       width: '400px',
-      data: {username: this.username, password: this.password, loginInvalid: this.loginInvalid}
+      data: {username: this.username, password: this.password, loginInvalid: this.loginInvalid, message: this.message}
     });
 
     this.subscriptions.add(dialogRef.afterClosed().subscribe(result => {
@@ -79,13 +80,15 @@ export class AppComponent implements OnDestroy{
         this.subscriptions.add(this.auth.login(new User(result.username.value, result.password.value))
         .subscribe(authResult => {
             
-          if(authResult === false){
+          if(authResult.ok == false){
             // not logged error message display
+            this.message = authResult.error.message
             this.loginInvalid = true
             this.openDialog()
           }else{
             // logged i remove credentials from dialog to hide them at the next login
             this.loginInvalid = false
+            this.message = undefined
             this.username.reset()
             this.password.reset()
             this.logged = true
@@ -95,6 +98,7 @@ export class AppComponent implements OnDestroy{
         }))
       }else if(!result){
         // dialog closed i remove the credentials
+        this.message = undefined
         this.username.reset()
         this.password.reset()
         this.loginInvalid = false
