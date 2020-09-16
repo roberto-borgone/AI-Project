@@ -60,6 +60,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ContentDialogComponent } from './content-dialog.component';
 import { NewTeamDialogComponent } from './student/new-team-dialog.component';
+import { StudentVmsContComponent } from './student/student-vms-cont.component';
+import { StudentVmsComponent } from './student/student-vms.component';
 
 
 @NgModule({
@@ -93,6 +95,8 @@ import { NewTeamDialogComponent } from './student/new-team-dialog.component';
     NewAssignmentDialogComponent,
     ContentDialogComponent,
     NewTeamDialogComponent,
+    StudentVmsContComponent,
+    StudentVmsComponent,
   ],
   entryComponents: [
     LoginDialogComponent

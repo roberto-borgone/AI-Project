@@ -21,7 +21,6 @@ import { OwnerDialogComponent } from './owner-dialog.component';
 })
 export class VmsContComponent implements OnDestroy {
 
-  subsciptions: Subscription = new Subscription()
   teams: Team[]
   vms: VM[]
   modelVM: ModelVM
@@ -47,19 +46,19 @@ export class VmsContComponent implements OnDestroy {
   }
 
   getTeams(){
-    this.subsciptions.add(this.teamService.query().subscribe(result => {this.teams = result}))
+    this.subscriptions.add(this.teamService.query().subscribe(result => {this.teams = result}))
   }
 
   getModelVM() {
-    this.subsciptions.add(this.courseService.getModelVM().subscribe(result => { this.modelVM = result }))
+    this.subscriptions.add(this.courseService.getModelVM().subscribe(result => { this.modelVM = result }))
   }
 
   getCourse() {
-    this.subsciptions.add(this.courseService.getCourse().subscribe(result => { this.course = result }))
+    this.subscriptions.add(this.courseService.getCourse().subscribe(result => { this.course = result }))
   }
 
   getVM(){
-    this.subsciptions.add(this.vmService.query().subscribe(result => this.vms = result))
+    this.subscriptions.add(this.vmService.query().subscribe(result => this.vms = result))
   }
 
   openUpdateVMDialog(team: Team){
@@ -160,7 +159,7 @@ export class VmsContComponent implements OnDestroy {
   }
 
   ngOnDestroy(){
-    this.subsciptions.unsubscribe()
+    this.subscriptions.unsubscribe()
   }
 
 }

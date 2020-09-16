@@ -82,7 +82,6 @@ export class VmsComponent {
   }
 
   showOwners(students: Student[]){
-    console.log(students)
     this.onShowOwners.emit(students)
   }
 
