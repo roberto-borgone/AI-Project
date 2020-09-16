@@ -11,6 +11,7 @@ import { ProfileComponent } from './profile.component';
 import { StudentCourseComponent } from './student/student-course.component';
 import { AssignmentsContComponent } from './teacher/assignments-cont.component';
 import { TeamContComponent } from './student/team-cont.component';
+import { StudentVmsContComponent } from './student/student-vms-cont.component';
 
 const routes: Routes = [
     { 
@@ -38,7 +39,7 @@ const routes: Routes = [
         children: [
             { path: '', component: HomeComponent },
             { path: ':id/teams', component: TeamContComponent },
-            { path: ':id/vms', component: VmsContComponent },
+            { path: ':id/vms', component: StudentVmsContComponent },
             { path: ':id/assignments', component: AssignmentsContComponent },
             { path: '', component: StudentCourseComponent, outlet: 'sidenav'}
         ]

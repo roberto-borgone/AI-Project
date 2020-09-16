@@ -54,6 +54,13 @@
       [active]="rlav.isActive">
       Gruppi
       </a>
+      <a mat-tab-link 
+      *ngIf="(this.courseService.currentCourse && this.auth.token && this.auth.token.role == 'student')?true:false"
+      [routerLink]="this.courseService.currentCourse?'/student/' + this.courseService.currentCourse.name + '/vms':''"
+      routerLinkActive #rlav="routerLinkActive"
+      [active]="rlav.isActive">
+      VMs
+      </a>
     </nav>
 
     <div id="tab"><router-outlet></router-outlet></div>

@@ -62,6 +62,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { ContentDialogComponent } from './content-dialog.component';
 import { NewTeamDialogComponent } from './student/new-team-dialog.component';
 import {MatDividerModule} from '@angular/material/divider';
+import { StudentVmsContComponent } from './student/student-vms-cont.component';
+import { StudentVmsComponent } from './student/student-vms.component';
 
 
 @NgModule({
@@ -95,6 +97,8 @@ import {MatDividerModule} from '@angular/material/divider';
     NewAssignmentDialogComponent,
     ContentDialogComponent,
     NewTeamDialogComponent,
+    StudentVmsContComponent,
+    StudentVmsComponent,
   ],
   entryComponents: [
     LoginDialogComponent
