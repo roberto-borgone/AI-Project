@@ -13,6 +13,7 @@ export class ProfileComponent implements OnInit {
 
   profile: Profile;
   url: any;
+  url_noimg :String = "assets/images/imm_no_profile.jpg"
   subscriptions: Subscription = new Subscription();
   uploadFail: boolean = false
 

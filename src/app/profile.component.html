@@ -2,6 +2,7 @@
 <div class="card">
    
   <img [src]="url" *ngIf="url" style="width:100%; height: auto;">
+  <img *ngIf="!url" [src]="url_noimg" style="width:100%; height: auto;">
   <br>
   <button mat-button color="primary" (click)="onClick()">
       <mat-icon>file_upload</mat-icon>
