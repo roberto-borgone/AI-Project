@@ -24,7 +24,7 @@ export class VmService {
 
   query(): Observable<VM[]>{
 
-    let PATH = 'https://localhost:4200/api/API/docents'
+    let PATH = 'https://localhost:4200/api/API/' + this.authService.token.role == 'teacher'?'docents':
 
     return this.http.get<VM[]>(PATH + '/' + this.authService.token.username + '/' + this.courseService.currentCourse.name + '/getVMS', this.httpOptions)
     .pipe(
