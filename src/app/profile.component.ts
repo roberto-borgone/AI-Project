@@ -13,6 +13,7 @@ export class ProfileComponent implements OnInit {
 
   profile: Profile;
   url: any;
+  url_noimg :String = "assets/images/imm_no_profile.jpg"
   subscriptions: Subscription = new Subscription();
   uploadFail: boolean = false
 
@@ -37,6 +38,7 @@ export class ProfileComponent implements OnInit {
 
   onClick() { 
     const fileUpload = document.getElementById('imageUpload') as HTMLInputElement;
+    this.uploadFail = false
     fileUpload.click();
 }
 

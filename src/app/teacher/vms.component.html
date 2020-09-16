@@ -1,32 +1,57 @@
 <div class="container">
-    <h2>Virtual Machines</h2>
-    <p *ngIf="modelVM.name != ''">Sistema Operativo: {{modelVM.name}}</p>
-    <p *ngIf="modelVM.name == ''">Sistema Operativo: Non ancora settato</p>
+    <mat-grid-list cols="2" rowHeight="1:0.65">
+      
 
-    <p *ngIf="modelVM.version != ''">Versione: {{modelVM.version}}</p>
-    <p *ngIf="modelVM.version == ''">Versione: Non ancora settata</p>
-    <h3>Vincoli</h3>
+      <mat-grid-tile>
+        <div class = "text-inside-grid">
+        <div class = "divinfobutton">
+          <button class="infobutton" (mouseenter) = "enter()" (mouseleave) = "leave()" mat-icon-button aria-label="Scopri di più">
+            <mat-icon>info</mat-icon>
+          </button>
 
-    <p *ngIf="course.maxRAM == -1" >Max RAM: Non ancora settata</p>
-    <p *ngIf="course.maxRAM != -1" >Max RAM: {{course.maxRAM}}GB</p>
+        </div>
+        
+          <h2>Vincoli Generali</h2> 
+        
+          <p class="error" *ngIf="course.maxActiveVM == -1 || course.maxTotVM == -1 || course.maxRAM == -1 || course.maxDisk == -1 || course.maxVirtualCPU == -1">Modificare queste informazioni per permettere agli studenti di creare delle VM</p>
+          <p *ngIf ="open" class = "info"> Questi vincoli sono applicati a tutti i gruppi in fase di creazione di un gruppo. </p>
+          <p *ngIf ="open" class = "info"> E' possibile modificare i valori settandoli per ogni singolo gruppo dalla tabella "Gruppi". </p>
+          <p *ngIf ="open" class = "info"> Nel caso in cui dei team siano già formati la modifica di questi valori si riflette nei gruppi i quali vincoli non sono ststi mai modificati singolarmente.</p>
+        
+          
+          <p *ngIf="course.maxRAM == -1" >Max RAM: Non ancora settata</p>
+          <p *ngIf="course.maxRAM != -1" >Max RAM: {{course.maxRAM}}GB</p>
 
-    <p *ngIf="course.maxDisk == -1">Max Disk: Non ancora settata</p>
-    <p *ngIf="course.maxDisk != -1">Max Disk: {{course.maxDisk}}GB</p>
+          <p *ngIf="course.maxDisk == -1">Max Disk: Non ancora settata</p>
+          <p *ngIf="course.maxDisk != -1">Max Disk: {{course.maxDisk}}GB</p>
 
-    <p *ngIf="course.maxVirtualCPU == -1">Max VCPU: Non ancora settata</p>
-    <p *ngIf="course.maxVirtualCPU != -1">Max VCPU: {{course.maxVirtualCPU}}GB</p>
+          <p *ngIf="course.maxVirtualCPU == -1">Max VCPU: Non ancora settata</p>
+          <p *ngIf="course.maxVirtualCPU != -1">Max VCPU: {{course.maxVirtualCPU}}GB</p>
 
-    <p *ngIf="course.maxActiveVM == -1">Max Active VM: Non ancora settata</p>
-    <p *ngIf="course.maxActiveVM != -1">Max Active VM: {{course.maxActiveVM}}</p>
+          <p *ngIf="course.maxActiveVM == -1">Max Active VM: Non ancora settata</p>
+          <p *ngIf="course.maxActiveVM != -1">Max Active VM: {{course.maxActiveVM}}</p>
 
 
-    <p *ngIf="course.maxTotVM == -1">Max Tot VM: Non ancora settata</p>
-    <p *ngIf="course.maxTotVM != -1">Max Tot VM: {{course.maxTotVM}}</p>
+          <p *ngIf="course.maxTotVM == -1">Max Tot VM: Non ancora settata</p>
+          <p *ngIf="course.maxTotVM != -1">Max Tot VM: {{course.maxTotVM}}</p>
 
-    <p class="error" *ngIf="course.maxActiveVM == -1 || course.maxTotVM == -1 || course.maxRAM == -1 || course.maxDisk == -1 || course.maxVirtualCPU == -1">Modificare queste informazioni per permetere agli studenti di creare delle VM</p>
-    
-    <button style="margin-bottom: 20px" mat-raised-button color="primary" (click)="updateCourseVM()">Modifica vincoli</button>
-    
+          
+          <button style="margin-bottom: 20px" mat-raised-button color="primary" (click)="updateCourseVM()">Modifica vincoli</button>
+        </div>
+      </mat-grid-tile>
+
+      <mat-grid-tile> 
+        <div class = "text-inside-grid">
+          <h2>Virtual Machines</h2>
+          <p *ngIf="modelVM.name != ''">Sistema Operativo: {{modelVM.name}}</p>
+          <p *ngIf="modelVM.name == ''">Sistema Operativo: Non ancora settato</p>
+
+          <p *ngIf="modelVM.version != ''">Versione: {{modelVM.version}}</p>
+          <p *ngIf="modelVM.version == ''">Versione: Non ancora settata</p>
+        </div>
+      </mat-grid-tile>
+
+    </mat-grid-list>
     <h3>Gruppi</h3>
     <div class="table-container">
         <table mat-table [dataSource]="teams" matSort #sort1="matSort">
@@ -83,6 +108,7 @@
                    [pageSizeOptions]="[5, 10, 25, 100]"
                    showFirstLastButtons="true">
     </mat-paginator>
+
 
     <h3>VM</h3>
     <div class="table-container">

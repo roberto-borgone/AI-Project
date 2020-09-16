@@ -49,6 +49,18 @@ p.error{
     
 }
 
+.title {
+    color: grey;
+    font-size: 25px;
+   }
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: auto;
+    text-align: center;
+}
+
 .center {
     display: block;
     margin-left: auto;
@@ -60,4 +72,9 @@ p.error{
     float: right;
     top:-24px;
     right:-24px;
+  }
+
+.info {
+    color: navy;
+    font-size: 8pt;
   }
