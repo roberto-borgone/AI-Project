@@ -2,7 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { TeamService } from '../services/team.service';
 import { Subscription } from 'rxjs';
 import { Team } from '../team.model';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { UpdateVMDialogComponent } from './update-vm-dialog.component';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -21,11 +21,15 @@ import { OwnerDialogComponent } from './owner-dialog.component';
 })
 export class VmsContComponent implements OnDestroy {
 
+  public dialogInfo: MatDialogRef<DialogInfo>
+
+
   subsciptions: Subscription = new Subscription()
   teams: Team[]
   vms: VM[]
   modelVM: ModelVM
   course: Course
+
 
   maxRAM: FormControl = new FormControl('', [Validators.min(1)])
   maxDisk: FormControl = new FormControl('', [Validators.min(1)])
@@ -61,6 +65,8 @@ export class VmsContComponent implements OnDestroy {
   getVM(){
     this.subsciptions.add(this.vmService.query().subscribe(result => this.vms = result))
   }
+
+  
 
   openUpdateVMDialog(team: Team){
 
@@ -151,6 +157,17 @@ export class VmsContComponent implements OnDestroy {
     
   }
 
+  showInfo(open: boolean){
+    
+    if(open === true){
+      console.log("Aperto")
+      this.dialogInfo = this.dialog.open(DialogInfo);
+    } else if(open === false){
+      this.dialogInfo.close();
+    }
+
+  }
+
   showOwnersDialog(students : Student[]){
 
     let dialogRef = this.dialog.open(OwnerDialogComponent, {
@@ -164,3 +181,9 @@ export class VmsContComponent implements OnDestroy {
   }
 
 }
+
+@Component({
+  selector: 'info-dialog',
+  templateUrl: 'infoDialog.html',
+})
+export class DialogInfo {}

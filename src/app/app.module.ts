@@ -29,6 +29,7 @@ import { LoginDialogComponent } from './auth/login-dialog.component';
 import {MatDialog, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtAuthInterceptor } from './jwt-auth.interceptor';
@@ -60,6 +61,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ContentDialogComponent } from './content-dialog.component';
 import { NewTeamDialogComponent } from './student/new-team-dialog.component';
+import {MatDividerModule} from '@angular/material/divider';
 
 
 @NgModule({
@@ -104,8 +106,8 @@ import { NewTeamDialogComponent } from './student/new-team-dialog.component';
     MatListModule, MatTabsModule, MatButtonModule, MatTableModule,
     MatCheckboxModule, MatAutocompleteModule, MatInputModule, 
     MatSortModule, MatPaginatorModule, AppRoutingModule, HttpClientModule,
-    MatDialogModule, FormsModule, ReactiveFormsModule, MatMenuModule, MatSlideToggleModule, MatFormFieldModule,
-    MatSelectModule, MatDatepickerModule, MatNativeDateModule,
+    MatDialogModule, FormsModule, ReactiveFormsModule, MatGridListModule, MatMenuModule, MatSlideToggleModule, MatFormFieldModule,
+    MatSelectModule, MatDatepickerModule, MatNativeDateModule, MatDividerModule,
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass:JwtAuthInterceptor, multi: true }, StudentService, AuthService],
   bootstrap: [AppComponent]

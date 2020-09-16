@@ -16,6 +16,8 @@ import { Course } from '../course.model';
 })
 export class VmsComponent {
 
+  open: boolean
+
   @ViewChild('sort1', {read: MatSort, static: true})
   sort: MatSort
 
@@ -33,6 +35,9 @@ export class VmsComponent {
 
   @Output()
   onShowOwners: EventEmitter<Student[]>
+
+  @Output()
+  onShowInfo: EventEmitter<boolean>
 
   @Output()
   onUpdateCourseVM: EventEmitter<any>
@@ -75,6 +80,8 @@ export class VmsComponent {
     this.onUpdateVM = new EventEmitter()
     this.onShowOwners = new EventEmitter<Student[]>()
     this.onUpdateCourseVM = new EventEmitter()
+    this.onShowInfo = new EventEmitter()
+    this.open = false
   }
 
   updateVM(team: Team){
@@ -92,6 +99,22 @@ export class VmsComponent {
 
   updateCourseVM() {
     this.onUpdateCourseVM.emit();
+  }
+
+  enter(){
+    console.log("Entrato")
+    this.open = true
+    /*if(this.open === false){
+      this.onShowInfo.emit(true);
+      
+    }*/
+  }
+
+  leave(){
+    console.log("USCITO")
+    this.open = false
+    /*this.onShowInfo.emit(false);
+    */
   }
 
 }

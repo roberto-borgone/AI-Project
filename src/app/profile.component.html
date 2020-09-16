@@ -1,17 +1,21 @@
 <!DOCTYPE html>
-<h1>Dati personali</h1>
-<img [src]="url" *ngIf="url" style="max-width: 200px; height: auto;">
-<br>
-<button mat-button color="primary" (click)="onClick()">
-    <mat-icon>file_upload</mat-icon>
-    Carica immagine profilo
-  </button>
+<div class="card">
+   
+  <img [src]="url" *ngIf="url" style="width:100%; height: auto;">
+  <br>
+  <button mat-button color="primary" (click)="onClick()">
+      <mat-icon>file_upload</mat-icon>
+      Carica immagine profilo
+    </button>
 
-  <mat-error *ngIf="uploadFail">La dimensione del file non deve superare i 10MB</mat-error>
-  
-  <input type="file" id="imageUpload" accept="image/*"(change)="handleImageSelect($event)" style="display:none;">
-  <br><br>
-  <p>Nome: {{profile.name}}</p>
-  <p>Cognome: {{profile.surname}}</p>
-  <p>Matricola: {{profile.id}}</p>
-  <p>Email: {{profile.email}}</p>
+    <mat-error *ngIf="uploadFail">Massima dimensione file: 1MB</mat-error>
+    
+    <input type="file" id="imageUpload" accept="image/*"(change)="handleImageSelect($event)" style="display:none;">
+    <br><br>
+
+    <h1>{{profile.name}} {{profile.surname}}</h1>
+    <p class="title">{{profile.id}}</p>
+    <p>{{profile.email}}</p>
+
+</div>
+
