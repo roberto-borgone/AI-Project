@@ -4,13 +4,13 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { ContentDialogComponent } from './content-dialog.component';
+import { LastWork } from './last-work.model';
 import { AssignmentService } from './services/assignment.service';
 import { Work } from './work.model';
 
 export interface DialogData {
   works: Work[];
-  assignmentId: number;
-  studentId: string;
+  lastWork: LastWork
 }
 
 @Component({
@@ -31,6 +31,11 @@ export class HistoryDialogComponent implements OnInit {
   numbers: number[]
   vote: number;
   laude: boolean;
+  isDisabledLode: boolean;
+  isDisabledVoto: boolean;
+  buttonDisable: boolean;
+  isDisabledSetVote: boolean;
+  isDisabledFileUpload: boolean;
 
   constructor(public dialogHistory: MatDialogRef<HistoryDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData, private assignmentService: AssignmentService, private dialog: MatDialog) {
@@ -39,10 +44,20 @@ export class HistoryDialogComponent implements OnInit {
       console.log(data.works)
       this.dataSource = new MatTableDataSource(data.works)
       this.dataSource.paginator = this.paginator
-
       this.numbers = Array.from(Array(31).keys()); 
-     }
+      this.isDisabledLode = true;
 
+      if(this.data.works.length==0 || (this.data.lastWork.voto != undefined && this.data.lastWork.voto != 0 && this.data.lastWork.voto != -1)) {
+        this.buttonDisable = true;  
+        this.isDisabledVoto = true;
+        this.isDisabledSetVote = true;
+        this.isDisabledFileUpload = true;
+      }
+
+      if(!this.data.lastWork.updateable) {
+        this.buttonDisable = true; 
+      }
+     }
 
      onClick() { 
       const fileUpload = document.getElementById('imageUpload') as HTMLInputElement;
@@ -53,18 +68,44 @@ export class HistoryDialogComponent implements OnInit {
       console.log("Sono in handleImageSelect");
       var files = event.target.files; // FileList object
       var file = files[0];
-      this.subscriptions.add(this.assignmentService.uploadCorrection(this.data.assignmentId, this.data.studentId, file).subscribe())
+      this.subscriptions.add(this.assignmentService.uploadCorrection(this.data.lastWork.consegnaId, this.data.lastWork.studentId, file).subscribe())
       }
 
-    giveVote() {
+    onClickVote() {
+      console.log("Sono in onClickVote()")
+      console.log(this.vote)
+      if(this.vote == 30) {
+        this.isDisabledLode = false;
+      }
+      else {
+        this.isDisabledLode = true;
+      }
+    }
+
+    setVote() {
       console.log("Sono in giveVote()")
       console.log(this.vote)
       console.log(this.laude)
-      this.subscriptions.add(this.assignmentService.giveVote(this.data.assignmentId, this.data.studentId, this.vote, this.laude).subscribe())
+      if(this.laude === undefined) {
+        this.laude = false;
+      }
+      if(this.vote>1) {
+        this.subscriptions.add(this.assignmentService.setVote(this.data.lastWork.consegnaId, this.data.lastWork.studentId, this.vote, this.laude)
+        .subscribe(res => {
+          if(res) {
+            this.buttonDisable = true;
+            this.isDisabledVoto = true;
+            this.isDisabledSetVote = true;
+            this.isDisabledLode = true;
+            this.isDisabledFileUpload = true;
+          }
+        }))
+      }
     }
 
     disable() {
-
+      this.subscriptions.add(this.assignmentService.disableAssignment(this.data.lastWork.consegnaId, this.data.lastWork.studentId)
+      .subscribe(res => {if(res) this.buttonDisable = true}))
     }
 
     showContent(workId: number) {

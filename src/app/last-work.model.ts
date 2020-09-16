@@ -2,9 +2,9 @@ import { Student } from './student.model';
 
 export class LastWork {
     id : number;
-    is_updateable : boolean;
+    updateable : boolean;
     status : string;
-    consegna_id : string;
+    consegnaId : number;
     studentId: string
     studentName: string
     studentSurname: string
@@ -12,12 +12,12 @@ export class LastWork {
     lode : boolean;
     voto : number;
   
-    constructor(id: number, is_updateable: boolean, status: string, date: Date, consegna_id : string, studentId: string, studentName: string, studentSurname: string, lode: boolean, voto: number){
+    constructor(id: number, updateable: boolean, status: string, date: Date, consegnaId : number, studentId: string, studentName: string, studentSurname: string, lode: boolean, voto: number){
         this.id = id;
-        this.is_updateable = is_updateable;
+        this.updateable = updateable;
         this.status = status;
         this.date = date;
-        this.consegna_id = consegna_id;
+        this.consegnaId = consegnaId;
         this.studentId = studentId;
         this.studentName = studentName;
         this.studentSurname = studentSurname;

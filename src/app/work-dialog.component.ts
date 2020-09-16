@@ -44,9 +44,10 @@ export class WorkDialogComponent {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  showHistory(assignmentId: number, studentId: string) {
+  showHistory(lastWork : LastWork) {
     console.log("showHystory in work-dialog.ts")
-    this.subscriptions.add(this.assignmentService.getStudentHistory(assignmentId, studentId).subscribe(history => {
+    console.log(lastWork);
+    this.subscriptions.add(this.assignmentService.getStudentHistory(lastWork.consegnaId, lastWork.studentId).subscribe(history => {
       console.log(history); 
 
       const dialogConfig = new MatDialogConfig();
@@ -54,8 +55,7 @@ export class WorkDialogComponent {
       dialogConfig.height = '70%';
       dialogConfig.data = {
         works: history,
-        assignmentId: assignmentId,
-        studentId: studentId
+        lastWork: lastWork       
       }
   
       let diag = this.dialog.open(HistoryDialogComponent, dialogConfig);

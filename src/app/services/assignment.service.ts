@@ -102,11 +102,11 @@ export class AssignmentService {
     )
   }
 
-  giveVote(assignmentId: number, studentId: string, vote: number, laude: boolean) {
+  setVote(assignmentId: number, studentId: string, vote: number, laude: boolean) {
 
     let PATH = 'https://localhost:4200/api/API/consegne/';
     
-    return this.http.post<any>(PATH + assignmentId + '/' + studentId + '/' + this.auth.token.username + '/setVoto', vote)
+    return this.http.post<any>(PATH + assignmentId + '/' + studentId + '/' + this.auth.token.username + '/setVoto', {'voto': vote, 'lode': laude})
     .pipe(
       map(result => {
         return true}),
@@ -130,6 +130,21 @@ export class AssignmentService {
       catchError( err => {
         console.error(err)
         return throwError(err.message)
+      })
+    )
+  }
+
+  disableAssignment(assignmentId: number, studentId: string) {
+
+    let PATH = 'https://localhost:4200/api/API/consegne/';
+    
+    return this.http.get<any>(PATH + assignmentId + '/' + this.auth.token.username + '/' + studentId + '/updateStatusConsegna')
+    .pipe(
+      map(result => {
+        return true}),
+      catchError( err => {
+        console.log(err)
+        return of(false)
       })
     )
   }
