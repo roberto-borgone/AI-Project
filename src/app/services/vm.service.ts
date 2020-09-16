@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { VM } from '../vm.model';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, concatMap, map } from 'rxjs/operators';
 import { CourseService } from './course.service';
 import { AuthService } from '../auth/auth.service';
 import { Student } from '../student.model';
@@ -40,4 +40,28 @@ export class VmService {
       })
     )
   }
+
+  getVM(): Observable<VM[]>{
+
+    let PATH = 'https://localhost:4200/api/API/students'
+
+    return this.courseService.getGroup().pipe(
+      concatMap(result => {
+        if(result){
+          return this.http.get<VM[]>(PATH + '/' + this.authService.token.username + '/teams/' + this.authService.token.group.id + '/getVMS', this.httpOptions).pipe(
+            map(vms => {
+              for(let vm of vms){
+                this.http.get<Student[]>(this.API_PATH + '/' + vm.id + '/owners').subscribe(owners => {vm.owners = owners})
+              }
+              return vms
+            })
+          )
+        }else{
+          let resultQuery: VM[] = []
+          return of(resultQuery)
+        }
+      })
+    )
+  }
+
 }

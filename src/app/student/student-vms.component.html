@@ -77,10 +77,10 @@
             <th mat-header-cell *matHeaderCellDef>Comandi</th>
             <td mat-cell *matCellDef="let element">
                 <button mat-icon-button (click)="element.on?stopVM(element):startVM(element)">
-                    <mat-icon>{{element.on?'play_circle_outline':'stop_circle_outline'}}</mat-icon>
+                    <mat-icon>{{element.on?'pause_circle_outline':'play_circle_outline'}}</mat-icon>
                 </button>
                 <button mat-icon-button (click)="deleteVM(element)">
-                    <mat-icon>delete</mat-icon>
+                    <mat-icon>delete_outline</mat-icon>
                 </button>
                 <button *ngIf="!element.on" mat-icon-button (click)="modifyVM(element)">
                     <mat-icon>settings</mat-icon>
