@@ -55,6 +55,10 @@ export class StudentVmsContComponent {
   }
 
   openNewVMDialog(){
+
+    
+
+    console.log("APERTO")
     
   }
 

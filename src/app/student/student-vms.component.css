@@ -34,3 +34,12 @@ th, td {
 .green{
     color: greenyellow;
 }
+
+.text-inside-grid {
+    position: absolute;
+    width: 100%;
+    left: 5px;
+    top: 5px;
+  }
+
+  .infobutton {float: left}
