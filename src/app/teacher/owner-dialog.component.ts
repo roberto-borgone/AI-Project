@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Student } from '../student.model';
+import { Student } from '../models/student.model';
 
 export interface DialogData{
   students: Student[]

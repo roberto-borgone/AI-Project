@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileService } from './services/profile.service';
-import { Profile } from './profile.model';
+import { Profile } from './models/profile.model';
 import { Subscription } from 'rxjs';
 
 

@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core'
-import { Student} from 'src/app/student.model'
 import { Observable, throwError, from } from 'rxjs'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { catchError, concatMap, toArray, map, flatMap, mergeAll } from 'rxjs/operators';
 import { CourseService } from './course.service';
-import { Team } from '../team.model';
+import { Student } from '../models/student.model';
 
 export interface GroupEntity{
   id: number

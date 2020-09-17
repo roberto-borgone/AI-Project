@@ -3,10 +3,10 @@ import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angu
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
-import { ContentDialogComponent } from './content-dialog.component';
-import { LastWork } from './last-work.model';
-import { AssignmentService } from './services/assignment.service';
-import { Work } from './work.model';
+import { ContentDialogComponent } from '../content-dialog.component';
+import { LastWork } from '../models/last-work.model';
+import { Work } from '../models/work.model';
+import { AssignmentService } from '../services/assignment.service';
 
 export interface DialogData {
   works: Work[];

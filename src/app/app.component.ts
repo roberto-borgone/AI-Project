@@ -6,12 +6,12 @@ import { RegisterComponent } from './auth/register.component'
 import { SuccessRegisterDialogComponent } from './auth/success-register-dialog.component'
 import {FormControl, Validators, FormGroupDirective, NgForm, FormGroup} from '@angular/forms';
 import { AuthService } from './auth/auth.service';
-import { User } from './user.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { RegistartionForm } from './registrationForm.model';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { CourseService } from './services/course.service';
+import { User } from './models/user.model';
+import { RegistartionForm } from './models/registrationForm.model';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {

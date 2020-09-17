@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
-import { Assignment } from '../assignment.model';
+import { Assignment } from '../models/assignment.model';
 import { ContentDialogComponent } from '../content-dialog.component';
 import { AssignmentService } from '../services/assignment.service';
 import { CourseService } from '../services/course.service';

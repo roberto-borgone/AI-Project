@@ -2,11 +2,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { Assignment } from '../assignment.model';
+import { Assignment } from '../models/assignment.model';
 import { AuthService } from '../auth/auth.service';
-import { LastWork } from '../last-work.model';
-import { Work } from '../work.model';
+import { LastWork } from '../models/last-work.model';
 import { CourseService } from './course.service';
+import { Work } from '../models/work.model';
 
 @Injectable({
   providedIn: 'root'
@@ -53,11 +53,10 @@ export class AssignmentService {
 
     const formData = new FormData();
     formData.append('imagefile', file);
-    formData.append('scadenza', dueDate.toString());
 
     let PATH = 'https://localhost:4200/api/API/courses/';
     
-    return this.http.post<any>(PATH + this.courseService.currentCourse.name + '/' + this.auth.token.username + '/newConsegna', formData, this.httpOptions)
+    return this.http.post<any>(PATH + this.courseService.currentCourse.name + '/' + this.auth.token.username + '/' + dueDate + '/newConsegna', formData)
     .pipe(
       map(result => {
         return true}),

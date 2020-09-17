@@ -2,13 +2,13 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Course } from '../course.model';
+import { Course } from '../models/course.model';
+import { Student } from '../models/student.model';
+import { VM } from '../models/vm.model';
 import { CourseService } from '../services/course.service';
 import { VmService } from '../services/vm.service';
-import { Student } from '../student.model';
-import { ModelVM } from '../teacher/modelVM.model';
+import { ModelVM } from '../models/modelVM.model';
 import { OwnerDialogComponent } from '../teacher/owner-dialog.component';
-import { VM } from '../vm.model';
 
 @Component({
   selector: 'app-student-vms-cont',

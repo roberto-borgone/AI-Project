@@ -2,7 +2,6 @@ import { Component, ViewChild, Input, Output, EventEmitter, QueryList, ViewChild
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Team } from '../team.model';
 import { CourseService } from '../services/course.service';
 import { VM } from '../vm.model';
 import { Student } from '../student.model';
@@ -10,6 +9,11 @@ import { ModelVM } from './modelVM.model';
 import { Course } from '../course.model';
 import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { Portal, TemplatePortalDirective } from '@angular/cdk/portal';
+import { ModelVM } from '../models/modelVM.model';
+import { Course } from '../models/course.model';
+import { Team } from '../models/team.model';
+import { Student } from '../models/student.model';
+import { VM } from '../models/vm.model';
 
 @Component({
   selector: 'app-vms',

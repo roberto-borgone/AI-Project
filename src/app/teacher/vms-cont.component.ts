@@ -1,18 +1,18 @@
 import { Component, OnDestroy } from '@angular/core';
 import { TeamService } from '../services/team.service';
 import { Subscription } from 'rxjs';
-import { Team } from '../team.model';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { UpdateVMDialogComponent } from './update-vm-dialog.component';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CourseService } from '../services/course.service';
-import { VM } from '../vm.model';
-import { Course } from '../course.model';
-import { ModelVM } from './modelVM.model';
+import { Course } from '../models/course.model';
+import { ModelVM } from '../models/modelVM.model';
 import { VmService } from '../services/vm.service';
-import { Student } from '../student.model';
 import { OwnerDialogComponent } from './owner-dialog.component';
+import { Team } from '../models/team.model';
+import { VM } from '../models/vm.model';
+import { Student } from '../models/student.model';
 
 @Component({
   selector: 'app-vms-cont',
