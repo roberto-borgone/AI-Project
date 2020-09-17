@@ -64,6 +64,9 @@ import { NewTeamDialogComponent } from './student/new-team-dialog.component';
 import {MatDividerModule} from '@angular/material/divider';
 import { StudentVmsContComponent } from './student/student-vms-cont.component';
 import { StudentVmsComponent } from './student/student-vms.component';
+import { AssignmentComponent } from './student/assignment.component';
+import { AssignmentContComponent } from './student/assignment-cont.component';
+import { WorksDialogComponent } from './student/works-dialog.component';
 
 
 @NgModule({
@@ -99,6 +102,9 @@ import { StudentVmsComponent } from './student/student-vms.component';
     NewTeamDialogComponent,
     StudentVmsContComponent,
     StudentVmsComponent,
+    AssignmentComponent,
+    AssignmentContComponent,
+    WorksDialogComponent,
   ],
   entryComponents: [
     LoginDialogComponent

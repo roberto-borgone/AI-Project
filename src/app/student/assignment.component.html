@@ -1,8 +1,5 @@
 <div class="container">
     <h2>Elenco consegne</h2>
-    <br>
-    <button mat-raised-button color="primary" (click)='createAssignment()'>Crea consegna</button>
-    <br>
     <div class="table-container">
       <table mat-table [dataSource]="assignments" matSort>
 
@@ -24,17 +21,17 @@
         <ng-container matColumnDef="content">
             <th mat-header-cell *matHeaderCellDef> Contenuto </th>
             <td mat-cell *matCellDef="let element">
-                <button mat-icon-button (click)="showContent(element)">
+                <button mat-icon-button (click)="showContent(element.id)">
                     <mat-icon>all_out</mat-icon>
                 </button>
             </td>
           </ng-container>
 
-          <ng-container matColumnDef="students">
-            <th mat-header-cell *matHeaderCellDef> Studenti </th>
+          <ng-container matColumnDef="works">
+            <th mat-header-cell *matHeaderCellDef> Elaborati </th>
             <td mat-cell *matCellDef="let element">
-                <button mat-icon-button (click)="showStudents(element.id)">
-                    <mat-icon>groups</mat-icon>
+                <button mat-icon-button (click)="showWorks(element)">
+                    <mat-icon>assignment</mat-icon>
                 </button>
             </td>
           </ng-container>

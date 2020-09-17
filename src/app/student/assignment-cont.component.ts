@@ -1,22 +1,19 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { MatDatepicker, MatDatepickerInput } from '@angular/material/datepicker';
-import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { Assignment } from '../assignment.model';
 import { ContentDialogComponent } from '../content-dialog.component';
-import { LastWork } from '../last-work.model';
 import { AssignmentService } from '../services/assignment.service';
 import { CourseService } from '../services/course.service';
-import { WorkDialogComponent } from '../work-dialog.component';
-import { NewAssignmentDialogComponent } from './new-assignment-dialog.component';
+import { WorksDialogComponent } from './works-dialog.component';
 
 @Component({
-  selector: 'app-assignments-cont',
-  templateUrl: './assignments-cont.component.html',
-  styleUrls: ['./assignments-cont.component.css']
+  selector: 'app-assignment-cont',
+  templateUrl: './assignment-cont.component.html',
+  styleUrls: ['./assignment-cont.component.css']
 })
-export class AssignmentsContComponent implements OnDestroy {
+export class AssignmentContComponent implements OnDestroy {
 
   assignments: Assignment[]
   subscriptions: Subscription = new Subscription()
@@ -48,7 +45,7 @@ export class AssignmentsContComponent implements OnDestroy {
     }));
   }
 
-  openStudentsDialog(assignmentId : number){
+  openWorksDialog(assignmentId : number){
 
     this.subscriptions.add(this.assignmentService.getStudentsWorks(assignmentId).subscribe(works => {
       console.log(works); 
@@ -57,23 +54,9 @@ export class AssignmentsContComponent implements OnDestroy {
       dialogConfig.height = '70%';
       dialogConfig.data = works;
   
-      let dialogRef = this.dialog.open(WorkDialogComponent, dialogConfig);
+      let dialogRef = this.dialog.open(WorksDialogComponent, dialogConfig);
   
       this.subscriptions.add(dialogRef.afterClosed().subscribe());
-    }));
-  }
-
-  openAssignmentDialog() {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = '40%';
-    dialogConfig.height = '40%';
-    dialogConfig.data = {dueDate: this.dueDate, file: this.file};
-
-    let dialogRef = this.dialog.open(NewAssignmentDialogComponent, dialogConfig);
-
-    this.subscriptions.add(dialogRef.afterClosed().subscribe(result => {
-      console.log(result.file)
-      this.subscriptions.add(this.assignmentService.createAssignment(result.dueDate.value, result.file).subscribe())
     }));
   }
 

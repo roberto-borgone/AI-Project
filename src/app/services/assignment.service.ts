@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { Assignment } from '../assignment.model';
 import { AuthService } from '../auth/auth.service';
 import { LastWork } from '../last-work.model';
 import { Work } from '../work.model';
@@ -67,7 +68,7 @@ export class AssignmentService {
     )
   }
 
-  getAssignmentContent(assignmentId: number): Observable<any> {
+  getAssignmentContent(assignment: Assignment): Observable<any> {
 
     let PATH = 'https://localhost:4200/api/API/courses/';
 
@@ -75,7 +76,7 @@ export class AssignmentService {
       responseType: 'blob'
     }
 
-    return this.http.get<any>(PATH + this.courseService.currentCourse.name + '/' + assignmentId + '/getConsegna', requestOptions)
+    return this.http.get<any>(PATH + this.courseService.currentCourse.name + '/' + assignment.id + '/getConsegna', requestOptions)
     .pipe(
       catchError( err => {
         console.error(err)
