@@ -116,11 +116,6 @@ export class VmsComponent {
     this.onUpdateCourseVM.emit();
   }
 
- 
-
- 
-
-
   enter() {
     let config = new OverlayConfig();
 
@@ -137,9 +132,4 @@ export class VmsComponent {
   leave() {
     this.fusilliOverlayRef.dispose();
   }
-
-
-
-  
-
 }
