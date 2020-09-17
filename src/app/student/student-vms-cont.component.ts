@@ -35,7 +35,7 @@ export class StudentVmsContComponent {
   }
 
   getVM(){
-    this.subscriptions.add(this.vmService.query().subscribe(result => this.vms = result))
+    this.subscriptions.add(this.vmService.getVM().subscribe(result => this.vms = result))
   }
 
   getCourse() {
