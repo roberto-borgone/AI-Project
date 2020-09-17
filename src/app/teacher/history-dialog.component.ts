@@ -18,7 +18,7 @@ export interface DialogData {
   templateUrl: './history-dialog.component.html',
   styleUrls: ['./history-dialog.component.css']
 })
-export class HistoryDialogComponent implements OnInit {
+export class HistoryDialogComponent {
 
   @ViewChild(MatPaginator) 
   paginator: MatPaginator
@@ -126,7 +126,8 @@ export class HistoryDialogComponent implements OnInit {
       }))
     }
 
-  ngOnInit(): void {
-  }
+    ngOnDestroy(): void {
+      this.subscriptions.unsubscribe();
+    }
 
 }

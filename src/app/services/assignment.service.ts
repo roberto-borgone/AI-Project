@@ -152,7 +152,7 @@ export class AssignmentService {
   getStudentWorks(assignment: Assignment) {
 
     let PATH = 'https://localhost:4200/api/API/consegne/';
-    return this.http.get<Work[]>(PATH + assignment.id + '/' + this.auth.token.username + '/' + assignment.docent_id + '/getAllStudentElaborati')
+    return this.http.get<Work[]>(PATH + assignment.id + '/' + this.auth.token.username + '/' + assignment.docentID + '/getAllStudentElaborati')
     .pipe(
       catchError( err => {
         console.error(err)
