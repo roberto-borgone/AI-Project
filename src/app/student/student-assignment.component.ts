@@ -5,11 +5,11 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Assignment } from '../models/assignment.model';
 
 @Component({
-  selector: 'app-assignment',
-  templateUrl: './assignment.component.html',
-  styleUrls: ['./assignment.component.css']
+  selector: 'app-student-assignment',
+  templateUrl: './student-assignment.component.html',
+  styleUrls: ['./student-assignment.component.css']
 })
-export class AssignmentComponent implements OnInit {
+export class StudentAssignmentComponent implements OnInit {
 
   @ViewChild(MatSort, {static: true})
   sort: MatSort
@@ -50,5 +50,4 @@ export class AssignmentComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

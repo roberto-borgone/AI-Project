@@ -2,18 +2,18 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
-import { Assignment } from '../models/assignment.model';
 import { ContentDialogComponent } from '../content-dialog.component';
+import { Assignment } from '../models/assignment.model';
 import { AssignmentService } from '../services/assignment.service';
 import { CourseService } from '../services/course.service';
 import { WorksDialogComponent } from './works-dialog.component';
 
 @Component({
-  selector: 'app-assignment-cont',
-  templateUrl: './assignment-cont.component.html',
-  styleUrls: ['./assignment-cont.component.css']
+  selector: 'app-student-assignment-cont',
+  templateUrl: './student-assignment-cont.component.html',
+  styleUrls: ['./student-assignment-cont.component.css']
 })
-export class AssignmentContComponent implements OnDestroy {
+export class StudentAssignmentContComponent implements OnDestroy {
 
   assignments: Assignment[]
   subscriptions: Subscription = new Subscription()
@@ -45,10 +45,11 @@ export class AssignmentContComponent implements OnDestroy {
     }));
   }
 
-  openWorksDialog(assignmentId : number){
+  openWorksDialog(assignment: Assignment){
 
-    this.subscriptions.add(this.assignmentService.getStudentsWorks(assignmentId).subscribe(works => {
-      console.log(works); 
+    this.subscriptions.add(this.assignmentService.getStudentWorks(assignment).subscribe(works => {
+      console.log(works);
+
       const dialogConfig = new MatDialogConfig();
       dialogConfig.width = '98%';
       dialogConfig.height = '70%';
@@ -63,4 +64,5 @@ export class AssignmentContComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
+
 }

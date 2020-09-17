@@ -12,6 +12,7 @@ import { StudentCourseComponent } from './student/student-course.component';
 import { AssignmentsContComponent } from './teacher/assignments-cont.component';
 import { TeamContComponent } from './student/team-cont.component';
 import { StudentVmsContComponent } from './student/student-vms-cont.component';
+import { StudentAssignmentContComponent } from './student/student-assignment-cont.component';
 
 const routes: Routes = [
     { 
@@ -40,7 +41,7 @@ const routes: Routes = [
             { path: '', component: HomeComponent },
             { path: ':id/teams', component: TeamContComponent },
             { path: ':id/vms', component: StudentVmsContComponent },
-            { path: ':id/assignments', component: AssignmentsContComponent },
+            { path: ':id/assignments', component: StudentAssignmentContComponent},
             { path: '', component: StudentCourseComponent, outlet: 'sidenav'}
         ]
     },
