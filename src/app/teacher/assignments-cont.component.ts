@@ -72,6 +72,7 @@ export class AssignmentsContComponent implements OnDestroy {
     this.subscriptions.add(dialogRef.afterClosed().subscribe(result => {
       console.log(result.file)
       this.subscriptions.add(this.assignmentService.createAssignment(result.dueDate.value, result.file).subscribe())
+      this.getAssignments()
     }));
   }
 

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
@@ -14,6 +14,8 @@ export interface DialogData {
 })
 export class NewAssignmentDialogComponent implements OnInit {
 
+  testo = "Carica consegna"
+  isValid = true
 
   constructor(public dialogRef: MatDialogRef<NewAssignmentDialogComponent>, 
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
@@ -36,5 +38,7 @@ export class NewAssignmentDialogComponent implements OnInit {
     var files = event.target.files; // FileList object
     var file = files[0];
     this.data.file = file;
+    this.testo = "Consegna Caricata"
+    this.isValid = false
   }
 }
