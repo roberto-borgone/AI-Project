@@ -52,10 +52,8 @@ import {MatSelectModule} from '@angular/material/select';
 import { StudentCourseComponent } from './student/student-course.component';
 import { AssignmentsContComponent } from './teacher/assignments-cont.component';
 import { AssignmentsComponent } from './teacher/assignments.component';
-import { WorkDialogComponent } from './work-dialog.component';
 import { TeamComponent } from './student/team.component';
 import { TeamContComponent } from './student/team-cont.component';
-import { HistoryDialogComponent } from './history-dialog.component';
 import { NewAssignmentDialogComponent } from './teacher/new-assignment-dialog.component';
 import {MatDatepickerModule} from '@angular/material/datepicker'; 
 import { MatNativeDateModule } from '@angular/material/core';
@@ -67,6 +65,8 @@ import { StudentVmsComponent } from './student/student-vms.component';
 import { AssignmentComponent } from './student/assignment.component';
 import { AssignmentContComponent } from './student/assignment-cont.component';
 import { WorksDialogComponent } from './student/works-dialog.component';
+import { WorkDialogComponent } from './teacher/work-dialog.component';
+import { HistoryDialogComponent } from './teacher/history-dialog.component';
 
 
 @NgModule({

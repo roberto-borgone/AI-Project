@@ -1,14 +1,11 @@
-import { Component, EventEmitter, Inject, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, Output, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
-import { DialogData } from './auth/login-dialog.component';
+import { LastWork } from '../models/last-work.model';
+import { AssignmentService } from '../services/assignment.service';
 import { HistoryDialogComponent } from './history-dialog.component';
-import { LastWork } from './last-work.model';
-import { AssignmentService } from './services/assignment.service';
-import { Work } from './work.model';
 
 @Component({
   selector: 'app-work-dialog',

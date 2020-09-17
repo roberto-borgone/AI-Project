@@ -1,12 +1,12 @@
 import { Component, OnDestroy } from '@angular/core';
-import { Student} from 'src/app/student.model'
 import { StudentService } from '../services/student.service';
 import { Subscription, Observable } from 'rxjs';
 import { CourseService } from '../services/course.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CsvUploadDialogComponent } from './csv-upload-dialog.component';
-import { CsvStudent } from '../csv-student.model';
+import { CsvStudent } from '../models/csv-student.model';
+import { Student } from '../models/student.model';
 
 @Component({
   selector: 'app-students-cont',

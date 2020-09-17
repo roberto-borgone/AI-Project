@@ -1,6 +1,4 @@
-import { Proposal } from './../proposal.model';
 import { Component, OnDestroy, AfterViewInit, OnInit } from '@angular/core';
-import { Student } from '../student.model';
 import { AuthService } from '../auth/auth.service';
 import { Subscription } from 'rxjs';
 import { TeamService } from '../services/team.service';
@@ -8,7 +6,9 @@ import { NavigationEnd, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { FormControl, Validators } from '@angular/forms';
 import { NewTeamDialogComponent } from './new-team-dialog.component';
-import { ThrowStmt } from '@angular/compiler';
+import { Student } from '../models/student.model';
+import { Proposal } from '../models/proposal.model';
+
 
 @Component({
   selector: 'app-team-cont',

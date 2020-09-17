@@ -1,15 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { MatDatepicker, MatDatepickerInput } from '@angular/material/datepicker';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
-import { Assignment } from '../assignment.model';
+import { Assignment } from '../models/assignment.model';
 import { ContentDialogComponent } from '../content-dialog.component';
-import { LastWork } from '../last-work.model';
 import { AssignmentService } from '../services/assignment.service';
 import { CourseService } from '../services/course.service';
-import { WorkDialogComponent } from '../work-dialog.component';
 import { NewAssignmentDialogComponent } from './new-assignment-dialog.component';
+import { WorkDialogComponent } from './work-dialog.component';
 
 @Component({
   selector: 'app-assignments-cont',

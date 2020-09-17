@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { Course } from '../course.model';
+import { Course } from '../models/course.model';
 import { Subscription } from 'rxjs';
 import { CourseService } from '../services/course.service';
 import { AuthService } from '../auth/auth.service';

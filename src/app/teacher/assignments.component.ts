@@ -2,8 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angu
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Assignment } from '../assignment.model';
-import { Student } from '../student.model';
+import { Assignment } from '../models/assignment.model';
 
 @Component({
   selector: 'app-assignments',

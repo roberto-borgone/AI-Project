@@ -1,11 +1,11 @@
 import { Component, ViewChild, Input, Output, EventEmitter } from '@angular/core';
-import { Proposal } from './../proposal.model';
 import { AuthService } from '../auth/auth.service';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-import { Student } from '../student.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
+import { Student } from '../models/student.model';
+import { Proposal } from '../models/proposal.model';
 
 @Component({
   selector: 'app-team',

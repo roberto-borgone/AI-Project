@@ -1,11 +1,8 @@
 import { Component, OnInit, ViewChild, Input, Inject } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { Student } from '../student.model';
-import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-import { CsvStudent } from '../csv-student.model';
+import { CsvStudent } from '../models/csv-student.model';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DialogData } from '../auth/login-dialog.component';
 
 @Component({
   selector: 'app-csv-upload-dialog',
