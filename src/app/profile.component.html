@@ -9,7 +9,7 @@
       Carica immagine profilo
     </button>
 
-    <mat-error *ngIf="uploadFail">Massima dimensione file: 1MB</mat-error>
+    <mat-error *ngIf="uploadFail">Massima dimensione file: 10MB</mat-error>
     
     <input type="file" id="imageUpload" accept="image/*"(change)="handleImageSelect($event)" style="display:none;">
     <br><br>

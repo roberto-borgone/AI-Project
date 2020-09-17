@@ -61,4 +61,8 @@ export class WorkDialogComponent {
     }));
   }
 
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
 }

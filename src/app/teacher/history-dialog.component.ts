@@ -63,6 +63,10 @@ export class HistoryDialogComponent implements OnInit {
       const fileUpload = document.getElementById('imageUpload') as HTMLInputElement;
       fileUpload.click();
     }
+
+    onNoClick(): void {
+      this.dialogHistory.close();
+    }
   
     handleImageSelect(event: any) {
       console.log("Sono in handleImageSelect");
