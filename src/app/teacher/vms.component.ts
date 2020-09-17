@@ -1,4 +1,4 @@
-import { Component, ViewChild, Input, Output, EventEmitter, QueryList } from '@angular/core';
+import { Component, ViewChild, Input, Output, EventEmitter, QueryList, ViewChildren } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -8,6 +8,8 @@ import { VM } from '../vm.model';
 import { Student } from '../student.model';
 import { ModelVM } from './modelVM.model';
 import { Course } from '../course.model';
+import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
+import { Portal, TemplatePortalDirective } from '@angular/cdk/portal';
 
 @Component({
   selector: 'app-vms',
@@ -16,7 +18,16 @@ import { Course } from '../course.model';
 })
 export class VmsComponent {
 
+
+  isMenuOpen: boolean = false;
+
+  fusilliOverlayRef: OverlayRef;
+
+  @ViewChildren(TemplatePortalDirective) templatePortals: QueryList<Portal<any>>;
+
+  
   open: boolean
+  isOpen = false;
 
   @ViewChild('sort1', {read: MatSort, static: true})
   sort: MatSort
@@ -76,7 +87,8 @@ export class VmsComponent {
     this.course = course
   }
 
-  constructor(public courseService: CourseService) { 
+
+  constructor(public courseService: CourseService, public overlay: Overlay) { 
     this.onUpdateVM = new EventEmitter()
     this.onShowOwners = new EventEmitter<Student[]>()
     this.onUpdateCourseVM = new EventEmitter()
@@ -100,20 +112,30 @@ export class VmsComponent {
     this.onUpdateCourseVM.emit();
   }
 
-  enter(){
-    console.log("Entrato")
-    this.open = true
-    /*if(this.open === false){
-      this.onShowInfo.emit(true);
-      
-    }*/
+ 
+
+ 
+
+
+  enter() {
+    let config = new OverlayConfig();
+
+    config.positionStrategy = this.overlay.position()
+        .global()
+        .centerHorizontally()
+        .top(`10%`);
+
+
+    this.fusilliOverlayRef = this.overlay.create(config);
+    this.fusilliOverlayRef.attach(this.templatePortals.first);
   }
 
-  leave(){
-    console.log("USCITO")
-    this.open = false
-    /*this.onShowInfo.emit(false);
-    */
+  leave() {
+    this.fusilliOverlayRef.dispose();
   }
+
+
+
+  
 
 }

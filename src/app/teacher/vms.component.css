@@ -44,3 +44,15 @@ th, td {
   }
 
   .infobutton {float: left}
+
+  .info{
+    background-color: whitesmoke;
+    border-radius: 5px;
+    box-shadow: 4px 4px 32px -17px rgba(0,0,0,0.7);
+    margin: auto;
+    width: 50%;
+
+}
+ .lista{
+     width: 80%;
+ }

@@ -67,6 +67,8 @@ import { StudentVmsComponent } from './student/student-vms.component';
 import { AssignmentComponent } from './student/assignment.component';
 import { AssignmentContComponent } from './student/assignment-cont.component';
 import { WorksDialogComponent } from './student/works-dialog.component';
+import {OverlayModule} from '@angular/cdk/overlay';
+import {PortalModule} from '@angular/cdk/portal';
 
 
 @NgModule({
@@ -117,7 +119,7 @@ import { WorksDialogComponent } from './student/works-dialog.component';
     MatCheckboxModule, MatAutocompleteModule, MatInputModule, 
     MatSortModule, MatPaginatorModule, AppRoutingModule, HttpClientModule,
     MatDialogModule, FormsModule, ReactiveFormsModule, MatGridListModule, MatMenuModule, MatSlideToggleModule, MatFormFieldModule,
-    MatSelectModule, MatDatepickerModule, MatNativeDateModule, MatDividerModule,
+    MatSelectModule, MatDatepickerModule, MatNativeDateModule, MatDividerModule, OverlayModule, PortalModule,
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass:JwtAuthInterceptor, multi: true }, StudentService, AuthService],
   bootstrap: [AppComponent]
