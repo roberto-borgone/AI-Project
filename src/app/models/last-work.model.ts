@@ -1,6 +1,7 @@
 import { Student } from './student.model';
 
 export class LastWork {
+
     id : number;
     updateable : boolean;
     status : string;

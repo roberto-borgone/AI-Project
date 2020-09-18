@@ -2,8 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
+import { last } from 'rxjs/operators';
 import { ContentDialogComponent } from '../content-dialog.component';
 import { Assignment } from '../models/assignment.model';
+import { LastWork } from '../models/last-work.model';
 import { AssignmentService } from '../services/assignment.service';
 import { CourseService } from '../services/course.service';
 import { WorksDialogComponent } from './works-dialog.component';
@@ -47,17 +49,25 @@ export class StudentAssignmentContComponent implements OnDestroy {
 
   openWorksDialog(assignment: Assignment){
 
-    this.subscriptions.add(this.assignmentService.getStudentWorks(assignment).subscribe(works => {
-      console.log(works);
+    this.subscriptions.add(this.assignmentService.getStudentWorksStudent(assignment).subscribe(worksData => {
 
-      const dialogConfig = new MatDialogConfig();
-      dialogConfig.width = '98%';
-      dialogConfig.height = '70%';
-      dialogConfig.data = works;
-  
-      let dialogRef = this.dialog.open(WorksDialogComponent, dialogConfig);
-  
-      this.subscriptions.add(dialogRef.afterClosed().subscribe());
+      this.subscriptions.add(this.assignmentService.getStudentStatus(assignment.id).subscribe(res => {
+
+        let lastWorkData: LastWork[] = []
+        lastWorkData.push(res);
+
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.width = '98%';
+        dialogConfig.height = '70%';
+        dialogConfig.data = {
+          worksData: worksData,
+          lastWorkData: lastWorkData
+        }
+    
+        let dialogRef = this.dialog.open(WorksDialogComponent, dialogConfig);
+    
+        this.subscriptions.add(dialogRef.afterClosed().subscribe());
+      }))
     }));
   }
 
