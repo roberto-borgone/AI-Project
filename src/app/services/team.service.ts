@@ -177,4 +177,8 @@ export class TeamService {
       })
     )
   }
+
+  getLimitVM(idTeam: number){
+    
+  }
 }

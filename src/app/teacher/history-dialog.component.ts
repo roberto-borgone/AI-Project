@@ -73,7 +73,7 @@ export class HistoryDialogComponent {
       var files = event.target.files; // FileList object
       var file = files[0];
       this.subscriptions.add(this.assignmentService.uploadCorrection(this.data.lastWork.consegnaId, this.data.lastWork.studentId, file).subscribe())
-      }
+    }
 
     onClickVote() {
       console.log("Sono in onClickVote()")
