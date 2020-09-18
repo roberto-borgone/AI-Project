@@ -4,14 +4,13 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { ContentDialogComponent } from '../content-dialog.component';
-import { Assignment } from '../models/assignment.model';
 import { LastWork } from '../models/last-work.model';
 import { Work } from '../models/work.model';
 import { AssignmentService } from '../services/assignment.service';
 
 export interface DialogData {
-  works: Work[];
-  lastWork: LastWork[]
+  worksData: Work[];
+  lastWorkData: LastWork[];
 }
 
 @Component({
@@ -36,9 +35,16 @@ export class WorksDialogComponent {
 
   constructor(public dialogHistory: MatDialogRef<WorksDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData, private assignmentService: AssignmentService, private dialog: MatDialog) {
-      this.works = new MatTableDataSource(data.works)
+      console.log("Sono nel costruttore di works-dialog component")
+      console.log(data.worksData)
+      console.log(data.lastWorkData)
+      this.works = new MatTableDataSource(data.worksData)
       this.works.paginator = this.paginator;
-      this.lastWork = new MatTableDataSource(data.lastWork)
+      this.lastWork = new MatTableDataSource(data.lastWorkData)
+
+      if(data.lastWorkData[0].updateable == false || (data.lastWorkData[0].status != 'RIVISTO' && data.lastWorkData[0].status != 'LETTO')) {
+        this.isDisabledFileUpload = true;
+      }
     }
 
   showContent(workId: number) {
@@ -64,6 +70,6 @@ export class WorksDialogComponent {
     console.log("Sono in handleImageSelect");
     var files = event.target.files; // FileList object
     var file = files[0];
-    this.subscriptions.add(this.assignmentService.uploadWork(this.data.lastWork[0].consegnaId, file).subscribe())
+    this.subscriptions.add(this.assignmentService.uploadWork(this.data.lastWorkData[0].consegnaId, file).subscribe())
   }
 }

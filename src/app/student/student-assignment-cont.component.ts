@@ -49,24 +49,20 @@ export class StudentAssignmentContComponent implements OnDestroy {
 
   openWorksDialog(assignment: Assignment){
 
-    this.subscriptions.add(this.assignmentService.getStudentWorksStudent(assignment).subscribe(works => {
-
-      console.log(works);
+    this.subscriptions.add(this.assignmentService.getStudentWorksStudent(assignment).subscribe(worksData => {
 
       this.subscriptions.add(this.assignmentService.getStudentStatus(assignment.id).subscribe(res => {
-        console.log("Sono qui")
-        console.log(res);
 
-        let lastWork: LastWork[] = []
-        lastWork.push(res);
-
-        console.log(lastWork)
+        let lastWorkData: LastWork[] = []
+        lastWorkData.push(res);
 
         const dialogConfig = new MatDialogConfig();
         dialogConfig.width = '98%';
         dialogConfig.height = '70%';
-        dialogConfig.data = works;
-        dialogConfig.data = lastWork;
+        dialogConfig.data = {
+          worksData: worksData,
+          lastWorkData: lastWorkData
+        }
     
         let dialogRef = this.dialog.open(WorksDialogComponent, dialogConfig);
     
