@@ -17,7 +17,7 @@ export class WorkDialogComponent {
   @ViewChild(MatPaginator) 
   paginator: MatPaginator
 
-  displayedColumns: string[] = ['id', 'name', 'surname', 'status', 'timestamp', "voto", 'lode','history'];
+  displayedColumns: string[] = ['id', 'name', 'surname', 'status', 'timestamp', 'voto', 'lode','history'];
   dataSource: MatTableDataSource<LastWork>
   subscriptions: Subscription = new Subscription()
 

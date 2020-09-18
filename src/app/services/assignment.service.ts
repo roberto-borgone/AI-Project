@@ -117,7 +117,7 @@ export class AssignmentService {
     )
   }
 
-  getWorkContent(workId: number) {
+  getWorkContent(workId: number) : Observable<any>{
 
     let PATH = 'https://localhost:4200/api/API/consegne/';
 
@@ -149,7 +149,7 @@ export class AssignmentService {
     )
   }
 
-  getStudentWorks(assignment: Assignment) {
+  getStudentWorks(assignment: Assignment) : Observable<Work[]> {
 
     let PATH = 'https://localhost:4200/api/API/consegne/';
     return this.http.get<Work[]>(PATH + assignment.id + '/' + this.auth.token.username + '/' + assignment.docentID + '/getAllStudentElaborati')
@@ -157,6 +157,48 @@ export class AssignmentService {
       catchError( err => {
         console.error(err)
         return throwError(err.message)
+      })
+    )
+  }
+
+  getStudentStatus(assignmentId: number) : Observable<LastWork> {
+
+    let PATH = 'https://localhost:4200/api/API/consegne/';
+    return this.http.get<LastWork>(PATH + assignmentId + '/' + this.auth.token.username + '/getStudentStatus')
+    .pipe(
+      catchError( err => {
+        console.error(err)
+        return throwError(err.message)
+      })
+    )
+  }
+
+  getStudentWorksStudent(assignment: Assignment): Observable<Work[]> {
+    
+    let PATH = 'https://localhost:4200/api/API/consegne/';
+    return this.http.get<Work[]>(PATH + assignment.id + '/' + this.auth.token.username + '/getAllStudentElaboratiStudent')
+    .pipe(
+      catchError( err => {
+        console.error(err)
+        return throwError(err.message)
+      })
+    )
+  }
+
+  uploadWork(assignmentId: number, file: any) : Observable<any> {
+    
+    const formData = new FormData();
+    formData.append('imagefile', file);
+
+    let PATH = 'https://localhost:4200/api/API/consegne/';
+    
+    return this.http.post<any>(PATH + + assignmentId + '/' + this.auth.token.username + '/consegnaElaborato', formData)
+    .pipe(
+      map(result => {
+        return true}),
+      catchError( err => {
+        console.log(err)
+        return of(false)
       })
     )
   }
