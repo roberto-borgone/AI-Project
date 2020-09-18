@@ -9,6 +9,7 @@
     <div class = "text-inside-grid">
 
     <h3>Vincoli</h3>
+      
       <p *ngIf="course.maxRAM == -1" >Max RAM: Non ancora settata</p>
       <p *ngIf="course.maxRAM != -1" >Max RAM: {{course.maxRAM}}GB</p>
 
@@ -16,7 +17,7 @@
       <p *ngIf="course.maxDisk != -1">Max Disk: {{course.maxDisk}}GB</p>
 
       <p *ngIf="course.maxVirtualCPU == -1">Max VCPU: Non ancora settata</p>
-      <p *ngIf="course.maxVirtualCPU != -1">Max VCPU: {{course.maxVirtualCPU}}GB</p>
+      <p *ngIf="course.maxVirtualCPU != -1">Max VCPU: {{course.maxVirtualCPU}}</p>
 
       <p *ngIf="course.maxActiveVM == -1">Max Active VM: Non ancora settata</p>
       <p *ngIf="course.maxActiveVM != -1">Max Active VM: {{course.maxActiveVM}}</p>
@@ -25,8 +26,6 @@
       <p *ngIf="course.maxTotVM != -1">Max Tot VM: {{course.maxTotVM}}</p>
 
       <p class="error" *ngIf="course.maxActiveVM == -1 || course.maxTotVM == -1 || course.maxRAM == -1 || course.maxDisk == -1 || course.maxVirtualCPU == -1">Non è possibile creare VM prima che il docente abbia settato i vincoli sulle risorse da utilizzare</p>
-      
-      <p class="error" *ngIf="course.maxActiveVM == -1 || course.maxTotVM == -1 || course.maxRAM == -1 || course.maxDisk == -1 || course.maxVirtualCPU == -1">Modificare queste informazioni per permettere agli studenti di creare delle VM</p>
     </div>
     </mat-grid-tile>
 
@@ -43,8 +42,7 @@
     </mat-grid-tile>
 
     </mat-grid-list>
-    
-    <div>
+    <div *ngIf="!(course.maxActiveVM == -1 || course.maxTotVM == -1 || course.maxRAM == -1 || course.maxDisk == -1 || course.maxVirtualCPU == -1)">
     <button style="margin-bottom: 20px" mat-raised-button color="primary" (click)="newVM()">Crea VM</button>
     
   
@@ -96,15 +94,16 @@
           <ng-container matColumnDef="commands">
             <th mat-header-cell *matHeaderCellDef>Comandi</th>
             <td mat-cell *matCellDef="let element">
-                <button mat-icon-button (click)="element.on?stopVM(element):startVM(element)">
+                <button  *ngIf="isOwner(element)" [matTooltip]="element.on?'SPEGNI':'ACCENDI'" mat-icon-button (click)="element.on?stopVM(element):startVM(element)">
                     <mat-icon>{{element.on?'pause_circle_outline':'play_circle_outline'}}</mat-icon>
                 </button>
-                <button mat-icon-button (click)="deleteVM(element)">
+                <button  *ngIf="isOwner(element)" matTooltip="ELIMINA" mat-icon-button (click)="deleteVM(element)">
                     <mat-icon>delete_outline</mat-icon>
                 </button>
-                <button *ngIf="!element.on" mat-icon-button (click)="modifyVM(element)">
+                <button *ngIf="!element.on && isOwner(element)" matTooltip="MODIFICA" mat-icon-button (click)="modifyVM(element)">
                     <mat-icon>settings</mat-icon>
                 </button>
+                {{!isOwner(element)?'NON SEI OWNER':''}}
             </td>
           </ng-container>
     

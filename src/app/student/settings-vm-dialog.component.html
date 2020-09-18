@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>Impostazioni VM</h2>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>RAM (GB)</mat-label>
+    <input matInput type="number" placeholder="1" [formControl]="data.ram" required>
+    <mat-error *ngIf="data.ram.invalid">{{getErrorMessageRAM(data.ram)}}</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Disk (GB)</mat-label>
+    <input matInput type="number" placeholder="1" [formControl]="data.disk" required>
+    <mat-error *ngIf="data.disk.invalid">{{getErrorMessageDisk(data.disk)}}</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Max VCPU</mat-label>
+    <input matInput type="number" placeholder="1" [formControl]="data.vCPU" required>
+    <mat-error *ngIf="data.vCPU.invalid">{{getErrorMessageVCPU(data.vCPU)}}</mat-error>
+  </mat-form-field>
+  <mat-error *ngIf="data.invalid">{{getMessage()}}</mat-error>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button 
+          color="primary" 
+          [mat-dialog-close]="data" 
+          [disabled]="data.ram.invalid || data.disk.invalid || data.vCPU.invalid">
+          Procedi
+  </button>
+  <button mat-raised-button (click)="onNoClick()">Annulla</button>
+</div>

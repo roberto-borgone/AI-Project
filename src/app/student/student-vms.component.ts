@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { AuthService } from '../auth/auth.service';
 import { Course } from '../course.model';
 import { Student } from '../student.model';
 import { ModelVM } from '../teacher/modelVM.model';
@@ -61,7 +62,7 @@ export class StudentVmsComponent {
     this.course = course
   }
 
-  constructor() { 
+  constructor(private auth: AuthService) { 
     this.onNewVM = new EventEmitter()
     this.onDeleteVM = new EventEmitter()
     this.onModifyVM = new EventEmitter()
@@ -83,15 +84,19 @@ export class StudentVmsComponent {
   }
 
   deleteVM(vm: VM){
-    this.onModifyVM.emit(vm)
+    this.onDeleteVM.emit(vm)
   }
 
   startVM(vm: VM){
-    this.onModifyVM.emit(vm)
+    this.onStartVM.emit(vm)
   }
 
   stopVM(vm: VM){
-    this.onModifyVM.emit(vm)
+    this.onStopVM.emit(vm)
+  }
+
+  isOwner(element: VM){
+    return element.owners.find(s => s.id == this.auth.token.username) != undefined
   }
 
 }

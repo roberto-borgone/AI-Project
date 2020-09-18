@@ -26,7 +26,7 @@
           <p *ngIf="course.maxDisk != -1">Max Disk: {{course.maxDisk}}GB</p>
 
           <p *ngIf="course.maxVirtualCPU == -1">Max VCPU: Non ancora settata</p>
-          <p *ngIf="course.maxVirtualCPU != -1">Max VCPU: {{course.maxVirtualCPU}}GB</p>
+          <p *ngIf="course.maxVirtualCPU != -1">Max VCPU: {{course.maxVirtualCPU}}</p>
 
           <p *ngIf="course.maxActiveVM == -1">Max Active VM: Non ancora settata</p>
           <p *ngIf="course.maxActiveVM != -1">Max Active VM: {{course.maxActiveVM}}</p>
@@ -94,7 +94,7 @@
           <ng-container matColumnDef="buttons">
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let element">
-                <button mat-icon-button (click)="updateVM(element)">
+                <button matTooltip="MODIFICA RISORSE" mat-icon-button (click)="updateVM(element)">
                     <mat-icon>settings</mat-icon>
                 </button>
             </td>

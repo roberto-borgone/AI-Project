@@ -64,6 +64,8 @@ import { NewTeamDialogComponent } from './student/new-team-dialog.component';
 import {MatDividerModule} from '@angular/material/divider';
 import { StudentVmsContComponent } from './student/student-vms-cont.component';
 import { StudentVmsComponent } from './student/student-vms.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { SettingsVmDialogComponent } from './student/settings-vm-dialog.component';
 
 
 @NgModule({
@@ -99,6 +101,7 @@ import { StudentVmsComponent } from './student/student-vms.component';
     NewTeamDialogComponent,
     StudentVmsContComponent,
     StudentVmsComponent,
+    SettingsVmDialogComponent,
   ],
   entryComponents: [
     LoginDialogComponent
@@ -111,7 +114,7 @@ import { StudentVmsComponent } from './student/student-vms.component';
     MatCheckboxModule, MatAutocompleteModule, MatInputModule, 
     MatSortModule, MatPaginatorModule, AppRoutingModule, HttpClientModule,
     MatDialogModule, FormsModule, ReactiveFormsModule, MatGridListModule, MatMenuModule, MatSlideToggleModule, MatFormFieldModule,
-    MatSelectModule, MatDatepickerModule, MatNativeDateModule, MatDividerModule,
+    MatSelectModule, MatDatepickerModule, MatNativeDateModule, MatDividerModule, MatTooltipModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass:JwtAuthInterceptor, multi: true }, StudentService, AuthService],
   bootstrap: [AppComponent]
