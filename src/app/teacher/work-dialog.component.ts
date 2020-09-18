@@ -1,14 +1,11 @@
-import { Component, EventEmitter, Inject, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, Output, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
-import { DialogData } from './auth/login-dialog.component';
+import { LastWork } from '../models/last-work.model';
+import { AssignmentService } from '../services/assignment.service';
 import { HistoryDialogComponent } from './history-dialog.component';
-import { LastWork } from './last-work.model';
-import { AssignmentService } from './services/assignment.service';
-import { Work } from './work.model';
 
 @Component({
   selector: 'app-work-dialog',
@@ -44,9 +41,10 @@ export class WorkDialogComponent {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  showHistory(assignmentId: number, studentId: string) {
+  showHistory(lastWork : LastWork) {
     console.log("showHystory in work-dialog.ts")
-    this.subscriptions.add(this.assignmentService.getStudentHistory(assignmentId, studentId).subscribe(history => {
+    console.log(lastWork);
+    this.subscriptions.add(this.assignmentService.getStudentHistory(lastWork.consegnaId, lastWork.studentId).subscribe(history => {
       console.log(history); 
 
       const dialogConfig = new MatDialogConfig();
@@ -54,14 +52,17 @@ export class WorkDialogComponent {
       dialogConfig.height = '70%';
       dialogConfig.data = {
         works: history,
-        assignmentId: assignmentId,
-        studentId: studentId
+        lastWork: lastWork       
       }
   
       let diag = this.dialog.open(HistoryDialogComponent, dialogConfig);
   
       this.subscriptions.add(diag.afterClosed().subscribe());
     }));
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
 }

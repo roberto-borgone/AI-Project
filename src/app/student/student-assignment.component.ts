@@ -5,11 +5,11 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Assignment } from '../models/assignment.model';
 
 @Component({
-  selector: 'app-assignments',
-  templateUrl: './assignments.component.html',
-  styleUrls: ['./assignments.component.css']
+  selector: 'app-student-assignment',
+  templateUrl: './student-assignment.component.html',
+  styleUrls: ['./student-assignment.component.css']
 })
-export class AssignmentsComponent implements OnInit {
+export class StudentAssignmentComponent implements OnInit {
 
   @ViewChild(MatSort, {static: true})
   sort: MatSort
@@ -18,7 +18,7 @@ export class AssignmentsComponent implements OnInit {
   paginator: MatPaginator
 
   // column to display in table
-  colsToDisplay: string[] = ['id', 'releaseDate', 'dueDate', 'content', 'students']
+  colsToDisplay: string[] = ['id', 'releaseDate', 'dueDate', 'content', 'works']
 
   assignments: MatTableDataSource<Assignment>
 
@@ -33,30 +33,21 @@ export class AssignmentsComponent implements OnInit {
   onShowContent: EventEmitter<any>;
 
   @Output()
-  onShowStudents: EventEmitter<any>;
-
-  @Output()
-  onCreateAssignment: EventEmitter<any>;
+  onShowWorks: EventEmitter<any>;
 
   constructor() { 
     this.onShowContent = new EventEmitter<any>();
-    this.onShowStudents = new EventEmitter<any>();
-    this.onCreateAssignment = new EventEmitter();
+    this.onShowWorks = new EventEmitter<any>();
   }
 
   showContent(assignmentId : number){
     this.onShowContent.emit(assignmentId);
   }
 
-  showStudents(assignmentId : number){
-    this.onShowStudents.emit(assignmentId);
-  }
-
-  createAssignment() {
-    this.onCreateAssignment.emit();
+  showWorks(assignment: Assignment){
+    this.onShowWorks.emit(assignment);
   }
 
   ngOnInit(): void {
   }
-
 }

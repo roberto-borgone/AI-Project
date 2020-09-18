@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
-import { VM } from '../vm.model';
 import { catchError, concatMap, map } from 'rxjs/operators';
 import { CourseService } from './course.service';
 import { AuthService } from '../auth/auth.service';
-import { Student } from '../student.model';
+import { VM } from '../models/vm.model';
+import { Student } from '../models/student.model';
 
 @Injectable({
   providedIn: 'root'

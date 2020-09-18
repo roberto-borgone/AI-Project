@@ -52,10 +52,8 @@ import {MatSelectModule} from '@angular/material/select';
 import { StudentCourseComponent } from './student/student-course.component';
 import { AssignmentsContComponent } from './teacher/assignments-cont.component';
 import { AssignmentsComponent } from './teacher/assignments.component';
-import { WorkDialogComponent } from './work-dialog.component';
 import { TeamComponent } from './student/team.component';
 import { TeamContComponent } from './student/team-cont.component';
-import { HistoryDialogComponent } from './history-dialog.component';
 import { NewAssignmentDialogComponent } from './teacher/new-assignment-dialog.component';
 import {MatDatepickerModule} from '@angular/material/datepicker'; 
 import { MatNativeDateModule } from '@angular/material/core';
@@ -66,6 +64,13 @@ import { StudentVmsContComponent } from './student/student-vms-cont.component';
 import { StudentVmsComponent } from './student/student-vms.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { SettingsVmDialogComponent } from './student/settings-vm-dialog.component';
+import { WorksDialogComponent } from './student/works-dialog.component';
+import {OverlayModule} from '@angular/cdk/overlay';
+import {PortalModule} from '@angular/cdk/portal';
+import { WorkDialogComponent } from './teacher/work-dialog.component';
+import { HistoryDialogComponent } from './teacher/history-dialog.component';
+import { StudentAssignmentContComponent } from './student/student-assignment-cont.component';
+import { StudentAssignmentComponent } from './student/student-assignment.component';
 
 
 @NgModule({
@@ -102,6 +107,10 @@ import { SettingsVmDialogComponent } from './student/settings-vm-dialog.componen
     StudentVmsContComponent,
     StudentVmsComponent,
     SettingsVmDialogComponent,
+    StudentAssignmentComponent,
+    WorksDialogComponent,
+    StudentAssignmentContComponent,
+    StudentAssignmentComponent,
   ],
   entryComponents: [
     LoginDialogComponent
@@ -114,7 +123,8 @@ import { SettingsVmDialogComponent } from './student/settings-vm-dialog.componen
     MatCheckboxModule, MatAutocompleteModule, MatInputModule, 
     MatSortModule, MatPaginatorModule, AppRoutingModule, HttpClientModule,
     MatDialogModule, FormsModule, ReactiveFormsModule, MatGridListModule, MatMenuModule, MatSlideToggleModule, MatFormFieldModule,
-    MatSelectModule, MatDatepickerModule, MatNativeDateModule, MatDividerModule, MatTooltipModule
+    MatSelectModule, MatDatepickerModule, MatNativeDateModule, MatDividerModule, MatTooltipModule, MatDatepickerModule, 
+    MatNativeDateModule, MatDividerModule, OverlayModule, PortalModule,
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass:JwtAuthInterceptor, multi: true }, StudentService, AuthService],
   bootstrap: [AppComponent]

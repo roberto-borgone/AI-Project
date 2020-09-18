@@ -2,10 +2,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { Assignment } from '../models/assignment.model';
 import { AuthService } from '../auth/auth.service';
-import { LastWork } from '../last-work.model';
-import { Work } from '../work.model';
+import { LastWork } from '../models/last-work.model';
 import { CourseService } from './course.service';
+import { Work } from '../models/work.model';
 
 @Injectable({
   providedIn: 'root'
@@ -52,11 +53,10 @@ export class AssignmentService {
 
     const formData = new FormData();
     formData.append('imagefile', file);
-    formData.append('scadenza', dueDate.toString());
 
     let PATH = 'https://localhost:4200/api/API/courses/';
     
-    return this.http.post<any>(PATH + this.courseService.currentCourse.name + '/' + this.auth.token.username + '/newConsegna', formData, this.httpOptions)
+    return this.http.post<any>(PATH + this.courseService.currentCourse.name + '/' + this.auth.token.username + '/' + dueDate + '/newConsegna', formData)
     .pipe(
       map(result => {
         return true}),
@@ -67,7 +67,7 @@ export class AssignmentService {
     )
   }
 
-  getAssignmentContent(assignmentId: number): Observable<any> {
+  getAssignmentContent(assignment: Assignment): Observable<any> {
 
     let PATH = 'https://localhost:4200/api/API/courses/';
 
@@ -75,7 +75,7 @@ export class AssignmentService {
       responseType: 'blob'
     }
 
-    return this.http.get<any>(PATH + this.courseService.currentCourse.name + '/' + assignmentId + '/getConsegna', requestOptions)
+    return this.http.get<any>(PATH + this.courseService.currentCourse.name + '/' + assignment.id + '/getConsegna', requestOptions)
     .pipe(
       catchError( err => {
         console.error(err)
@@ -102,11 +102,11 @@ export class AssignmentService {
     )
   }
 
-  giveVote(assignmentId: number, studentId: string, vote: number, laude: boolean) {
+  setVote(assignmentId: number, studentId: string, vote: number, laude: boolean) {
 
     let PATH = 'https://localhost:4200/api/API/consegne/';
     
-    return this.http.post<any>(PATH + assignmentId + '/' + studentId + '/' + this.auth.token.username + '/setVoto', vote)
+    return this.http.post<any>(PATH + assignmentId + '/' + studentId + '/' + this.auth.token.username + '/setVoto', {'voto': vote, 'lode': laude})
     .pipe(
       map(result => {
         return true}),
@@ -126,6 +126,33 @@ export class AssignmentService {
     }
 
     return this.http.get<any>(PATH + workId + '/getElaborato', requestOptions)
+    .pipe(
+      catchError( err => {
+        console.error(err)
+        return throwError(err.message)
+      })
+    )
+  }
+
+  disableAssignment(assignmentId: number, studentId: string) {
+
+    let PATH = 'https://localhost:4200/api/API/consegne/';
+    
+    return this.http.get<any>(PATH + assignmentId + '/' + this.auth.token.username + '/' + studentId + '/updateStatusConsegna')
+    .pipe(
+      map(result => {
+        return true}),
+      catchError( err => {
+        console.log(err)
+        return of(false)
+      })
+    )
+  }
+
+  getStudentWorks(assignment: Assignment) {
+
+    let PATH = 'https://localhost:4200/api/API/consegne/';
+    return this.http.get<Work[]>(PATH + assignment.id + '/' + this.auth.token.username + '/' + assignment.docentID + '/getAllStudentElaborati')
     .pipe(
       catchError( err => {
         console.error(err)

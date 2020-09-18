@@ -2,10 +2,10 @@ import { Component, ViewChild, ElementRef, Input, Output, OnInit } from '@angula
 import {MatTableDataSource} from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-import { Student} from 'src/app/student.model'
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { EventEmitter } from '@angular/core';
+import { Student } from '../models/student.model';
 
 @Component({
   selector: 'app-students',

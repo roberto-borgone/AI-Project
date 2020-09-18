@@ -1,12 +1,12 @@
-import { Proposal } from './../proposal.model';
 import { Injectable } from '@angular/core';
 import { CourseService } from './course.service';
-import { Team } from '../team.model';
 import { Observable, throwError, of } from 'rxjs';
 import { catchError, map, concatMap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Student } from '../student.model';
 import { AuthService } from '../auth/auth.service';
+import { Team } from '../models/team.model';
+import { Student } from '../models/student.model';
+import { Proposal } from '../models/proposal.model';
 
 @Injectable({
   providedIn: 'root'

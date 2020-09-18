@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { User } from '../user.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import * as moment from 'moment';
 import { Router } from '@angular/router';
-import { RegistartionForm } from '../registrationForm.model';
-import { Team } from '../team.model';
+import { Team } from '../models/team.model';
+import { User } from '../models/user.model';
+import { RegistartionForm } from '../models/registrationForm.model';
 
 export interface Token {
   //accessToken is for the mock server

@@ -3,10 +3,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from '../auth/auth.service';
-import { Course } from '../course.model';
-import { Student } from '../student.model';
-import { ModelVM } from '../teacher/modelVM.model';
-import { VM } from '../vm.model';
+import { Course } from '../models/course.model';
+import { Student } from '../models/student.model';
+import { VM } from '../models/vm.model';
+import { ModelVM } from '../models/modelVM.model';
 
 @Component({
   selector: 'app-student-vms',
