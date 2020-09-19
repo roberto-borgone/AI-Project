@@ -33,6 +33,30 @@ export class AssignmentService {
     )
   }
 
+  getAssignmentsDocent() : Observable<any> {
+
+    let PATH = 'https://localhost:4200/api/API/courses'
+    return this.http.get<Assignment[]>(PATH + '/' + this.courseService.currentCourse.name + '/getConsegne')
+    .pipe(
+      catchError( err => {
+        console.error(err)
+        return throwError(err.message)
+      })
+    )
+  }
+
+  getAssignmentsStudent() : Observable<any> {
+
+    let PATH = 'https://localhost:4200/api/API/courses'
+    return this.http.get<Assignment[]>(PATH + '/' + this.courseService.currentCourse.name + '/' + this.auth.token.username + '/getConsegneStatus')
+    .pipe(
+      catchError( err => {
+        console.error(err)
+        return throwError(err.message)
+      })
+    )
+  }
+
   getStudentHistory(assignmentId : number, studentId : string): Observable<any> {
     
     let PATH = 'https://localhost:4200/api/API/consegne/';

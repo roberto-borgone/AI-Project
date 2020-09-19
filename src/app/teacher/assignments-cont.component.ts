@@ -28,7 +28,7 @@ export class AssignmentsContComponent implements OnDestroy {
   }
 
   getAssignments() {
-    this.subscriptions.add(this.courseService.getAssignmentsService().subscribe(assignments => {console.log(assignments); this.assignments = assignments}));
+    this.subscriptions.add(this.assignmentService.getAssignmentsDocent().subscribe(assignments => {console.log(assignments); this.assignments = assignments}));
   }
 
   openContentDialog(assignment: Assignment){
