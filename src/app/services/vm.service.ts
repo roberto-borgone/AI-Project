@@ -114,4 +114,31 @@ export class VmService {
     )
   }
 
+  startVM(vmID: number): Observable<any> {
+    console.log(vmID)
+
+    return this.http.get(this.API_PATH + '/' +vmID + '/changeStatus/', this.httpOptions)
+    .pipe(
+      catchError( err => {
+        console.error(err)
+        return throwError(err.message)
+      })
+    )
+
+  }
+
+  stopVM(vmID: number) : Observable<any>{
+    console.log(vmID)
+
+    return this.http.get(this.API_PATH + '/' + vmID + '/changeStatus/', this.httpOptions).pipe(
+      map(result => {
+        return true
+      }),
+      catchError(err => {
+        console.error(err)
+        return of(false)
+      })
+    )
+  }
+
 }

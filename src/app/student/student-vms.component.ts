@@ -88,10 +88,12 @@ export class StudentVmsComponent {
   }
 
   startVM(vm: VM){
+    console.log("start")
     this.onStartVM.emit(vm)
   }
 
   stopVM(vm: VM){
+    console.log("stop")
     this.onStopVM.emit(vm)
   }
 
