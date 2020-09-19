@@ -1,2 +1,22 @@
-<h2>Contenuto</h2>
-<img [src]="url" *ngIf="url" style="max-width: 200px; height: auto;">
+<div class = "btndisclaimer">
+<button mat-fab color="primary" aria-label="Zoom In" (click)="zoomPlus()">
+          <mat-icon>zoom_in</mat-icon>
+</button>
+
+
+<button  mat-fab color="primary" aria-label="Zoom Out" (click)="zoomMinus()">
+          <mat-icon>zoom_out</mat-icon>
+</button>
+
+<button mat-raised-button (click)="onNoClick()">Esci</button>
+
+</div>
+
+<mat-divider></mat-divider>
+
+<img #input [src]="url" *ngIf="url" style="width: {{zoom}}">
+
+
+
+
+
