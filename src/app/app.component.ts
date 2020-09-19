@@ -72,9 +72,13 @@ export class AppComponent implements OnDestroy{
       width: '400px',
       data: {username: this.username, password: this.password, loginInvalid: this.loginInvalid, message: this.message}
     });
-
+    
     this.subscriptions.add(dialogRef.afterClosed().subscribe(result => {
       if(result && result.username.valid && result.password.valid){
+
+        if(!this.auth.redirectUrl){
+          this.auth.redirectUrl = result.username.value.startsWith('s')?'/student':'/teacher'
+        }
 
         // nested observables.. i could have found a more elegant solution to this
         this.subscriptions.add(this.auth.login(new User(result.username.value, result.password.value))
@@ -93,7 +97,6 @@ export class AppComponent implements OnDestroy{
             this.password.reset()
             this.logged = true
             this.auth.redirectUrl = undefined
-            this.router.navigate(['/' + this.auth.token.role])
           }
         }))
       }else if(!result){

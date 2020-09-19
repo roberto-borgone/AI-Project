@@ -13,7 +13,7 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return this.checkLogin(state.url);
+    return this.checkLogin(state.url) && this.checkRole(state.url);
   }
 
   checkLogin(url: string): boolean {
@@ -31,6 +31,15 @@ export class AuthGuard implements CanActivate {
     // navigate to the login page with extras
     this.router.navigate(['/home'], navigationExtras);
     return false;
+    }
+
+    checkRole(url: string): boolean{
+      if((url.includes('teacher') && this.auth.token.role == 'teacher') || (url.includes('student') && this.auth.token.role == 'student'))
+        return true
+      else{
+        this.router.navigate(['/' + this.auth.token.role]);
+        return false
+      }
     }
   
 }

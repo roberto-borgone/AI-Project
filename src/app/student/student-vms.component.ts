@@ -62,7 +62,7 @@ export class StudentVmsComponent {
     this.course = course
   }
 
-  constructor(private auth: AuthService) { 
+  constructor(public auth: AuthService) { 
     this.onNewVM = new EventEmitter()
     this.onDeleteVM = new EventEmitter()
     this.onModifyVM = new EventEmitter()

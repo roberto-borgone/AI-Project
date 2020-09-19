@@ -16,8 +16,8 @@
       <p *ngIf="this.auth.token.group.maxDisk == -1">Max Disk: Non ancora settata</p>
       <p *ngIf="this.auth.token.group.maxDisk != -1">Max Disk: {{this.auth.token.group.maxDisk}}GB</p>
 
-      <p *ngIf="this.auth.token.group.maxVirtualCPU == -1">Max VCPU: Non ancora settata</p>
-      <p *ngIf="this.auth.token.group.maxVirtualCPU != -1">Max VCPU: {{this.auth.token.group.maxVirtualCPU}}</p>
+      <p *ngIf="this.auth.token.group.maxVCPU == -1">Max VCPU: Non ancora settata</p>
+      <p *ngIf="this.auth.token.group.maxVCPU != -1">Max VCPU: {{this.auth.token.group.maxVCPU}}</p>
 
       <p *ngIf="this.auth.token.group.maxActiveVM == -1">Max Active VM: Non ancora settata</p>
       <p *ngIf="this.auth.token.group.maxActiveVM != -1">Max Active VM: {{this.auth.token.group.maxActiveVM}}</p>
