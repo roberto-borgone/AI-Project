@@ -24,12 +24,12 @@ export class StudentAssignmentContComponent implements OnDestroy {
   dueDate: FormControl = new FormControl('', Validators.required)
   file: any
 
-  constructor(private courseService : CourseService, private assignmentService : AssignmentService, private dialog: MatDialog) {
+  constructor(private assignmentService : AssignmentService, private dialog: MatDialog) {
     this.getAssignments();
   }
 
   getAssignments() {
-    this.subscriptions.add(this.courseService.getAssignmentsService().subscribe(assignments => {console.log(assignments); this.assignments = assignments}));
+    this.subscriptions.add(this.assignmentService.getAssignmentsStudent().subscribe(assignments => {console.log(assignments); this.assignments = assignments}));
   }
 
   openContentDialog(assignment: Assignment){

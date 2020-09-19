@@ -152,16 +152,6 @@ export class CourseService {
     )
   }
 
-  getAssignmentsService() : Observable<any> {
-    return this.http.get<Assignment[]>(this.API_PATH + '/' + this.currentCourse.name + '/getConsegne')
-    .pipe(
-      catchError( err => {
-        console.error(err)
-        return throwError(err.message)
-      })
-    )
-  }
-
   getGroup(): Observable<boolean>{
 
     let PATH = 'https://localhost:4200/api/API/students/' + this.currentCourse.name + '/' + this.auth.token.username + '/getTeam'

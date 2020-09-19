@@ -18,7 +18,7 @@ export class StudentAssignmentComponent implements OnInit {
   paginator: MatPaginator
 
   // column to display in table
-  colsToDisplay: string[] = ['id', 'releaseDate', 'dueDate', 'content', 'works']
+  colsToDisplay: string[] = ['id', 'releaseDate', 'dueDate', 'content', 'status', 'works']
 
   assignments: MatTableDataSource<Assignment>
 
