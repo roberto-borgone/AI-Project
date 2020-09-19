@@ -16,9 +16,7 @@
     <mat-grid-tile>
     <mat-form-field color="primary" appearance="fill">
         <mat-label>Data di scadenza</mat-label>
-        <input matInput [matDatepicker]="dueDate" [formControl]="data.dueDate">
-        <mat-datepicker-toggle matSuffix [for]="dueDate"></mat-datepicker-toggle>
-        <mat-datepicker #dueDate></mat-datepicker>
+        <input matInput type="datetime-local" [formControl]="data.dueDate">
     </mat-form-field>
     </mat-grid-tile>
 </mat-grid-list>

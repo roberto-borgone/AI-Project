@@ -147,11 +147,25 @@ export class StudentVmsContComponent {
   }
 
   startVM(vm: VM){
+    console.log(vm.id)
 
+    this.vmService.startVM(vm.id).subscribe(result => {
+      this.getModelVM()
+      this.getVM()
+      this.getCourse()
+    }
+    )
   }
 
   stopVM(vm: VM){
-
+    console.log(vm.id)
+    this.vmService.stopVM(vm.id).subscribe(result =>
+      {
+      this.getModelVM()
+      this.getVM()
+      this.getCourse()
+    }
+      )
   }
 
 }
