@@ -1,12 +1,13 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subscription } from 'rxjs';
 import * as moment from 'moment';
 import { Router } from '@angular/router';
 import { Team } from '../models/team.model';
 import { User } from '../models/user.model';
 import { RegistartionForm } from '../models/registrationForm.model';
+import { CourseService } from '../services/course.service';
 
 export interface Token {
   //accessToken is for the mock server
@@ -28,15 +29,16 @@ export interface TokenPayload {
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService implements OnDestroy {
 
   API_PATH = 'https://localhost:4200/api/auth/signin'
   API_PATH_REGISTER = 'https://localhost:4200/api/auth/register'
 
   token: Token
   redirectUrl: string
+  subscriptions: Subscription = new Subscription()
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private courseService: CourseService) {}
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -56,8 +58,11 @@ export class AuthService {
           this.token.role = 'student'
         else if(token.username.startsWith('d'))
           this.token.role = 'teacher'
-        if(this.redirectUrl)
-          this.router.navigate([this.redirectUrl])
+        let redirect = this.redirectUrl
+        this.subscriptions.add(this.courseService.query(this.token.role, this.token.username).subscribe(result => {
+          if(redirect)
+          this.router.navigate([redirect])
+        }))
         return token}),
       catchError( err => {
         return of(err)
@@ -101,6 +106,10 @@ export class AuthService {
         return of(false)
       })
     )
+  }
+
+  ngOnDestroy(){
+    this.subscriptions.unsubscribe()
   }
 
 }

@@ -31,6 +31,7 @@ const routes: Routes = [
             { path: ':id/students', component: StudentsContComponent },
             { path: ':id/vms', component: VmsContComponent },
             { path: ':id/assignments', component: AssignmentsContComponent },
+            { path: 'profile', component: ProfileComponent},
             { path: '', component: CoursesContComponent, outlet: 'sidenav'}
         ]
     },
@@ -42,10 +43,10 @@ const routes: Routes = [
             { path: ':id/teams', component: TeamContComponent },
             { path: ':id/vms', component: StudentVmsContComponent },
             { path: ':id/assignments', component: StudentAssignmentContComponent},
+            { path: 'profile', component: ProfileComponent},
             { path: '', component: StudentCourseComponent, outlet: 'sidenav'}
         ]
     },
-    { path: 'profile', component: ProfileComponent},
     { path: '**', component: PageNotFoundComponent },
 ];
 

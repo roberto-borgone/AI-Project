@@ -19,7 +19,7 @@ export class StudentCourseComponent implements OnDestroy {
   }
 
   getCourses(){
-    this.subscriptions.add(this.courseService.query().subscribe(courses => this.courses = courses))
+    this.subscriptions.add(this.courseService.query(this.auth.token.role, this.auth.token.username).subscribe(courses => this.courses = courses))
   }
 
   setCurrentCourse(course: Course){

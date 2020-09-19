@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { FormControl, Validators } from '@angular/forms';
 import { AddCourseDialogComponent } from './add-course-dialog.component';
 import { ModifyCourseDialogComponent } from './modify-course-dialog.component';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-courses-cont',
@@ -31,7 +32,7 @@ export class CoursesContComponent implements OnDestroy {
   mcourseMin: FormControl = new FormControl('', [Validators.min(1)])
   mcourseMax: FormControl = new FormControl('', [Validators.min(1)])
 
-  constructor(private courseService: CourseService, private router: Router, private route: ActivatedRoute, private dialog: MatDialog) { 
+  constructor(private courseService: CourseService, private router: Router, private route: ActivatedRoute, private dialog: MatDialog, private auth: AuthService) { 
     this.getCourses()
     this.subscriptions.add(this.route.queryParams.subscribe(params => {
       if(params['addCourse'] === 'true'){
@@ -41,7 +42,7 @@ export class CoursesContComponent implements OnDestroy {
   }
 
   getCourses(){
-    this.subscriptions.add(this.courseService.query().subscribe(courses => this.courses = courses))
+    this.subscriptions.add(this.courseService.query(this.auth.token.role, this.auth.token.username).subscribe(courses => this.courses = courses))
   }
 
   toggleCourse(course: Course){

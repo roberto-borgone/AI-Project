@@ -1,21 +1,22 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Course } from '../models/course.model';
-import { catchError, map } from 'rxjs/operators';
-import { Observable, throwError, of } from 'rxjs'
-import { AuthService } from '../auth/auth.service';
+import { catchError, filter, map, switchMap } from 'rxjs/operators';
+import { Observable, throwError, of, Subscription } from 'rxjs'
 import { ModelVM } from '../models/modelVM.model';
-import { Assignment } from '../models/assignment.model';
-import { Team } from '../models/team.model';
+import { ActivatedRoute, Event, NavigationEnd, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CourseService {
+export class CourseService implements OnDestroy{
 
   API_PATH = 'https://localhost:4200/api/API/courses'
 
+  courses: Course[]
   currentCourse: Course
+  navigationEnd: Observable<Event>
+  subscriptions: Subscription = new Subscription()
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -23,7 +24,31 @@ export class CourseService {
     })
   }
      
-  constructor(private http: HttpClient, private auth: AuthService) {}
+  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router) {
+
+    this.navigationEnd = this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    );
+
+    this.subscriptions.add(this.navigationEnd
+      .pipe(
+        map(() => {return this.route.root.firstChild}),
+        switchMap((firstChild: ActivatedRoute) => {
+          if(firstChild && firstChild.firstChild){
+            return firstChild.firstChild.paramMap
+            .pipe(map(paramMap => {return paramMap.get('id')}))
+          }
+          else{
+            return of(undefined)
+          }
+        }
+        )
+      ).subscribe((result: string) => {
+        if(this.courses){
+          this.currentCourse = this.courses.find(c => c.name == decodeURI(result))
+        }
+      }))
+  }
 
   create(course: Course): Observable<Boolean>{
     return this.http.post<Course>(this.API_PATH, course, this.httpOptions)
@@ -60,18 +85,22 @@ export class CourseService {
     )
   }
 
-  query(): Observable<Course[]>{
+  query(role: string, username: string): Observable<Course[]>{
 
     let PATH : string;
 
-    if(this.auth.token.role == 'student')
-      PATH = 'https://localhost:4200/api/API/students/' + this.auth.token.username + '/courses'
-    else if(this.auth.token.role == 'teacher')
-      PATH = 'https://localhost:4200/api/API/docents/' + this.auth.token.username + '/courses'
+    if(role == 'student')
+      PATH = 'https://localhost:4200/api/API/students/' + username + '/courses'
+    else if(role == 'teacher')
+      PATH = 'https://localhost:4200/api/API/docents/' + username + '/courses'
 
     //return of(this.students)
     return this.http.get<Course[]>(PATH)
     .pipe(
+      map(result => {
+        this.courses = result
+        return result
+      }),
       catchError( err => {
         console.error(err)
         return throwError(err.message)
@@ -152,26 +181,8 @@ export class CourseService {
     )
   }
 
-  getGroup(): Observable<boolean>{
-
-    let PATH = 'https://localhost:4200/api/API/students/' + this.currentCourse.name + '/' + this.auth.token.username + '/getTeam'
-    return this.http.get<Team>(PATH, this.httpOptions)
-    .pipe(
-      map(result => {
-        
-        if(result){
-          this.auth.token.group = result
-          this.auth.token.groupStatus = result.status
-          return true
-        }else{
-          this.auth.token.group = undefined
-          return false
-        }
-      }),
-      catchError( err => {
-        console.error(err)
-        return of(false)
-      })
-    )
+  ngOnDestroy(){
+    this.subscriptions.unsubscribe()
   }
+  
 }

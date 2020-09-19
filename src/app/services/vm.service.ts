@@ -6,6 +6,7 @@ import { CourseService } from './course.service';
 import { AuthService } from '../auth/auth.service';
 import { VM } from '../models/vm.model';
 import { Student } from '../models/student.model';
+import { TeamService } from './team.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class VmService {
 
   API_PATH: string = 'https://localhost:4200/api/API/vms'
 
-  constructor(private http: HttpClient, private courseService: CourseService, private authService: AuthService) { }
+  constructor(private http: HttpClient, private courseService: CourseService, private authService: AuthService, private teamService: TeamService) { }
 
   query(): Observable<VM[]>{
 
@@ -45,7 +46,7 @@ export class VmService {
 
     let PATH = 'https://localhost:4200/api/API/students'
 
-    return this.courseService.getGroup().pipe(
+    return this.teamService.getGroup().pipe(
       concatMap(result => {
         if(result){
           return this.http.get<VM[]>(PATH + '/' + this.authService.token.username + '/teams/' + this.authService.token.group.id + '/getVMS', this.httpOptions).pipe(
@@ -69,7 +70,7 @@ export class VmService {
 
     let PATH = 'https://localhost:4200/api/API/teams'
 
-    return this.courseService.getGroup().pipe(
+    return this.teamService.getGroup().pipe(
       concatMap(result => {
         if(result){
           return this.http.post<Object>(PATH + '/' + this.authService.token.group.id + '/newVM/', {ram: ram, disk: disk, vcpu: vcpu}, this.httpOptions).pipe(
