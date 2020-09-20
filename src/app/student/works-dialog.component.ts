@@ -36,10 +36,10 @@ export class WorksDialogComponent {
   testoButton: String = "Carica Elaborato"
 
   constructor(public dialogHistory: MatDialogRef<WorksDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData, private assignmentService: AssignmentService, private dialog: MatDialog) {
-      console.log("Sono nel costruttore di works-dialog component")
-      console.log(data.worksData)
-      console.log(data.lastWorkData)
+    @Inject(MAT_DIALOG_DATA) public data: DialogData, 
+    private assignmentService: AssignmentService, 
+    private dialog: MatDialog) {
+      
       this.works = new MatTableDataSource(data.worksData)
       this.works.paginator = this.paginator;
       this.lastWork = new MatTableDataSource(data.lastWorkData)

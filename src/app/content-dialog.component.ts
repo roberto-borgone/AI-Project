@@ -9,6 +9,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class ContentDialogComponent implements OnInit {
 
   url: any;
+
   
   zoom = "100%"
 
@@ -21,6 +22,8 @@ export class ContentDialogComponent implements OnInit {
       reader.readAsDataURL(this.data);
       reader.onload = (_event) => {
       this.url = reader.result;
+      this.urlDownload += this.url
+      console.log(this.urlDownload)
       }
   }
 
@@ -39,5 +42,7 @@ export class ContentDialogComponent implements OnInit {
     value -= 10
     this.zoom = value + "%"
   }
+
+  
   
 }

@@ -25,7 +25,7 @@ export class AddCourseDialogComponent {
     public dialogRef: MatDialogRef<AddCourseDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
-  sistemiOp: string[] = ['ios', 'ububtu', 'windows'];
+  sistemiOp: string[] = ['ios', 'ubuntu', 'windows'];
 
   onNoClick(): void {
     this.dialogRef.close();
