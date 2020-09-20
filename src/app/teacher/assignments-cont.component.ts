@@ -8,6 +8,7 @@ import { AssignmentService } from '../services/assignment.service';
 import { CourseService } from '../services/course.service';
 import { NewAssignmentDialogComponent } from './new-assignment-dialog.component';
 import { WorkDialogComponent } from './work-dialog.component';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-assignments-cont',
@@ -23,8 +24,12 @@ export class AssignmentsContComponent implements OnDestroy {
   dueDate: FormControl = new FormControl('', Validators.required)
   file: any
 
-  constructor(private courseService : CourseService, private assignmentService : AssignmentService, private dialog: MatDialog) {
-    this.getAssignments();
+  constructor(private router: Router, private courseService : CourseService, private assignmentService : AssignmentService, private dialog: MatDialog) {
+    this.subscriptions.add(this.router.events.subscribe(val => {
+      if(val instanceof NavigationEnd){
+        this.getAssignments();
+      }
+    }))
   }
 
   getAssignments() {

@@ -64,7 +64,7 @@ export class TeamService {
   }
 
   getMembers(): Observable<Student[]>{
-    return this.courseService.getGroup().pipe(
+    return this.getGroup().pipe(
       concatMap(result => {
         if(result){
           let resultQuery: Student[]
@@ -78,7 +78,7 @@ export class TeamService {
   }
 
   getTeamPropStudent(): Observable<Student[]>{
-    return this.courseService.getGroup().pipe(
+    return this.getGroup().pipe(
       concatMap(result => {
         if(result){
           let resultQuery: Student[]
@@ -95,7 +95,7 @@ export class TeamService {
     
     let PATH = 'https://localhost:4200/api/API/courses'
     
-    return this.courseService.getGroup().pipe(
+    return this.getGroup().pipe(
       concatMap(result => {
         if(result){
           let resultQuery: Student[] = []
@@ -110,7 +110,7 @@ export class TeamService {
   getProposal(): Observable<Proposal[]>{
     let PATH = 'https://localhost:4200/api/API/students'
 
-    return this.courseService.getGroup().pipe(
+    return this.getGroup().pipe(
       concatMap(result => {
         if(!result || this.auth.token.groupStatus == 0){
           let resultQuery: Proposal[]
@@ -174,6 +174,29 @@ export class TeamService {
       }),
       catchError(err => {
         return of(err)
+      })
+    )
+  }
+
+  getGroup(): Observable<boolean>{
+
+    let PATH = 'https://localhost:4200/api/API/students/' + this.courseService.currentCourse.name + '/' + this.auth.token.username + '/getTeam'
+    return this.http.get<Team>(PATH, this.httpOptions)
+    .pipe(
+      map(result => {
+        
+        if(result){
+          this.auth.token.group = result
+          this.auth.token.groupStatus = result.status
+          return true
+        }else{
+          this.auth.token.group = undefined
+          return false
+        }
+      }),
+      catchError( err => {
+        console.error(err)
+        return of(false)
       })
     )
   }

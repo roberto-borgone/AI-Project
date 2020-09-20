@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Course } from '../models/course.model';
 import { Student } from '../models/student.model';
@@ -11,13 +11,14 @@ import { VmService } from '../services/vm.service';
 import { ModelVM } from '../models/modelVM.model';
 import { OwnerDialogComponent } from '../teacher/owner-dialog.component';
 import { SettingsVmDialogComponent } from './settings-vm-dialog.component';
+import { TeamService } from '../services/team.service';
 
 @Component({
   selector: 'app-student-vms-cont',
   templateUrl: './student-vms-cont.component.html',
   styleUrls: ['./student-vms-cont.component.css']
 })
-export class StudentVmsContComponent {
+export class StudentVmsContComponent implements OnDestroy{
 
   subscriptions: Subscription = new Subscription()
   vms: VM[]
@@ -32,12 +33,17 @@ export class StudentVmsContComponent {
 
 
 
-  constructor(private vmService: VmService, private dialog: MatDialog, private router: Router, private courseService: CourseService) { 
-    this.modelVM = new ModelVM('','');
-    this.course = new Course('','',0,0,false);
-    this.getModelVM()
-    this.getVM()
-    this.getCourse()
+  constructor(private vmService: VmService, private teamService: TeamService, private dialog: MatDialog, private router: Router, private courseService: CourseService) { 
+    
+    this.subscriptions.add(this.router.events.subscribe(val => {
+      if(val instanceof NavigationEnd){
+        this.modelVM = new ModelVM('','');
+        this.course = new Course('','',0,0,false);
+        this.getCourse()
+        this.getModelVM()
+        this.getVM()
+      }
+    }))
   }
 
   getModelVM() {
@@ -166,6 +172,10 @@ export class StudentVmsContComponent {
       this.getCourse()
     }
       )
+  }
+
+  ngOnDestroy(){
+    this.subscriptions.unsubscribe()
   }
 
 }

@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { UpdateVMDialogComponent } from './update-vm-dialog.component';
 import { FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { CourseService } from '../services/course.service';
 import { Course } from '../models/course.model';
 import { ModelVM } from '../models/modelVM.model';
@@ -42,12 +42,16 @@ export class VmsContComponent implements OnDestroy {
   subscriptions: Subscription = new Subscription()
 
   constructor(private vmService: VmService, private teamService: TeamService, private dialog: MatDialog, private router: Router, private courseService: CourseService) {
-    this.modelVM = new ModelVM('','');
-    this.course = new Course('','',0,0,false);
-    this.getTeams()
-    this.getModelVM()
-    this.getCourse()
-    this.getVM()
+    this.subscriptions.add(this.router.events.subscribe(val => {
+      if(val instanceof NavigationEnd){
+        this.modelVM = new ModelVM('','');
+        this.course = new Course('','',0,0,false);
+        this.getTeams()
+        this.getModelVM()
+        this.getCourse()
+        this.getVM()
+      }
+    }))
   }
 
   getTeams(){

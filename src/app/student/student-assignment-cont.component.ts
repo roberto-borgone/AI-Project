@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { last } from 'rxjs/operators';
 import { ContentDialogComponent } from '../content-dialog.component';
@@ -24,8 +25,12 @@ export class StudentAssignmentContComponent implements OnDestroy {
   dueDate: FormControl = new FormControl('', Validators.required)
   file: any
 
-  constructor(private assignmentService : AssignmentService, private dialog: MatDialog) {
-    this.getAssignments();
+  constructor(private router: Router, private assignmentService : AssignmentService, private dialog: MatDialog) {
+    this.subscriptions.add(this.router.events.subscribe(val => {
+      if(val instanceof NavigationEnd){
+        this.getAssignments();
+      }
+    }))
   }
 
   getAssignments() {
