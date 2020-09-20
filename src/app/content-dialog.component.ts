@@ -22,8 +22,6 @@ export class ContentDialogComponent implements OnInit {
       reader.readAsDataURL(this.data);
       reader.onload = (_event) => {
       this.url = reader.result;
-      this.urlDownload += this.url
-      console.log(this.urlDownload)
       }
   }
 
