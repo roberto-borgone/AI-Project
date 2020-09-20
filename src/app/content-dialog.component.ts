@@ -29,27 +29,15 @@ export class ContentDialogComponent implements OnInit {
   }
 
   zoomPlus(): void{
-
-    console.log(this.zoom)
     var value = parseInt(this.zoom.split("%")[0])
-    
-    console.log(value)
     value += 10
     this.zoom = value + "%"
-
-    console.log(this.zoom)
   }
 
   zoomMinus(): void{
-
-    console.log(this.zoom)
     var value = parseInt(this.zoom.split("%")[0])
-    
-    console.log(value)
     value -= 10
     this.zoom = value + "%"
-
-    console.log(this.zoom)
   }
   
 }

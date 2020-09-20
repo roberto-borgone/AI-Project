@@ -54,6 +54,8 @@ export class HistoryDialogComponent {
         this.isDisabledFileUpload = true;
       }
 
+      
+
       if(!this.data.lastWork.updateable) {
         this.buttonDisable = true; 
       }
@@ -109,7 +111,13 @@ export class HistoryDialogComponent {
 
     disable() {
       this.subscriptions.add(this.assignmentService.disableAssignment(this.data.lastWork.consegnaId, this.data.lastWork.studentId)
-      .subscribe(res => {if(res) this.buttonDisable = true}))
+      .subscribe(res => {if(res){
+        if(this.buttonDisable === true)
+          this.buttonDisable = false
+        else 
+          this.buttonDisable = true
+      }
+    }))
     }
 
     showContent(workId: number) {

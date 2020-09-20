@@ -41,7 +41,7 @@
 </table>
 <button mat-raised-button color="primary" [disabled]="isDisabledFileUpload" (click)="onClick()">
   <mat-icon>file_upload</mat-icon>
-  Carica elaborato
+  {{testoButton}}
 </button>
 <input type="file" id="imageUpload" accept="image/*"(change)="handleImageSelect($event)" style="display:none;">
 <br>

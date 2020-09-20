@@ -85,12 +85,13 @@ export class VmsContComponent implements OnDestroy {
         // nested observables.. i could have found a more elegant solution to this
         this.subscriptions.add(this.teamService.updateVM(new Team(team.id, team.name, result.maxRAM.value, result.maxDisk.value, result.maxVCPU.value, result.maxActiveVM.value, result.maxTotVM.value))
         .subscribe(authResult => {
-            
+          
           if(authResult.ok == false){
             // not logged error message display
             this.updateVMInvalid = true
             this.message = authResult.error.message
             this.openUpdateCourseVMDialog()
+
           }else{
 
             // created
@@ -114,10 +115,7 @@ export class VmsContComponent implements OnDestroy {
         this.maxActiveVM.reset()
       }
       
-      this.getTeams()
-      this.getModelVM()
-      this.getCourse()
-      this.getVM()
+      console.log("Created")
 
     }));
     

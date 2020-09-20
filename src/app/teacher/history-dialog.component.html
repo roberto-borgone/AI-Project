@@ -9,7 +9,11 @@
     <input type="file" id="imageUpload" accept="image/*"(change)="handleImageSelect($event)" style="display:none;">
   </mat-grid-tile>
   <mat-grid-tile>
-    <button style="padding-left: 20px;" mat-raised-button color="primary" [disabled]="buttonDisable" (click)="disable()">
+    <button *ngIf = "buttonDisable" style="padding-left: 20px;" mat-raised-button color="primary" (click)="disable()">
+      Riabilita consegne
+    </button>
+
+    <button *ngIf = "!buttonDisable" style="padding-left: 20px;" mat-raised-button color="primary"  (click)="disable()">
       Disabilita consegne
     </button>
   </mat-grid-tile>

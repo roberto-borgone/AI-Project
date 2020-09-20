@@ -33,6 +33,8 @@ export class WorksDialogComponent {
 
   isDisabledFileUpload: boolean;
 
+  testoButton: String = "Carica Elaborato"
+
   constructor(public dialogHistory: MatDialogRef<WorksDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData, private assignmentService: AssignmentService, private dialog: MatDialog) {
       console.log("Sono nel costruttore di works-dialog component")
@@ -44,6 +46,7 @@ export class WorksDialogComponent {
 
       if(data.lastWorkData[0].updateable == false || (data.lastWorkData[0].status != 'RIVISTO' && data.lastWorkData[0].status != 'LETTO')) {
         this.isDisabledFileUpload = true;
+        this.testoButton = "Il docente ti ha disabilitato le consegne"
       }
     }
 
