@@ -1,4 +1,8 @@
-<div class="container">
+<div *ngIf="!this.auth.token.group" class="container">
+<h1 style:text-aligin:center> Devi prima entrare in un gruppo </h1>
+</div>
+
+<div *ngIf="this.auth.token.group" class="container">
 
 <mat-grid-list cols="2" rowHeight="1:0.5">
       
@@ -10,20 +14,20 @@
 
     <h3>Vincoli</h3>
       
-      <p *ngIf="this.auth.token.group.maxRAM == -1" >Max RAM: Non ancora settata</p>
-      <p *ngIf="this.auth.token.group.maxRAM != -1" >Max RAM: {{this.auth.token.group.maxRAM}}GB</p>
+      <p *ngIf="this.auth.token.group.maxRAM == -1" >Max quantità di RAM: Non ancora settata</p>
+      <p *ngIf="this.auth.token.group.maxRAM != -1" >Max quantità di RAM: {{this.auth.token.group.maxRAM}}GB</p>
 
-      <p *ngIf="this.auth.token.group.maxDisk == -1">Max Disk: Non ancora settata</p>
-      <p *ngIf="this.auth.token.group.maxDisk != -1">Max Disk: {{this.auth.token.group.maxDisk}}GB</p>
+      <p *ngIf="this.auth.token.group.maxDisk == -1">Max quantità di Disk: Non ancora settata</p>
+      <p *ngIf="this.auth.token.group.maxDisk != -1">Max quantità di Disk: {{this.auth.token.group.maxDisk}}GB</p>
 
-      <p *ngIf="this.auth.token.group.maxVCPU == -1">Max VCPU: Non ancora settata</p>
-      <p *ngIf="this.auth.token.group.maxVCPU != -1">Max VCPU: {{this.auth.token.group.maxVCPU}}</p>
+      <p *ngIf="this.auth.token.group.maxVCPU == -1">Max quantità di VCPU: Non ancora settata</p>
+      <p *ngIf="this.auth.token.group.maxVCPU != -1">Max quantità di VCPU: {{this.auth.token.group.maxVCPU}}</p>
 
-      <p *ngIf="this.auth.token.group.maxActiveVM == -1">Max Active VM: Non ancora settata</p>
-      <p *ngIf="this.auth.token.group.maxActiveVM != -1">Max Active VM: {{this.auth.token.group.maxActiveVM}}</p>
+      <p *ngIf="this.auth.token.group.maxActiveVM == -1">Max numero di VM attive: Non ancora settata</p>
+      <p *ngIf="this.auth.token.group.maxActiveVM != -1">Max numero di VM attive: {{this.auth.token.group.maxActiveVM}}</p>
 
-      <p *ngIf="this.auth.token.group.maxTotVM == -1">Max Tot VM: Non ancora settata</p>
-      <p *ngIf="this.auth.token.group.maxTotVM != -1">Max Tot VM: {{this.auth.token.group.maxTotVM}}</p>
+      <p *ngIf="this.auth.token.group.maxTotVM == -1">Max numero di VM totali: Non ancora settata</p>
+      <p *ngIf="this.auth.token.group.maxTotVM != -1">Max numero di VM totali: {{this.auth.token.group.maxTotVM}}</p>
 
       <p class="error" *ngIf="course.maxActiveVM == -1 || course.maxTotVM == -1 || course.maxRAM == -1 || course.maxDisk == -1 || course.maxVirtualCPU == -1">Non è possibile creare VM prima che il docente abbia settato i vincoli sulle risorse da utilizzare</p>
     </div>

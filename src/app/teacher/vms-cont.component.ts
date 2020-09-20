@@ -109,6 +109,12 @@ export class VmsContComponent implements OnDestroy {
         this.maxVCPU.reset()
         this.maxActiveVM.reset()
       }
+      
+      this.getTeams()
+      this.getModelVM()
+      this.getCourse()
+      this.getVM()
+
     }));
     
   }
