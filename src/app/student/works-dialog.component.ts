@@ -73,6 +73,16 @@ export class WorksDialogComponent {
     console.log("Sono in handleImageSelect");
     var files = event.target.files; // FileList object
     var file = files[0];
-    this.subscriptions.add(this.assignmentService.uploadWork(this.data.lastWorkData[0].consegnaId, file).subscribe())
+    this.subscriptions.add(this.assignmentService.uploadWork(this.data.lastWorkData[0].consegnaId, file).subscribe(res => {
+      this.subscriptions.add(this.assignmentService.getStudentWorksStudent(this.data.lastWorkData[0].consegnaId).subscribe(worksData => {
+        this.works = new MatTableDataSource(worksData);
+        this.subscriptions.add(this.assignmentService.getStudentStatus(this.data.lastWorkData[0].consegnaId).subscribe(res => {
+          let lastWorkArray : LastWork[];
+          lastWorkArray.push(res);
+          this.lastWork = new MatTableDataSource(lastWorkArray);
+        }))
+      }
+      ))
+    }));
   }
 }

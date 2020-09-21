@@ -197,10 +197,10 @@ export class AssignmentService {
     )
   }
 
-  getStudentWorksStudent(assignment: Assignment): Observable<Work[]> {
+  getStudentWorksStudent(assignmentId : number): Observable<Work[]> {
     
     let PATH = 'https://localhost:4200/api/API/consegne/';
-    return this.http.get<Work[]>(PATH + assignment.id + '/' + this.auth.token.username + '/getAllStudentElaboratiStudent')
+    return this.http.get<Work[]>(PATH + assignmentId + '/' + this.auth.token.username + '/getAllStudentElaboratiStudent')
     .pipe(
       catchError( err => {
         console.error(err)
