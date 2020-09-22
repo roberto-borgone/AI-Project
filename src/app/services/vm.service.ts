@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
+import { from, Observable, of, throwError } from 'rxjs';
 import { catchError, concatMap, map } from 'rxjs/operators';
 import { CourseService } from './course.service';
 import { AuthService } from '../auth/auth.service';
@@ -132,6 +132,21 @@ export class VmService {
     console.log(vmID)
 
     return this.http.get(this.API_PATH + '/' + vmID + '/changeStatus/', this.httpOptions).pipe(
+      map(result => {
+        return true
+      }),
+      catchError(err => {
+        console.error(err)
+        return of(false)
+      })
+    )
+  }
+
+  makeOwners(owners: Student[], vm: VM): Observable<boolean>{
+    return from(owners).pipe(
+      concatMap(owner => {
+        return this.http.post(this.API_PATH + '/' + vm.id + '/makeOwner', {id: owner.id}, this.httpOptions)
+      }),
       map(result => {
         return true
       }),

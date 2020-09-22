@@ -98,7 +98,7 @@ export class AddCourseDialogComponent {
     // the input matches if is present in name or first name 
     // or if it matches the id beginning
     filter = filter.toUpperCase()
-    this.filteredTeachers = this.filteredTeachers.filter(s => 
+    this.filteredTeachers = this.teachers.filter(s => 
       (s.name.toUpperCase().includes(filter) || 
       s.name.toUpperCase().includes(filter) || 
       s.id.startsWith(filter)))
@@ -116,7 +116,7 @@ export class AddCourseDialogComponent {
     // avoid multiple insertion
     if(this.selectedTeacher != null && this.data.owners.findIndex(d => d.id == this.selectedTeacher.id) === -1) {
       this.data.owners.push(this.selectedTeacher)
-      this.filteredTeachers = this.filteredTeachers.filter(d => d.id != this.selectedTeacher.id)
+      this.teachers = this.teachers.filter(d => d.id != this.selectedTeacher.id)
       // clear the input field
       this.input.nativeElement.value = ''
       this.input.nativeElement.blur()
@@ -134,15 +134,13 @@ export class AddCourseDialogComponent {
       this.teachers = result
       this.teachers = this.teachers.filter(d => d.id != this.auth.token.username)
       this.filteredTeachers = this.teachers
-
-      console.log(this.filteredTeachers)
     
     }))
   }
 
   removeTeacher(teacher: Teacher){
     this.data.owners = this.data.owners.filter(d => d.id != teacher.id)
-    this.filteredTeachers.push(teacher)
+    this.teachers.push(teacher)
     this.filterTeachers()
   }
 }

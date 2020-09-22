@@ -41,6 +41,7 @@ export class StudentVmsComponent {
 
   @Output()
   onOpenVM: EventEmitter<VM>
+  onAddOwner: EventEmitter<VM>
 
   colsToDisplay: string[] = ['on', 'id', 'ram', 'virtualCpu', 'disk', 'teamID', 'owners', 'commands']
 
@@ -73,6 +74,7 @@ export class StudentVmsComponent {
     this.onStartVM = new EventEmitter()
     this.onStopVM = new EventEmitter()
     this.onOpenVM = new EventEmitter()
+    this.onAddOwner = new EventEmitter()
   }
 
   showOwners(students: Student[]){
@@ -99,6 +101,10 @@ export class StudentVmsComponent {
   stopVM(vm: VM){
     console.log("stop")
     this.onStopVM.emit(vm)
+  }
+
+  addOwner(vm: VM){
+    this.onAddOwner.emit(vm)
   }
 
   isOwner(element: VM){
