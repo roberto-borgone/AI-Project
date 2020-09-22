@@ -39,6 +39,7 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
 </table>
+<p class="error">{{error}}</p>
 <button mat-raised-button color="primary" [disabled]="isDisabledFileUpload" (click)="onClick()">
   <mat-icon>file_upload</mat-icon>
   {{testoButton}}
@@ -71,3 +72,5 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
   </table>
   <mat-paginator #pag2 [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons="true"></mat-paginator>
+
+  <button mat-raised-button (click)="onNoClick()">Indietro</button>

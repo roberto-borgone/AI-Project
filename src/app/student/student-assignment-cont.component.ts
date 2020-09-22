@@ -34,7 +34,7 @@ export class StudentAssignmentContComponent implements OnDestroy {
   }
 
   getAssignments() {
-    this.subscriptions.add(this.assignmentService.getAssignmentsStudent().subscribe(assignments => {console.log(assignments); this.assignments = assignments}));
+    this.subscriptions.add(this.assignmentService.getAssignmentsStudent().subscribe(assignments => {this.assignments = assignments}));
   }
 
   openContentDialog(assignment: Assignment){
@@ -48,7 +48,7 @@ export class StudentAssignmentContComponent implements OnDestroy {
   
       let dialogRef = this.dialog.open(ContentDialogComponent, dialogConfig);
   
-      this.subscriptions.add(dialogRef.afterClosed().subscribe());
+      this.subscriptions.add(dialogRef.afterClosed().subscribe(res => this.getAssignments()));
     }));
   }
 

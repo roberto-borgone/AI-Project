@@ -33,7 +33,7 @@ export class AssignmentsContComponent implements OnDestroy {
   }
 
   getAssignments() {
-    this.subscriptions.add(this.assignmentService.getAssignmentsDocent().subscribe(assignments => {console.log(assignments); this.assignments = assignments}));
+    this.subscriptions.add(this.assignmentService.getAssignmentsDocent().subscribe(assignments => {this.assignments = assignments}));
   }
 
   openContentDialog(assignment: Assignment){
@@ -66,17 +66,33 @@ export class AssignmentsContComponent implements OnDestroy {
     }));
   }
 
-  openAssignmentDialog() {
+  openAssignmentDialog(error: string) {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = '40%';
+    dialogConfig.width = '30%';
     dialogConfig.height = '40%';
-    dialogConfig.data = {dueDate: this.dueDate, file: this.file};
+    dialogConfig.data = {dueDate: this.dueDate, file: this.file, error: error};
 
     let dialogRef = this.dialog.open(NewAssignmentDialogComponent, dialogConfig);
 
     this.subscriptions.add(dialogRef.afterClosed().subscribe(result => {
-      console.log(result.file)
-      this.subscriptions.add(this.assignmentService.createAssignment(result.dueDate.value, result.file).subscribe(res => {if(res) this.getAssignments()}))
+      if(result!=undefined) {
+        if(result.dueDate!=undefined && result.file!=undefined) {
+          let currentDateTime: Date = new Date();
+          console.log(currentDateTime);
+          console.log(new Date(result.dueDate.value));
+          if(new Date(result.dueDate.value) <= currentDateTime) {
+            let err: string = "Inserire una data di scadenza valida";
+            this.openAssignmentDialog(err);
+          }
+          else {
+            this.subscriptions.add(this.assignmentService.createAssignment(result.dueDate.value, result.file).subscribe(res => {if(res) this.getAssignments()}));
+          }
+        }
+        else {
+          let err: string = "Inserire una data di scadenza valida e caricare il testo della consegna";
+          this.openAssignmentDialog(err);    
+        }
+      }
     }));
   }
 

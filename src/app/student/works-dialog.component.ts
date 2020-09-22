@@ -33,7 +33,9 @@ export class WorksDialogComponent {
 
   isDisabledFileUpload: boolean;
 
-  testoButton: String = "Carica Elaborato"
+  error: string;
+
+  testoButton: String = "Carica elaborato"
 
   constructor(public dialogHistory: MatDialogRef<WorksDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData, 
@@ -46,8 +48,13 @@ export class WorksDialogComponent {
 
       if(data.lastWorkData[0].updateable == false || (data.lastWorkData[0].status != 'RIVISTO' && data.lastWorkData[0].status != 'LETTO')) {
         this.isDisabledFileUpload = true;
-        this.testoButton = "Il docente ti ha disabilitato le consegne"
+        this.testoButton = "Consegna disabilitata"
       }
+
+      if(data.lastWorkData[0].status=='NULL') {
+        this.error = "Leggere il testo della consegna per poter caricare un elaborato"
+      }
+
     }
 
   showContent(workId: number) {
@@ -84,5 +91,9 @@ export class WorksDialogComponent {
       }
       ))
     }));
+  }
+
+  onNoClick(): void {
+    this.dialogHistory.close();
   }
 }
