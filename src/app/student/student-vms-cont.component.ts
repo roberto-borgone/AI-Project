@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Course } from '../models/course.model';
@@ -13,6 +13,7 @@ import { OwnerDialogComponent } from '../teacher/owner-dialog.component';
 import { SettingsVmDialogComponent } from './settings-vm-dialog.component';
 import { TeamService } from '../services/team.service';
 import { NewOwnerDialogComponent } from './new-owner-dialog.component';
+import { OpenVmDialogComponent } from './open-vm-dialog.component';
 
 @Component({
   selector: 'app-student-vms-cont',
@@ -178,6 +179,16 @@ export class StudentVmsContComponent implements OnDestroy{
   }
 
   showVMDialog(vm: VM) {
+    console.log("Sono in showVMDialog")
+    this.subscriptions.add(this.vmService.getVMImage(vm).subscribe(img => {
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.width = '98%';
+      dialogConfig.height = '70%';
+      dialogConfig.data = img;
+  
+      let dialogRef = this.dialog.open(OpenVmDialogComponent, dialogConfig);
+      this.subscriptions.add(dialogRef.afterClosed().subscribe());
+    }))
   }
 
   openDialogNewOwner(vm: VM){

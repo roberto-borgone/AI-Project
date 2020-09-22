@@ -101,14 +101,15 @@
                 <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="isOwner(element)">
                     <mat-icon>more_vert</mat-icon>
                 </button>
-                <button *ngIf="element.on && isOwner(element)" matTooltip="VISUALIZZA" mat-icon-button (click)="openVM(element)">
-                  <mat-icon>all_out</mat-icon>
-              </button>
                 {{!isOwner(element)?'NON SEI OWNER':''}}
                 <mat-menu #menu="matMenu">
                     <button mat-menu-item (click)="addOwner(element)">
                         <mat-icon>person_add</mat-icon>
                         <span>Aggiungi owner</span>
+                    </button>
+                    <button mat-menu-item *ngIf="element.on && isOwner(element)" (click)="openVM(element)">
+                      <mat-icon>all_out</mat-icon>
+                      <span>Visualizza</span>
                     </button>
                     <button mat-menu-item (click)="element.on?stopVM(element):startVM(element)">
                         <mat-icon>{{element.on?'pause_circle_outline':'play_circle_outline'}}</mat-icon>

@@ -41,6 +41,8 @@ export class StudentVmsComponent {
 
   @Output()
   onOpenVM: EventEmitter<VM>
+
+  @Output()
   onAddOwner: EventEmitter<VM>
 
   colsToDisplay: string[] = ['on', 'id', 'ram', 'virtualCpu', 'disk', 'teamID', 'owners', 'commands']
