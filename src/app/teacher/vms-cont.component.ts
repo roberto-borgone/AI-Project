@@ -64,7 +64,7 @@ export class VmsContComponent implements OnDestroy {
   getTeams(){
     this.subscriptions.add(this.teamService.query().subscribe(result => {
       this.teams = result
-
+      this.getResources(this.teams)
       this.interval = setInterval(() => {
         this.getResources(this.teams)
       }, 10000)
