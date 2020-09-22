@@ -174,6 +174,10 @@ export class StudentVmsContComponent implements OnDestroy{
       )
   }
 
+  showVMDialog(vm: VM) {
+
+  }
+
   ngOnDestroy(){
     this.subscriptions.unsubscribe()
   }

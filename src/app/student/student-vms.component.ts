@@ -39,6 +39,9 @@ export class StudentVmsComponent {
   @Output()
   onStopVM: EventEmitter<VM>
 
+  @Output()
+  onOpenVM: EventEmitter<VM>
+
   colsToDisplay: string[] = ['on', 'id', 'ram', 'virtualCpu', 'disk', 'teamID', 'owners', 'commands']
 
   vms: MatTableDataSource<VM>
@@ -69,6 +72,7 @@ export class StudentVmsComponent {
     this.onShowOwners = new EventEmitter()
     this.onStartVM = new EventEmitter()
     this.onStopVM = new EventEmitter()
+    this.onOpenVM = new EventEmitter()
   }
 
   showOwners(students: Student[]){
@@ -99,6 +103,11 @@ export class StudentVmsComponent {
 
   isOwner(element: VM){
     return element.owners.find(s => s.id == this.auth.token.username) != undefined
+  }
+
+  openVM(vm: VM) {
+    console.log("open")
+    this.onOpenVM.emit(vm)
   }
 
 }

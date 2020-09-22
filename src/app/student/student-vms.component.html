@@ -107,6 +107,9 @@
                 <button *ngIf="!element.on && isOwner(element)" matTooltip="MODIFICA" mat-icon-button (click)="modifyVM(element)">
                     <mat-icon>settings</mat-icon>
                 </button>
+                <button *ngIf="element.on && isOwner(element)" matTooltip="VISUALIZZA" mat-icon-button (click)="openVM(element)">
+                  <mat-icon>all_out</mat-icon>
+              </button>
                 {{!isOwner(element)?'NON SEI OWNER':''}}
             </td>
           </ng-container>
