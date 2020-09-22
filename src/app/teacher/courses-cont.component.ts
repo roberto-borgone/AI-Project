@@ -54,7 +54,7 @@ export class CoursesContComponent implements OnDestroy {
   deleteCourse(course: Course){
     this.subscriptions.add(this.courseService.deleteCourse(course).subscribe(course => {
       this.getCourses();
-      this.router.navigate(['/home']);
+      this.router.navigate(['/teacher']);
     }))
   }
 
