@@ -107,6 +107,10 @@
                         <mat-icon>person_add</mat-icon>
                         <span>Aggiungi owner</span>
                     </button>
+                    <button mat-menu-item *ngIf="element.on && isOwner(element)" (click)="openVM(element)">
+                      <mat-icon>all_out</mat-icon>
+                      <span>Visualizza</span>
+                    </button>
                     <button mat-menu-item (click)="element.on?stopVM(element):startVM(element)">
                         <mat-icon>{{element.on?'pause_circle_outline':'play_circle_outline'}}</mat-icon>
                         <span>{{element.on?'Spegni':'Accendi'}}</span>

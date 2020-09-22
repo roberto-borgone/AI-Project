@@ -160,4 +160,17 @@ export class VmService {
     )
   }
 
+  getVMImage(vm: VM): Observable<string>{
+
+    let PATH = 'https://localhost:4200/api/API/vms';
+
+    return this.http.get<string>(PATH + '/' + vm.id + '/getVM')
+    .pipe(
+      catchError( err => {
+        console.error(err)
+        return throwError(err.message)
+      }))
+
+
+  }
 }

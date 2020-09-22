@@ -71,7 +71,7 @@ export class StudentAssignmentContComponent implements OnDestroy {
     
         let dialogRef = this.dialog.open(WorksDialogComponent, dialogConfig);
     
-        this.subscriptions.add(dialogRef.afterClosed().subscribe());
+        this.subscriptions.add(dialogRef.afterClosed().subscribe(res => this.getAssignments()));
       }))
     }));
   }
