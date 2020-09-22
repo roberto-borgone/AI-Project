@@ -42,7 +42,7 @@ export class WorkDialogComponent {
   }
 
   showHistory(lastWork : LastWork) {
-    console.log("showHystory in work-dialog.ts")
+    console.log("showHistory in work-dialog.ts")
     console.log(lastWork);
     this.subscriptions.add(this.assignmentService.getStudentHistory(lastWork.consegnaId, lastWork.studentId).subscribe(history => {
       console.log(history); 
@@ -57,12 +57,13 @@ export class WorkDialogComponent {
   
       let diag = this.dialog.open(HistoryDialogComponent, dialogConfig);
   
-      this.subscriptions.add(diag.afterClosed().subscribe());
+      this.subscriptions.add(diag.afterClosed().subscribe(res => 
+        this.subscriptions.add(this.assignmentService.getStudentsWorks(lastWork.consegnaId).subscribe(works => this.dataSource = new MatTableDataSource(works))
+        )));
     }));
   }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
-
 }

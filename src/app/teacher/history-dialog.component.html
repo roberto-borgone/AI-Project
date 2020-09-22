@@ -1,24 +1,19 @@
 <h2>Storico</h2>
 
-<mat-grid-list cols="3" rowHeight="1:0.35">
-  <mat-grid-tile>
     <button mat-raised-button color="primary" [disabled]="isDisabledFileUpload" (click)="onClick()">
       <mat-icon>file_upload</mat-icon>
       Carica correzione
     </button>
     <input type="file" id="imageUpload" accept="image/*"(change)="handleImageSelect($event)" style="display:none;">
-  </mat-grid-tile>
-  <mat-grid-tile>
-    <button *ngIf = "buttonDisable" style="padding-left: 20px;" mat-raised-button color="primary" (click)="disable()">
+
+    <button *ngIf = "buttonDisable" mat-raised-button color="primary" (click)="disable()">
       Riabilita consegne
     </button>
 
-    <button *ngIf = "!buttonDisable" style="padding-left: 20px;" mat-raised-button color="primary"  (click)="disable()">
+    <button *ngIf = "!buttonDisable" mat-raised-button color="primary"  (click)="disable()">
       Disabilita consegne
     </button>
-  </mat-grid-tile>
-  <mat-grid-tile>
-
+    <br>
     <mat-form-field class="voto" appearance="fill">
       <div>
       <mat-label>Voto</mat-label>
@@ -29,17 +24,12 @@
         </mat-option>
       </mat-select>
       </div>
-    </mat-form-field>
-    
-    <div>
+    </mat-form-field>   
     <mat-checkbox [(ngModel)]="laude" [disabled]="isDisabledLode">Lode</mat-checkbox>
     <button mat-raised-button color="primary" (click)="setVote()" [disabled]="isDisabledSetVote">
       Assegna voto
     </button>
-    </div>
-  </mat-grid-tile>
-  </mat-grid-list>
-  
+
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   <ng-container matColumnDef="timestamp">
     <th mat-header-cell *matHeaderCellDef> Data </th>

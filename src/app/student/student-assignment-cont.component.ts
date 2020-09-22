@@ -54,7 +54,7 @@ export class StudentAssignmentContComponent implements OnDestroy {
 
   openWorksDialog(assignment: Assignment){
 
-    this.subscriptions.add(this.assignmentService.getStudentWorksStudent(assignment).subscribe(worksData => {
+    this.subscriptions.add(this.assignmentService.getStudentWorksStudent(assignment.id).subscribe(worksData => {
 
       this.subscriptions.add(this.assignmentService.getStudentStatus(assignment.id).subscribe(res => {
 

@@ -74,7 +74,9 @@ export class HistoryDialogComponent {
       console.log("Sono in handleImageSelect");
       var files = event.target.files; // FileList object
       var file = files[0];
-      this.subscriptions.add(this.assignmentService.uploadCorrection(this.data.lastWork.consegnaId, this.data.lastWork.studentId, file).subscribe())
+      this.subscriptions.add(this.assignmentService.uploadCorrection(this.data.lastWork.consegnaId, this.data.lastWork.studentId, file).subscribe(res =>
+        this.assignmentService.getStudentHistory(this.data.lastWork.consegnaId, this.data.lastWork.studentId).subscribe(history => this.dataSource = new MatTableDataSource(history))
+      ))
     }
 
     onClickVote() {
@@ -92,6 +94,7 @@ export class HistoryDialogComponent {
       console.log("Sono in giveVote()")
       console.log(this.vote)
       console.log(this.laude)
+
       if(this.laude === undefined) {
         this.laude = false;
       }
@@ -104,6 +107,7 @@ export class HistoryDialogComponent {
             this.isDisabledSetVote = true;
             this.isDisabledLode = true;
             this.isDisabledFileUpload = true;
+            this.assignmentService.getStudentHistory(this.data.lastWork.consegnaId, this.data.lastWork.studentId).subscribe(history => this.dataSource = new MatTableDataSource(history))
           }
         }))
       }
@@ -118,7 +122,7 @@ export class HistoryDialogComponent {
           this.buttonDisable = true
       }
     }))
-    }
+  }
 
     showContent(workId: number) {
       this.subscriptions.add(this.assignmentService.getWorkContent(workId).subscribe(img => {
