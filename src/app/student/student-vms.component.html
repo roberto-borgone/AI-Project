@@ -98,18 +98,30 @@
           <ng-container matColumnDef="commands">
             <th mat-header-cell *matHeaderCellDef>Comandi</th>
             <td mat-cell *matCellDef="let element">
-                <button  *ngIf="isOwner(element)" [matTooltip]="element.on?'SPEGNI':'ACCENDI'" mat-icon-button (click)="element.on?stopVM(element):startVM(element)">
-                    <mat-icon>{{element.on?'pause_circle_outline':'play_circle_outline'}}</mat-icon>
-                </button>
-                <button  *ngIf="isOwner(element)" matTooltip="ELIMINA" mat-icon-button (click)="deleteVM(element)">
-                    <mat-icon>delete_outline</mat-icon>
-                </button>
-                <button *ngIf="!element.on && isOwner(element)" matTooltip="MODIFICA" mat-icon-button (click)="modifyVM(element)">
-                    <mat-icon>settings</mat-icon>
+                <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="isOwner(element)">
+                    <mat-icon>more_vert</mat-icon>
                 </button>
                 {{!isOwner(element)?'NON SEI OWNER':''}}
-            </td>
-          </ng-container>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="addOwner(element)">
+                        <mat-icon>person_add</mat-icon>
+                        <span>Aggiungi owner</span>
+                    </button>
+                    <button mat-menu-item (click)="element.on?stopVM(element):startVM(element)">
+                        <mat-icon>{{element.on?'pause_circle_outline':'play_circle_outline'}}</mat-icon>
+                        <span>{{element.on?'Spegni':'Accendi'}}</span>
+                    </button>
+                    <button mat-menu-item (click)="deleteVM(element)">
+                        <mat-icon>delete_outline</mat-icon>
+                        <span>Elimina</span>
+                    </button>
+                    <button mat-menu-item *ngIf="!element.on" (click)="modifyVM(element)">
+                        <mat-icon>settings</mat-icon>
+                        <span>Modifica</span>
+                    </button>
+                </mat-menu>
+          </td>
+        </ng-container>
     
           <tr mat-header-row *matHeaderRowDef="colsToDisplay; sticky: true"></tr>
           <tr mat-row *matRowDef="let row; columns: colsToDisplay;"></tr>

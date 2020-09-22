@@ -72,6 +72,7 @@ import { WorkDialogComponent } from './teacher/work-dialog.component';
 import { HistoryDialogComponent } from './teacher/history-dialog.component';
 import { StudentAssignmentContComponent } from './student/student-assignment-cont.component';
 import { StudentAssignmentComponent } from './student/student-assignment.component';
+import { NewOwnerDialogComponent } from './student/new-owner-dialog.component';
 
 
 @NgModule({
@@ -112,6 +113,7 @@ import { StudentAssignmentComponent } from './student/student-assignment.compone
     WorksDialogComponent,
     StudentAssignmentContComponent,
     StudentAssignmentComponent,
+    NewOwnerDialogComponent,
   ],
   entryComponents: [
     LoginDialogComponent

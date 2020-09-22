@@ -1,0 +1,37 @@
+<h2 mat-dialog-title>Owners VM</h2>
+
+<mat-divider></mat-divider>
+
+<div mat-dialog-content>
+
+  <mat-form-field class="search" appearance="standard">
+    <mat-label>Aggiungi owner</mat-label>
+    <input #input spellcheck="false" id="addStudent" type="search" placeholder="Id o nome dello studente" matInput [matAutocomplete]="auto" (keyup)="filterStudents()">
+    <mat-autocomplete (optionSelected)="getOption($event)" #auto="matAutocomplete" [displayWith]="studentToString">
+      <mat-option *ngFor="let student of filteredStudents" [value]="student">
+        {{student.name.toUpperCase() + ' ' + student.surname.toUpperCase() + ' (' + student.id + ')'}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <mat-list role="list">
+    <mat-list-item role="listitem" *ngFor="let student of data.owners">
+      <mat-card>
+        <button mat-icon-button (click)="removeStudent(student)">
+          <mat-icon>clear</mat-icon>
+        </button>
+          {{student.id.toUpperCase() + ' ' + student.surname.toUpperCase() + ' ' + student.name.toUpperCase()}}
+      </mat-card>
+    </mat-list-item>
+  </mat-list>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button 
+          color="primary" 
+          [mat-dialog-close]="data" 
+          [disabled]="data.owners.length == 0">
+          Procedi
+  </button>
+  <button mat-raised-button (click)="onNoClick()">Annulla</button>
+</div>

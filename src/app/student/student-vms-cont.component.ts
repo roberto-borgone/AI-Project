@@ -12,6 +12,7 @@ import { ModelVM } from '../models/modelVM.model';
 import { OwnerDialogComponent } from '../teacher/owner-dialog.component';
 import { SettingsVmDialogComponent } from './settings-vm-dialog.component';
 import { TeamService } from '../services/team.service';
+import { NewOwnerDialogComponent } from './new-owner-dialog.component';
 
 @Component({
   selector: 'app-student-vms-cont',
@@ -31,6 +32,8 @@ export class StudentVmsContComponent implements OnDestroy{
   invalid: boolean
   message: string
 
+
+  owners: Student[] = []
 
 
   constructor(private vmService: VmService, private teamService: TeamService, private dialog: MatDialog, private router: Router, private courseService: CourseService) { 
@@ -172,6 +175,32 @@ export class StudentVmsContComponent implements OnDestroy{
       this.getCourse()
     }
       )
+  }
+
+  openDialogNewOwner(vm: VM){
+    let dialogRef = this.dialog.open(NewOwnerDialogComponent, {
+      width: '400px',
+      data: {owners: this.owners, vm: vm}
+    });
+
+    this.subscriptions.add(dialogRef.afterClosed().subscribe(result => {
+      if(result && !(result.owners.length == 0)){
+
+        // nested observables.. i could have found a more elegant solution to this
+        this.subscriptions.add(this.vmService.makeOwners(result.owners, vm)
+        .subscribe(authResult => {
+            
+          if(authResult == true){
+            // created
+            this.owners = []
+            this.getVM()
+          }
+        }))
+      }else if(!result){
+        // dialog closed i remove data
+        this.owners = []
+      }
+    }));
   }
 
   ngOnDestroy(){
