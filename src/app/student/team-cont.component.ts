@@ -25,6 +25,7 @@ export class TeamContComponent implements OnDestroy{
   subscriptions: Subscription = new Subscription()
 
   newTeamName: FormControl = new FormControl('', [Validators.required])
+  timeout: FormControl = new FormControl('', [Validators.min(1)])
   newTeamInvalid: boolean = false
   message: string
 
@@ -66,14 +67,14 @@ export class TeamContComponent implements OnDestroy{
   openDialogTeamUp(students: Student[]){
     let dialogRef = this.dialog.open(NewTeamDialogComponent, {
       width: '400px',
-      data: {students: students, newTeamName: this.newTeamName, newTeamInvalid: this.newTeamInvalid, message: this.message}
+      data: {students: students, newTeamName: this.newTeamName, timeout: this.timeout, newTeamInvalid: this.newTeamInvalid, message: this.message}
     });
 
     this.subscriptions.add(dialogRef.afterClosed().subscribe(result => {
-      if(result && result.newTeamName.valid){
+      if(result && result.newTeamName.valid && result.timeout.valid){
 
         // nested observables.. i could have found a more elegant solution to this
-        this.subscriptions.add(this.teamService.newTeam(result.newTeamName.value, students)
+        this.subscriptions.add(this.teamService.newTeam(result.newTeamName.value, result.timeout.value, students)
         .subscribe(authResult => {
             
           if(authResult.ok == false){
@@ -86,6 +87,7 @@ export class TeamContComponent implements OnDestroy{
             // created
             this.newTeamInvalid = false
             this.newTeamName.reset()
+            this.timeout.reset()
             this.message = undefined
             this.getTeamMembers()
             this.getStudents()
@@ -97,6 +99,7 @@ export class TeamContComponent implements OnDestroy{
         // dialog closed i remove data
         this.newTeamInvalid = false
         this.newTeamName.reset()
+        this.timeout.reset()
         this.message = undefined
       }
     }));

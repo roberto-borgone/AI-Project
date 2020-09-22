@@ -8,6 +8,7 @@ import { Student } from '../models/student.model';
 export interface DialogData {
   students: Student[]
   newTeamName: FormControl;
+  timeout: FormControl
   newTeamInvalid: boolean;
   message: string
 }
@@ -34,6 +35,12 @@ export class NewTeamDialogComponent {
   getErrorMessageName(newTeamName: FormControl) {
     if (newTeamName.hasError('required')) {
       return 'Inserisci un nome';
+    }
+  }
+
+  getErrorMessageTimeout(timeout: FormControl) {
+    if (timeout.hasError('min')) {
+      return 'Inserisci un tiemout per la proposta';
     }
   }
 

@@ -123,7 +123,7 @@ export class TeamService {
     )
   }
 
-  newTeam(name: string, students: Student[]){
+  newTeam(name: string, timeout: number, students: Student[]){
     
     let PATH = 'https://localhost:4200/api/API/courses'
 
@@ -135,7 +135,7 @@ export class TeamService {
 
     studentsID.push(this.auth.token.username)
 
-    return this.http.post<Object>(PATH + '/' + this.courseService.currentCourse.name + '/proposeTeam', {nameTeam: name, memberIds: studentsID, timeout: 10}, this.httpOptions)
+    return this.http.post<Object>(PATH + '/' + this.courseService.currentCourse.name + '/proposeTeam', {nameTeam: name, memberIds: studentsID, timeout: timeout*60}, this.httpOptions)
     .pipe(
       map(result => {
         console.log(result)

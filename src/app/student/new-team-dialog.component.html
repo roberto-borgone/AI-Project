@@ -5,6 +5,11 @@
         <input matInput placeholder="Nome" [formControl]="data.newTeamName" required>
         <mat-error *ngIf="data.newTeamName.invalid">{{getErrorMessageName(data.newTeamName)}}</mat-error>
     </mat-form-field>
+    <mat-form-field>
+        <mat-label>Timeout richiesta (min)</mat-label>
+        <input matInput type="number" placeholder="1" [formControl]="data.timeout" required>
+        <mat-error *ngIf="data.timeout.invalid">{{getErrorMessageTimeout(data.timeout)}}</mat-error>
+    </mat-form-field>
     <mat-divider></mat-divider>
     <h3>Membri</h3>
     <mat-list role="list">
