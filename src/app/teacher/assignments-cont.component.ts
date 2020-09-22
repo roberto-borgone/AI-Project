@@ -68,7 +68,7 @@ export class AssignmentsContComponent implements OnDestroy {
 
   openAssignmentDialog(error: string) {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = '30%';
+    dialogConfig.width = '35%';
     dialogConfig.height = '40%';
     dialogConfig.data = {dueDate: this.dueDate, file: this.file, error: error};
 

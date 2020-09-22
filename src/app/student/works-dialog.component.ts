@@ -82,14 +82,15 @@ export class WorksDialogComponent {
     var file = files[0];
     this.subscriptions.add(this.assignmentService.uploadWork(this.data.lastWorkData[0].consegnaId, file).subscribe(res => {
       this.subscriptions.add(this.assignmentService.getStudentWorksStudent(this.data.lastWorkData[0].consegnaId).subscribe(worksData => {
+        console.log(worksData)
         this.works = new MatTableDataSource(worksData);
         this.subscriptions.add(this.assignmentService.getStudentStatus(this.data.lastWorkData[0].consegnaId).subscribe(res => {
-          let lastWorkArray : LastWork[];
+          let lastWorkArray : LastWork[] = [];
           lastWorkArray.push(res);
+          console.log(lastWorkArray);
           this.lastWork = new MatTableDataSource(lastWorkArray);
         }))
-      }
-      ))
+      }))
     }));
   }
 
