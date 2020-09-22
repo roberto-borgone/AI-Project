@@ -130,7 +130,7 @@ export class CourseService implements OnDestroy{
   }
 
   deleteCourse(course: Course): Observable<boolean>{
-    return this.http.delete<boolean>(this.API_PATH + '/' + course.name, this.httpOptions)
+    return this.http.delete<boolean>(this.API_PATH + '/' + course.name + '/delete', this.httpOptions)
     .pipe(
       map(result => {
         return result}),
