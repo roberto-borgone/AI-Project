@@ -1,5 +1,11 @@
 <h2 mat-dialog-title>Crea nuovo corso</h2>
+
+<mat-divider></mat-divider>
+
 <div mat-dialog-content>
+
+  <h2 mat-dialog-title>Info</h2>
+
   <mat-form-field>
     <input matInput placeholder="Nome" [formControl]="data.courseName" required>
     <mat-error *ngIf="data.courseName.invalid">{{getErrorMessageName(data.courseName)}}</mat-error>
@@ -42,7 +48,33 @@
     <input matInput placeholder="Versione" [formControl]="data.courseVersionVM" required>
     <mat-error *ngIf="data.courseVersionVM.invalid">{{getErrorMessageVersionVM(data.courseVersionVM)}}</mat-error>
   </mat-form-field>
+
+  <h2 mat-dialog-title>Owners</h2>
+
+  <mat-form-field class="search" appearance="standard">
+    <mat-label>Aggiungi docente</mat-label>
+    <input #input spellcheck="false" id="addTeacher" type="search" placeholder="Id o nome del docente" matInput [matAutocomplete]="auto" (keyup)="filterTeachers()">
+    <mat-autocomplete (optionSelected)="getOption($event)" #auto="matAutocomplete" [displayWith]="teacherToString">
+      <mat-option *ngFor="let teacher of filteredTeachers" [value]="teacher">
+        {{teacher.name.toUpperCase() + ' ' + teacher.surname.toUpperCase() + ' (' + teacher.id + ')'}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <mat-list role="list">
+    <mat-list-item role="listitem">{{'Tu (' + this.auth.token.username + ')'}}</mat-list-item>
+    <mat-list-item role="listitem" *ngFor="let teacher of data.owners">
+      <mat-card>
+        <button mat-icon-button (click)="removeTeacher(teacher)">
+          <mat-icon>clear</mat-icon>
+        </button>
+          {{teacher.id.toUpperCase() + ' ' + teacher.surname.toUpperCase() + ' ' + teacher.name.toUpperCase()}}
+      </mat-card>
+    </mat-list-item>
+  </mat-list>
+
   <mat-error *ngIf="data.addCourseInvalid">La creazione del corso non è possibile con questi dati</mat-error>
+
 </div>
 <div mat-dialog-actions>
   <button mat-raised-button 

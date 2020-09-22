@@ -1,10 +1,11 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Course } from '../models/course.model';
-import { catchError, filter, map, switchMap } from 'rxjs/operators';
+import { catchError, concatMap, filter, map, switchMap } from 'rxjs/operators';
 import { Observable, throwError, of, Subscription } from 'rxjs'
 import { ModelVM } from '../models/modelVM.model';
 import { ActivatedRoute, Event, NavigationEnd, Router } from '@angular/router';
+import { Teacher } from '../models/teacher.model';
 
 @Injectable({
   providedIn: 'root'
@@ -50,11 +51,19 @@ export class CourseService implements OnDestroy{
       }))
   }
 
-  create(course: Course): Observable<Boolean>{
+  create(course: Course, owners: Teacher[]): Observable<Boolean>{
     return this.http.post<Course>(this.API_PATH, course, this.httpOptions)
     .pipe(
-      map(result => {
-        return true}),
+      concatMap(result => {
+
+        let teacherId = []
+        for(let teacher of owners){
+          teacherId.push(teacher.id)
+        }
+
+        return this.http.post<Object>(this.API_PATH + '/' + course.name + '/addDocentsToCourse', {docentIds: teacherId}, this.httpOptions)
+      }),
+      map(result => true),
       catchError( err => {
         console.log(err)
         return of(false)
@@ -173,6 +182,19 @@ export class CourseService implements OnDestroy{
 
   getCourse() : Observable<any> {
     return this.http.get<Course>(this.API_PATH + '/' + this.currentCourse.name)
+    .pipe(
+      catchError( err => {
+        console.error(err)
+        return throwError(err.message)
+      })
+    )
+  }
+
+  getTeachers(): Observable<Teacher[]>{
+
+    let PATH = 'https://localhost:4200/api/API/docents/all'
+
+    return this.http.get<Teacher[]>(PATH, this.httpOptions)
     .pipe(
       catchError( err => {
         console.error(err)

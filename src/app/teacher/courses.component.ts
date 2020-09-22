@@ -26,10 +26,14 @@ export class CoursesComponent {
   @Output()
   modifyCourseEvent: EventEmitter<Course>
 
+  @Output()
+  addCourseEvent: EventEmitter<void>
+
   constructor(private courseService: CourseService) {
     this.toggleCourseEvent = new EventEmitter()
     this.deleteCourseEvent = new EventEmitter()
     this.modifyCourseEvent = new EventEmitter()
+    this.addCourseEvent = new EventEmitter()
    }
 
   setCurrentCourse(course: Course){
@@ -46,6 +50,10 @@ export class CoursesComponent {
 
   modifyCourse(course: Course){
     this.modifyCourseEvent.emit(course)
+  }
+
+  addCourse(){
+    this.addCourseEvent.emit()
   }
 
 }

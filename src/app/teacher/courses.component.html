@@ -26,11 +26,7 @@
             </button>
         </mat-menu>
     </div>
-    <a mat-list-item
-    routerLink="/teacher"
-    [queryParams]="{addCourse: true}"
-    routerLinkActive="active"
-    >
+    <a mat-list-item (click)="addCourse()">
         <mat-icon class="addCourse">add_box</mat-icon>
         <span>Crea nuovo corso</span>
     </a>

@@ -67,6 +67,7 @@ import { SettingsVmDialogComponent } from './student/settings-vm-dialog.componen
 import { WorksDialogComponent } from './student/works-dialog.component';
 import {OverlayModule} from '@angular/cdk/overlay';
 import {PortalModule} from '@angular/cdk/portal';
+import {MatCardModule} from '@angular/material/card';
 import { WorkDialogComponent } from './teacher/work-dialog.component';
 import { HistoryDialogComponent } from './teacher/history-dialog.component';
 import { StudentAssignmentContComponent } from './student/student-assignment-cont.component';
@@ -124,7 +125,7 @@ import { StudentAssignmentComponent } from './student/student-assignment.compone
     MatSortModule, MatPaginatorModule, AppRoutingModule, HttpClientModule,
     MatDialogModule, FormsModule, ReactiveFormsModule, MatGridListModule, MatMenuModule, MatSlideToggleModule, MatFormFieldModule,
     MatSelectModule, MatDatepickerModule, MatNativeDateModule, MatDividerModule, MatTooltipModule, MatDatepickerModule, 
-    MatNativeDateModule, MatDividerModule, OverlayModule, PortalModule,
+    MatNativeDateModule, MatDividerModule, OverlayModule, PortalModule, MatCardModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass:JwtAuthInterceptor, multi: true }, StudentService, AuthService],
   bootstrap: [AppComponent]

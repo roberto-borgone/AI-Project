@@ -8,6 +8,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { AddCourseDialogComponent } from './add-course-dialog.component';
 import { ModifyCourseDialogComponent } from './modify-course-dialog.component';
 import { AuthService } from '../auth/auth.service';
+import { Teacher } from '../models/teacher.model';
 
 @Component({
   selector: 'app-courses-cont',
@@ -26,6 +27,7 @@ export class CoursesContComponent implements OnDestroy {
   courseEnabled: FormControl = new FormControl(true)
   courseNameVM: FormControl = new FormControl('', [Validators.required])
   courseVersionVM: FormControl = new FormControl('', [Validators.required])
+  owners: Teacher[] = []
   addCourseInvalid: boolean = false
 
   mcourseAcronimo: FormControl = new FormControl('', [Validators.required])
@@ -34,11 +36,6 @@ export class CoursesContComponent implements OnDestroy {
 
   constructor(private courseService: CourseService, private router: Router, private route: ActivatedRoute, private dialog: MatDialog, private auth: AuthService) { 
     this.getCourses()
-    this.subscriptions.add(this.route.queryParams.subscribe(params => {
-      if(params['addCourse'] === 'true'){
-        this.openDialogAddCourse()
-      }
-    }))
   }
 
   getCourses(){
@@ -56,14 +53,14 @@ export class CoursesContComponent implements OnDestroy {
   openDialogAddCourse(): void {
     let dialogRef = this.dialog.open(AddCourseDialogComponent, {
       width: '400px',
-      data: {courseName: this.courseName, courseAcronimo: this.courseAcronimo, courseMin: this.courseMin, courseMax: this.courseMax, courseEnabled: this.courseEnabled, courseNameVM: this.courseNameVM, courseVersionVM: this.courseVersionVM, addCourseInvalid: this.addCourseInvalid}
+      data: {courseName: this.courseName, courseAcronimo: this.courseAcronimo, courseMin: this.courseMin, courseMax: this.courseMax, courseEnabled: this.courseEnabled, courseNameVM: this.courseNameVM, courseVersionVM: this.courseVersionVM, addCourseInvalid: this.addCourseInvalid, owners: this.owners}
     });
 
     this.subscriptions.add(dialogRef.afterClosed().subscribe(result => {
       if(result && result.courseName.valid && result.courseAcronimo.valid && result.courseMin.valid && result.courseMax.valid && result.courseNameVM.valid && result.courseVersionVM.valid && result.courseEnabled.valid){
 
         // nested observables.. i could have found a more elegant solution to this
-        this.subscriptions.add(this.courseService.create(new Course(result.courseName.value, result.courseAcronimo.value, result.courseMin.value, result.courseMax.value, result.courseEnabled.value))
+        this.subscriptions.add(this.courseService.create(new Course(result.courseName.value, result.courseAcronimo.value, result.courseMin.value, result.courseMax.value, result.courseEnabled.value), result.owners)
         .subscribe(authResult => {
             
           if(authResult === false){
@@ -80,7 +77,7 @@ export class CoursesContComponent implements OnDestroy {
             this.courseMin.reset()
             this.courseMax.reset()
             this.courseEnabled.reset()
-            this.router.navigate(['/teacher'])
+            this.owners = []
             this.getCourses()
           }
         }))
@@ -92,7 +89,7 @@ export class CoursesContComponent implements OnDestroy {
         this.courseMin.reset()
         this.courseMax.reset()
         this.courseEnabled.reset()
-        this.router.navigate(['/teacher'])
+        this.owners = []
       }
     }));
   }
