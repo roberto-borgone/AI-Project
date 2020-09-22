@@ -5,6 +5,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export interface DialogData {
   dueDate: FormControl;
   file: any;
+  error: string;
 }
 
 @Component({
@@ -15,10 +16,13 @@ export interface DialogData {
 export class NewAssignmentDialogComponent implements OnInit {
 
   testo = "Carica consegna"
-  isValid = true
+  isValid: boolean;
+  isDisabled: boolean;
 
   constructor(public dialogRef: MatDialogRef<NewAssignmentDialogComponent>, 
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+      this.isValid = true;
+      this.isDisabled = true;
    }
 
   ngOnInit(): void {
@@ -38,7 +42,8 @@ export class NewAssignmentDialogComponent implements OnInit {
     var files = event.target.files; // FileList object
     var file = files[0];
     this.data.file = file;
-    this.testo = "Consegna Caricata"
+    this.testo = "Consegna caricata"
     this.isValid = false
+    this.isDisabled = false
   }
 }

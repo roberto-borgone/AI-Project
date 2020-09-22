@@ -1,28 +1,13 @@
 
-<div  class = "center">
-<h2 class = "h2center" mat-dialog-title>Crea nuova consegna</h2>
-
-</div>  
-
-
- <mat-grid-list cols="2" rowHeight="1:0.50">
-   
-
-<mat-grid-tile>
+<h2 class=".h2center" mat-dialog-title>Crea nuova consegna</h2>
+<br>
+<mat-form-field style="margin-right: 20px;" color="primary" appearance="fill">
+    <mat-label>Data di scadenza</mat-label>
+    <input matInput type="datetime-local" [formControl]="data.dueDate">
+</mat-form-field>
 <button [disabled]="!isValid" class="button" mat-button color="primary" (click)="onClick()"><mat-icon>file_upload</mat-icon> {{testo}}</button>
 <input type="file" id="imageUpload" accept="image/*"(change)="handleImageSelect($event)" style="display:none;">
+<p class="error">{{data.error}}</p>
 <br>
-</mat-grid-tile>
-    <mat-grid-tile>
-    <mat-form-field color="primary" appearance="fill">
-        <mat-label>Data di scadenza</mat-label>
-        <input matInput type="datetime-local" [formControl]="data.dueDate">
-    </mat-form-field>
-    </mat-grid-tile>
-</mat-grid-list>
-
-
-<div>
-<button class = "left" mat-raised-button color="primary" [mat-dialog-close]="data" >Crea</button>
-<button class = "right" mat-raised-button (click)="onNoClick()">Annulla</button>
-</div>
+<button mat-raised-button color="primary" [mat-dialog-close]="data" [disabled]="isDisabled" >Crea</button>
+<button mat-raised-button (click)="onNoClick()">Annulla</button>

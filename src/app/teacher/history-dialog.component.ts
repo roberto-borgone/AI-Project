@@ -107,7 +107,8 @@ export class HistoryDialogComponent {
             this.isDisabledSetVote = true;
             this.isDisabledLode = true;
             this.isDisabledFileUpload = true;
-            this.assignmentService.getStudentHistory(this.data.lastWork.consegnaId, this.data.lastWork.studentId).subscribe(history => this.dataSource = new MatTableDataSource(history))
+            //this.assignmentService.getStudentHistory(this.data.lastWork.consegnaId, this.data.lastWork.studentId).subscribe(history => this.dataSource = new MatTableDataSource(history))
+            this.dialogHistory.close();
           }
         }))
       }

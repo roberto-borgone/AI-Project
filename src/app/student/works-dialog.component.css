@@ -12,3 +12,9 @@ th, td {
 button {
     margin-top: 10px;
 }
+
+.error {
+    color: red;
+    margin-top: 20px;
+    margin-left: 10px;
+}
