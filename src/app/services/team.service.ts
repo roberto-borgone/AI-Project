@@ -7,6 +7,7 @@ import { AuthService } from '../auth/auth.service';
 import { Team } from '../models/team.model';
 import { Student } from '../models/student.model';
 import { Proposal } from '../models/proposal.model';
+import { Resources } from '../models/resources.model';
 
 @Injectable({
   providedIn: 'root'
@@ -203,5 +204,15 @@ export class TeamService {
 
   getLimitVM(idTeam: number){
     
+  }
+
+  getResources(team: Team): Observable<Resources>{
+    return this.http.get<Resources>(this.API_PATH + '/' + team.id + '/teamResources', this.httpOptions)
+    .pipe(
+      catchError( err => {
+        console.error(err)
+        return throwError(err.message)
+      })
+    )
   }
 }

@@ -13,6 +13,7 @@ import { OwnerDialogComponent } from './owner-dialog.component';
 import { Team } from '../models/team.model';
 import { VM } from '../models/vm.model';
 import { Student } from '../models/student.model';
+import { Resources } from '../models/resources.model';
 
 @Component({
   selector: 'app-vms-cont',
@@ -23,10 +24,13 @@ export class VmsContComponent implements OnDestroy {
 
   public dialogInfo: MatDialogRef<DialogInfo>
 
-
-  subsciptions: Subscription = new Subscription()
   teams: Team[]
   vms: VM[]
+  resources: Map<number, Resources> = new Map()
+
+  interval: NodeJS.Timeout
+  intervalVM: NodeJS.Timeout
+
   modelVM: ModelVM
   course: Course
 
@@ -50,12 +54,27 @@ export class VmsContComponent implements OnDestroy {
         this.getModelVM()
         this.getCourse()
         this.getVM()
+        this.intervalVM = setInterval(() => {
+          this.getVM()
+        }, 4000)
       }
     }))
   }
 
   getTeams(){
-    this.subscriptions.add(this.teamService.query().subscribe(result => {this.teams = result}))
+    this.subscriptions.add(this.teamService.query().subscribe(result => {
+      this.teams = result
+
+      this.interval = setInterval(() => {
+        this.getResources(this.teams)
+      }, 10000)
+    }))
+  }
+
+  getResources(teams: Team[]){
+    for(let team of teams){
+      this.subscriptions.add(this.teamService.getResources(team).subscribe(result => this.resources[team.id] = result))
+    }
   }
 
   getModelVM() {
@@ -185,6 +204,8 @@ export class VmsContComponent implements OnDestroy {
   }
 
   ngOnDestroy(){
+    clearInterval(this.interval)
+    clearInterval(this.intervalVM)
     this.subscriptions.unsubscribe()
   }
 

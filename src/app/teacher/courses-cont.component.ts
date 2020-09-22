@@ -34,8 +34,13 @@ export class CoursesContComponent implements OnDestroy {
   mcourseMin: FormControl = new FormControl('', [Validators.min(1)])
   mcourseMax: FormControl = new FormControl('', [Validators.min(1)])
 
+  interval: NodeJS.Timeout
+
   constructor(private courseService: CourseService, private router: Router, private route: ActivatedRoute, private dialog: MatDialog, private auth: AuthService) { 
     this.getCourses()
+    this.interval = setInterval(() => {
+      this.getCourses()
+    }, 4000)
   }
 
   getCourses(){
@@ -112,6 +117,7 @@ export class CoursesContComponent implements OnDestroy {
 
 
   ngOnDestroy(): void {
+    clearInterval(this.interval)
     this.subscriptions.unsubscribe()
   }
 

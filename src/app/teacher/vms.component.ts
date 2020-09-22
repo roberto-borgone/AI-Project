@@ -11,6 +11,7 @@ import { Course } from '../models/course.model';
 import { Team } from '../models/team.model';
 import { Student } from '../models/student.model';
 import { VM } from '../models/vm.model';
+import { Resources } from '../models/resources.model';
 
 @Component({
   selector: 'app-vms',
@@ -60,6 +61,8 @@ export class VmsComponent {
   teams: MatTableDataSource<Team>
   vms: MatTableDataSource<VM>
 
+  resources: Map<number, Resources> = new Map()
+
   modelVM: ModelVM
 
   course: Course
@@ -81,6 +84,11 @@ export class VmsComponent {
   @Input()
   set _modelVM(modelVM: ModelVM) {
     this.modelVM = modelVM
+  }
+
+  @Input()
+  set _resources(resources: Map<number, Resources>){
+    this.resources = resources
   }
 
   @Input()

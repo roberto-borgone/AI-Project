@@ -62,7 +62,7 @@
       </mat-grid-tile>
 
     </mat-grid-list>
-    <h3>Gruppi</h3>
+    <h3>Vincoli gruppi</h3>
     <div class="table-container">
         <table mat-table [dataSource]="teams" matSort #sort1="matSort">
           
@@ -77,28 +77,28 @@
           </ng-container>
     
           <ng-container matColumnDef="maxRAM">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> max Qnt. RAM </th>
-            <td mat-cell *matCellDef="let element"> {{element.maxRAM}} </td>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> RAM <span class='realtime'>(RT)</span></th>
+            <td mat-cell *matCellDef="let element"> {{element.maxRAM}}<span class='realtime'>{{(this.resources[element.id]?('(' + this.resources[element.id].ram + ')'):'')}}</span></td>
           </ng-container>
     
           <ng-container matColumnDef="maxDisk">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> max Qnt. Disk </th>
-            <td mat-cell *matCellDef="let element"> {{element.maxDisk}} </td>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Disk <span class='realtime'>(RT)</span></th>
+            <td mat-cell *matCellDef="let element"> {{element.maxDisk}}<span class='realtime'>{{(this.resources[element.id]?('(' + this.resources[element.id].disk + ')'):'')}}</span></td>
           </ng-container>
     
           <ng-container matColumnDef="maxVCPU">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> max Qnt. VCPU </th>
-            <td mat-cell *matCellDef="let element"> {{element.maxVCPU}} </td>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> VCPU <span class='realtime'>(RT)</span></th>
+            <td mat-cell *matCellDef="let element"> {{element.maxVCPU}}<span class='realtime'>{{(this.resources[element.id]?('(' + this.resources[element.id].vcpu + ')'):'')}}</span></td>
           </ng-container>
     
           <ng-container matColumnDef="maxActiveVM">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> max num. VM Attive </th>
-            <td mat-cell *matCellDef="let element"> {{element.maxActiveVM}} </td>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> VM Attive <span class='realtime'>(RT)</span></th>
+            <td mat-cell *matCellDef="let element"> {{element.maxActiveVM}}<span class='realtime'>{{(this.resources[element.id]?('(' + this.resources[element.id].n_active + ')'):'')}}</span></td>
           </ng-container>
     
           <ng-container matColumnDef="maxTotVM">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> max num. VM Totali </th>
-            <td mat-cell *matCellDef="let element"> {{element.maxTotVM}} </td>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> VM Totali <span class='realtime'>(RT)</span></th>
+            <td mat-cell *matCellDef="let element"> {{element.maxTotVM}}<span class='realtime'>{{(this.resources[element.id]?('(' + this.resources[element.id].n_tot + ')'):'')}}</span></td>
           </ng-container>
 
           <ng-container matColumnDef="buttons">

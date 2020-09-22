@@ -32,6 +32,8 @@ export class StudentVmsContComponent implements OnDestroy{
   invalid: boolean
   message: string
 
+  intervalVM: NodeJS.Timeout
+
 
   owners: Student[] = []
 
@@ -45,6 +47,9 @@ export class StudentVmsContComponent implements OnDestroy{
         this.getCourse()
         this.getModelVM()
         this.getVM()
+        this.intervalVM = setInterval(() => {
+          this.getVM()
+        }, 4000)
       }
     }))
   }
@@ -204,6 +209,7 @@ export class StudentVmsContComponent implements OnDestroy{
   }
 
   ngOnDestroy(){
+    clearInterval(this.intervalVM)
     this.subscriptions.unsubscribe()
   }
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { from, Observable, of, throwError } from 'rxjs';
-import { catchError, concatMap, map } from 'rxjs/operators';
+import { catchError, concatMap, map, toArray } from 'rxjs/operators';
 import { CourseService } from './course.service';
 import { AuthService } from '../auth/auth.service';
 import { VM } from '../models/vm.model';
@@ -50,13 +50,16 @@ export class VmService {
       concatMap(result => {
         if(result){
           return this.http.get<VM[]>(PATH + '/' + this.authService.token.username + '/teams/' + this.authService.token.group.id + '/getVMS', this.httpOptions).pipe(
-            map(vms => {
-              for(let vm of vms){
-                vm.owners = []
-                this.http.get<Student[]>(this.API_PATH + '/' + vm.id + '/owners').subscribe(owners => {vm.owners = owners})
-              }
-              return vms
-            })
+            concatMap(vms => from(vms)),
+            concatMap(vm => {
+              return this.http.get<Student[]>(this.API_PATH + '/' + vm.id + '/owners').pipe(
+                map(owners => {
+                  vm.owners = owners
+                  return vm
+                }),
+              )
+            }),
+            toArray()
           )
         }else{
           let resultQuery: VM[] = []
