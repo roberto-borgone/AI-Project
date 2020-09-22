@@ -4,15 +4,11 @@
 
 <div *ngIf="this.auth.token.group" class="container">
 
-<mat-grid-list cols="2" rowHeight="1:0.5">
+  <div class="info-cont">
       
+    <div>
 
-    
-
-    <mat-grid-tile>
-    <div class = "text-inside-grid">
-
-    <h3>Vincoli</h3>
+      <h3>Vincoli</h3>
       
       <p *ngIf="this.auth.token.group && this.auth.token.group.maxRAM == -1" >Max quantità di RAM: Non ancora settata</p>
       <p *ngIf="this.auth.token.group && this.auth.token.group.maxRAM != -1" >Max quantità di RAM: {{this.auth.token.group.maxRAM}}GB</p>
@@ -31,11 +27,10 @@
     
       <p class="error" *ngIf="course.maxActiveVM == -1 || course.maxTotVM == -1 || course.maxRAM == -1 || course.maxDisk == -1 || course.maxVirtualCPU == -1">Non è possibile creare VM prima che il docente abbia settato i vincoli sulle risorse da utilizzare</p>
     </div>
-    </mat-grid-tile>
 
-    <mat-grid-tile>
+    <span class="spacer"></span>
 
-    <div class = "text-inside-grid">
+    <div class="right">
       <h3>Virtual Machines</h3>
       <p *ngIf="modelVM.name != ''">Sistema Operativo: {{modelVM.name}}</p>
       <p *ngIf="modelVM.name == ''">Sistema Operativo: Non ancora settato</p>
@@ -43,13 +38,13 @@
       <p *ngIf="modelVM.version != ''">Versione: {{modelVM.version}}</p>
       <p *ngIf="modelVM.version == ''">Versione: Non ancora settata</p>
     </div>
-    </mat-grid-tile>
 
-    </mat-grid-list>
-    <div *ngIf="!(course.maxActiveVM == -1 || course.maxTotVM == -1 || course.maxRAM == -1 || course.maxDisk == -1 || course.maxVirtualCPU == -1)">
+  </div>
+
+  <div *ngIf="!(course.maxActiveVM == -1 || course.maxTotVM == -1 || course.maxRAM == -1 || course.maxDisk == -1 || course.maxVirtualCPU == -1)">
+    
     <button style="margin-bottom: 20px" mat-raised-button color="primary" (click)="newVM()">Crea VM</button>
     
-  
     <h3>VM</h3>
     <div class="table-container">
         <table mat-table [dataSource]="vms" matSort>
@@ -135,7 +130,7 @@
                    [pageSizeOptions]="[5, 10, 25, 100]"
                    showFirstLastButtons="true">
     </mat-paginator>
-    </div>
+  </div>
     
 </div>
 

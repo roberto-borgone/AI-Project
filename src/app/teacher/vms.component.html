@@ -1,18 +1,18 @@
 <div class="container">
-    <mat-grid-list cols="2" rowHeight="1:0.50">
+    <div class="info-cont">
       
 
-      <mat-grid-tile>
-        <div class = "text-inside-grid">
-        <div class = "divinfobutton">
-          <button class="infobutton" (mouseenter) = "enter()" (mouseleave) = "leave()" mat-icon-button aria-label="Scopri di più">
-            <mat-icon>info</mat-icon>
-          </button>
-
-        </div>
+        <div class>
         
-          <h2>Vincoli Generali Per Gruppo</h2> 
-
+          <div class="info-cont">
+            <h2>Vincoli Generali Per Gruppo</h2>
+            <span>
+              <button (mouseenter) = "enter()" (mouseleave) = "leave()" mat-icon-button aria-label="Scopri di più">
+                <mat-icon>info</mat-icon>
+              </button>
+            </span>
+          </div>
+          
           <!-- Template to load into an overlay. -->
           <ng-template cdk-portal>
           <div class = 'info'>
@@ -23,11 +23,6 @@
             </ul>
           </div>
           </ng-template>
-
-
-        
-          <p class="error" *ngIf="course.maxActiveVM == -1 || course.maxTotVM == -1 || course.maxRAM == -1 || course.maxDisk == -1 || course.maxVirtualCPU == -1">Modificare queste informazioni per permettere agli studenti di creare delle VM</p>
-          
           
           <p *ngIf="course.maxRAM == -1" >Quantità massima di RAM utilizzabile: Non ancora settata</p>
           <p *ngIf="course.maxRAM != -1" >Quantità massima di RAM utilizzabile: {{course.maxRAM}}GB</p>
@@ -45,13 +40,14 @@
           <p *ngIf="course.maxTotVM == -1">Max numero di VM creabili: Non ancora settata</p>
           <p *ngIf="course.maxTotVM != -1">Max numero di VM creabili: {{course.maxTotVM}}</p>
 
+          <p class="error" *ngIf="course.maxActiveVM == -1 || course.maxTotVM == -1 || course.maxRAM == -1 || course.maxDisk == -1 || course.maxVirtualCPU == -1">Modificare queste informazioni per permettere agli studenti di creare delle VM</p>
           
           <button style="margin-bottom: 20px" mat-raised-button color="primary" (click)="updateCourseVM()">Modifica vincoli</button>
         </div>
-      </mat-grid-tile>
-
-      <mat-grid-tile> 
-        <div class = "text-inside-grid">
+        
+        <span class="spacer"></span>
+        
+        <div class = "right">
           <h2>Virtual Machines</h2>
           <p *ngIf="modelVM.name != ''">Sistema Operativo: {{modelVM.name}}</p>
           <p *ngIf="modelVM.name == ''">Sistema Operativo: Non ancora settato</p>
@@ -59,9 +55,8 @@
           <p *ngIf="modelVM.version != ''">Versione: {{modelVM.version}}</p>
           <p *ngIf="modelVM.version == ''">Versione: Non ancora settata</p>
         </div>
-      </mat-grid-tile>
 
-    </mat-grid-list>
+      </div>
     <h3>Vincoli gruppi</h3>
     <div class="table-container">
         <table mat-table [dataSource]="teams" matSort #sort1="matSort">

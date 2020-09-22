@@ -35,10 +35,15 @@ th, td {
     color: #ff4081;
 }
 
-.text-inside-grid {
-    width: 100%;
-    left: 5px;
-    top: 5px;
-  }
+.info-cont{
+    display: flex;
+    flex-direction: row;
+}
 
-  .infobutton {float: left}
+.right{
+    padding-right: 64px;
+}
+
+.spacer{
+    flex: 1 1 auto;
+}

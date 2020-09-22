@@ -36,26 +36,33 @@ th, td {
     color: #ff4081;
 }
 
-.text-inside-grid {
-    width: 100%;
-    left: 5px;
-    top: 5px;
-  }
-
-  .infobutton {float: left}
-
-  .info{
+.info{
     background-color: whitesmoke;
     border-radius: 5px;
     box-shadow: 4px 4px 32px -17px rgba(0,0,0,0.7);
-    margin: auto;
     width: 50%;
-
+    margin: auto;
+    padding-right: 16px;
+    transform: translateX(32%);
 }
- .lista{
-     width: 80%;
- }
 
- .realtime{
-     color: #ff4081;
- }
+.lista{
+     width: 80%;
+}
+
+.info-cont{
+    display: flex;
+    flex-direction: row;
+}
+
+.right{
+    padding-right: 64px;
+}
+
+.spacer{
+    flex: 1 1 auto;
+}
+
+.realtime{
+    color: #ff4081;
+}
