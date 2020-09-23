@@ -65,9 +65,11 @@ export class VmsContComponent implements OnDestroy {
     this.subscriptions.add(this.teamService.query().subscribe(result => {
       this.teams = result
       this.getResources(this.teams)
-      this.interval = setInterval(() => {
-        this.getResources(this.teams)
-      }, 10000)
+      if(!this.interval){
+        this.interval = setInterval(() => {
+          this.getResources(this.teams)
+        }, 10000)
+      }
     }))
   }
 
@@ -168,6 +170,7 @@ export class VmsContComponent implements OnDestroy {
             this.maxVCPU.reset()
             this.maxActiveVM.reset()
             this.getCourse()
+            this.getTeams()
           }
         }))
       }else if(!result){
