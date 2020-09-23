@@ -49,7 +49,7 @@ export class StudentsContComponent implements OnDestroy{
     console.log("Sono in uploadFile in students-cont");
     this.subscriptions.add(this.courseService.uploadFile(file).subscribe(uploadResult => {
       this.csvResult = uploadResult;
-      console.log(this.csvResult);
+      //console.log(this.csvResult);
       this.openDialog();
     }));
   }
@@ -64,7 +64,10 @@ export class StudentsContComponent implements OnDestroy{
 
     const dialogRef = this.dialog.open(CsvUploadDialogComponent, dialogConfig);
 
-    //this.subscriptions.add(dialogRef.afterClosed().subscribe());
+    this.subscriptions.add(dialogRef.afterClosed().subscribe(res => {
+      this.getStudents()
+      this.getEnrolledStudents()
+    }));
 }
 
   ngOnDestroy(){
