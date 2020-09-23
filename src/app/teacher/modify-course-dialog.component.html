@@ -20,7 +20,7 @@
   <button mat-raised-button 
           color="primary" 
           [mat-dialog-close]="data" 
-          [disabled]="data.mcourseAcronimo.invalid || data.mcourseMin.invalid || data.mcourseMax.invalid">
+          [disabled]="data.mcourseAcronimo.invalid || data.mcourseMin.invalid || data.mcourseMax.invalid || data.mcourseMin.value > data.mcourseMax.value">
           Modifica
   </button>
   <button mat-raised-button (click)="onNoClick()">Annulla</button>

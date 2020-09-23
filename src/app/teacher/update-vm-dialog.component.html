@@ -31,7 +31,7 @@
   <button mat-raised-button 
           color="primary" 
           [mat-dialog-close]="data" 
-          [disabled]="data.maxRAM.invalid || data.maxDisk.invalid || data.maxVCPU.invalid || data.maxTotVM.invalid || data.maxActiveVM.invalid">
+          [disabled]="data.maxRAM.invalid || data.maxDisk.invalid || data.maxVCPU.invalid || data.maxTotVM.invalid || data.maxActiveVM.invalid || data.maxTotVM.value < data.maxActiveVM.value">
           Modifica
   </button>
   <button mat-raised-button (click)="onNoClick()">Annulla</button>
