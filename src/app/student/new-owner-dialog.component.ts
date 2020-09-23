@@ -63,7 +63,7 @@ export class NewOwnerDialogComponent {
     filter = filter.toUpperCase()
     this.filteredStudents = this.students.filter(s => 
       (s.name.toUpperCase().includes(filter) || 
-      s.name.toUpperCase().includes(filter) || 
+      s.surname.toUpperCase().includes(filter) || 
       s.id.startsWith(filter)))
   }
 

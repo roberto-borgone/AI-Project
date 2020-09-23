@@ -118,14 +118,15 @@ export class VmService {
     )
   }
 
-  startVM(vmID: number): Observable<any> {
+  startVM(vmID: number): Observable<boolean> {
     console.log(vmID)
 
     return this.http.get(this.API_PATH + '/' +vmID + '/changeStatus/', this.httpOptions)
     .pipe(
+      map(result => true),
       catchError( err => {
         console.error(err)
-        return throwError(err.message)
+        return of(false)
       })
     )
 
@@ -164,7 +165,7 @@ export class VmService {
 
     let PATH = 'https://localhost:4200/api/API/vms';
 
-    return this.http.get<string>(PATH + '/' + vm.id + '/getVM')
+    return this.http.get(PATH + '/' + vm.id + '/getVM', {responseType: 'text'})
     .pipe(
       catchError( err => {
         console.error(err)

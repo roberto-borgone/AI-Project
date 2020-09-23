@@ -100,7 +100,7 @@ export class AddCourseDialogComponent {
     filter = filter.toUpperCase()
     this.filteredTeachers = this.teachers.filter(s => 
       (s.name.toUpperCase().includes(filter) || 
-      s.name.toUpperCase().includes(filter) || 
+      s.surname.toUpperCase().includes(filter) || 
       s.id.startsWith(filter)))
   }
 

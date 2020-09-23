@@ -9,8 +9,17 @@ export interface DialogData {
   maxVCPU: FormControl;
   maxTotVM: FormControl;
   maxActiveVM: FormControl;
-  updateVMInvalid: boolean; 
+  updateVMInvalid: boolean;
+  placeholders: Placeholders
   message: String;
+}
+
+export interface Placeholders {
+  maxRAM: number
+  maxDisk: number
+  maxVCPU: number
+  maxTotVM: number
+  maxActiveVM: number
 }
 
 @Component({
