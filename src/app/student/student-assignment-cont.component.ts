@@ -3,12 +3,10 @@ import { FormControl, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { last } from 'rxjs/operators';
 import { ContentDialogComponent } from '../content-dialog.component';
 import { Assignment } from '../models/assignment.model';
 import { LastWork } from '../models/last-work.model';
 import { AssignmentService } from '../services/assignment.service';
-import { CourseService } from '../services/course.service';
 import { WorksDialogComponent } from './works-dialog.component';
 
 @Component({

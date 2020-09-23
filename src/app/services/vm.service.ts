@@ -171,7 +171,5 @@ export class VmService {
         console.error(err)
         return throwError(err.message)
       }))
-
-
   }
 }

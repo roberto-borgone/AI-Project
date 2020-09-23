@@ -1,7 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ContentDialogComponent } from '../content-dialog.component';
 
 @Component({
   selector: 'app-open-vm-dialog',
@@ -12,7 +11,7 @@ export class OpenVmDialogComponent implements OnInit {
 
   imageSource: any;
 
-  constructor(private sanitizer: DomSanitizer, public dialogRef: MatDialogRef<ContentDialogComponent>,
+  constructor(private sanitizer: DomSanitizer, public dialogRef: MatDialogRef<OpenVmDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {}
 
   ngOnInit () {

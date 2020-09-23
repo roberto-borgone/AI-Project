@@ -73,8 +73,8 @@ import { HistoryDialogComponent } from './teacher/history-dialog.component';
 import { StudentAssignmentContComponent } from './student/student-assignment-cont.component';
 import { StudentAssignmentComponent } from './student/student-assignment.component';
 import { NewOwnerDialogComponent } from './student/new-owner-dialog.component';
-import { OpenVmDialogComponent } from './student/open-vm-dialog.component';
 import { ErrorMaxActiveVmComponent } from './student/error-max-active-vm.component';
+import { OpenVmDialogComponent } from './open-vm-dialog.component';
 
 
 @NgModule({
