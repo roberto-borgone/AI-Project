@@ -14,6 +14,7 @@ import { SettingsVmDialogComponent } from './settings-vm-dialog.component';
 import { TeamService } from '../services/team.service';
 import { NewOwnerDialogComponent } from './new-owner-dialog.component';
 import { OpenVmDialogComponent } from './open-vm-dialog.component';
+import { ErrorMaxActiveVmComponent } from './error-max-active-vm.component';
 
 @Component({
   selector: 'app-student-vms-cont',
@@ -162,14 +163,16 @@ export class StudentVmsContComponent implements OnDestroy{
   }
 
   startVM(vm: VM){
-    console.log(vm.id)
 
     this.vmService.startVM(vm.id).subscribe(result => {
-      this.getModelVM()
-      this.getVM()
-      this.getCourse()
-    }
-    )
+      if(result){
+        this.getVM()
+      }else{
+        let dialogRef = this.dialog.open(ErrorMaxActiveVmComponent, {
+          width: '400px',
+        });
+      }
+    })
   }
 
   stopVM(vm: VM){

@@ -74,6 +74,7 @@ import { StudentAssignmentContComponent } from './student/student-assignment-con
 import { StudentAssignmentComponent } from './student/student-assignment.component';
 import { NewOwnerDialogComponent } from './student/new-owner-dialog.component';
 import { OpenVmDialogComponent } from './student/open-vm-dialog.component';
+import { ErrorMaxActiveVmComponent } from './student/error-max-active-vm.component';
 
 
 @NgModule({
@@ -116,6 +117,7 @@ import { OpenVmDialogComponent } from './student/open-vm-dialog.component';
     StudentAssignmentComponent,
     NewOwnerDialogComponent,
     OpenVmDialogComponent,
+    ErrorMaxActiveVmComponent,
   ],
   entryComponents: [
     LoginDialogComponent
