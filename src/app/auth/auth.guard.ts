@@ -34,7 +34,7 @@ export class AuthGuard implements CanActivate {
     }
 
     checkRole(url: string): boolean{
-      if((url.includes('teacher') && this.auth.token.role == 'teacher') || (url.includes('student') && this.auth.token.role == 'student'))
+      if((url.includes('teacher') && this.auth.token.role == 'teacher') || (url.includes('student') && !url.includes('students') && this.auth.token.role == 'student'))
         return true
       else{
         this.router.navigate(['/' + this.auth.token.role]);
