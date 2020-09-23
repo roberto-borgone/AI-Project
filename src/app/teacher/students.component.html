@@ -19,8 +19,14 @@
     </p>
 
     <button mat-button (click)='deleteSelected()'>Cancella Selezionati</button>
-
+    <mat-card *ngIf="enrolledStudents.paginator && isPageSelected()">
+      {{'Tutti i ' + this.enrolledStudents.paginator.pageSize + ' studenti di questa pagina sono stati selezionati.'}}
+      <button mat-button (click)="isAllSelected()?deselectAll():selectAll()">
+        {{isAllSelected()?'Annulla selezione':('Seleziona tutti gli studenti del corso (' + this.enrolledStudents.data.length + ' elementi)')}}
+      </button>
+    </mat-card>
     <div class="table-container">
+      
       <table mat-table [dataSource]="enrolledStudents" matSort>
 
         <ng-container matColumnDef="select">

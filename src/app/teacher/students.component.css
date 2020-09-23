@@ -28,3 +28,8 @@ th, td {
     max-height: calc(100vh - 323px);
     min-height: 100px;
 }
+
+.mat-card{
+    padding: 16px;
+    margin: 8px;
+}

@@ -89,24 +89,46 @@ export class StudentsComponent {
     return numSelected === numRows;
   }
 
+  selectAll(){
+    this.enrolledStudents.data.forEach(row => this.selection.select(row));
+  }
+
+  deselectAll(){
+    this.enrolledStudents.data.forEach(row => this.selection.deselect(row));
+  }
+
+  isPageSelected(){
+    return this.getPageData().every((row) => this.selection.isSelected(row));
+  }
+
+  getPageData(){
+    return this.enrolledStudents._pageData(this.enrolledStudents._orderData(this.enrolledStudents.filteredData));
+  }
+
   // master toggle handling
   masterToggle() {
-    // clear all if already all selected otherwise select all
-    this.isAllSelected() ?
-        this.selection.clear() :
-        this.enrolledStudents.data.forEach(row => this.selection.select(row));
+    if(this.isAllSelected()){
+      this.selection.clear()
+    }
+    else if(this.isPageSelected()){
+      // clear page
+      this.selection.deselect(...this.getPageData())
+    }else{
+      this.selection.select(...this.getPageData())
+    }
+        
   }
 
   // condition for master checked
   isMasterChecked(): boolean {
     // master is checked if all the students are checked
-    return this.selection.hasValue() && this.isAllSelected()
+    return this.selection.hasValue() && this.isPageSelected()
   }
 
   // condition for master indeterminate
   isMasterIndeterminate(): boolean {
     // if some students are selected but not all master is indeterminate
-    return this.selection.hasValue() && !this.isAllSelected()
+    return this.getPageData().some((row) => this.selection.isSelected(row)) && !this.isPageSelected()
   }
 
   // condition for master disabled
