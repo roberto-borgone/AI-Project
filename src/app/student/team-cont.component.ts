@@ -131,6 +131,7 @@ export class TeamContComponent implements OnDestroy{
     this.subscriptions.add(this.teamService.reject(id).subscribe(result => {
       
       console.log(result)
+      this.getStudents()
       this.getTeamMembers()
       this.getProposals()
       this.getTeamPropStudent()
