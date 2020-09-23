@@ -13,8 +13,8 @@ import { OwnerDialogComponent } from '../teacher/owner-dialog.component';
 import { SettingsVmDialogComponent } from './settings-vm-dialog.component';
 import { TeamService } from '../services/team.service';
 import { NewOwnerDialogComponent } from './new-owner-dialog.component';
-import { OpenVmDialogComponent } from './open-vm-dialog.component';
 import { ErrorMaxActiveVmComponent } from './error-max-active-vm.component';
+import { OpenVmDialogComponent } from '../open-vm-dialog.component';
 
 @Component({
   selector: 'app-student-vms-cont',

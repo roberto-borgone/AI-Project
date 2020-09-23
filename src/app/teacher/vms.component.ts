@@ -55,6 +55,9 @@ export class VmsComponent {
   @Output()
   onUpdateCourseVM: EventEmitter<any>
 
+  @Output()
+  onOpenVM: EventEmitter<any>
+
   colsToDisplay: string[] = ['id', 'name', 'maxRAM', 'maxDisk', 'maxVCPU', 'maxActiveVM', 'maxTotVM', 'buttons']
   colsToDisplayVM: string[] = ['on', 'id', 'ram', 'virtualCpu', 'disk', 'teamID', 'owners', 'path']
 
@@ -102,6 +105,7 @@ export class VmsComponent {
     this.onShowOwners = new EventEmitter<Student[]>()
     this.onUpdateCourseVM = new EventEmitter()
     this.onShowInfo = new EventEmitter()
+    this.onOpenVM = new EventEmitter()
     this.open = false
   }
 
@@ -113,8 +117,8 @@ export class VmsComponent {
     this.onShowOwners.emit(students)
   }
 
-  startVM(vm: VM){
-    console.log("VM " + vm.id + " has started")
+  openVM(vm: VM){
+    this.onOpenVM.emit(vm)
   }
 
   updateCourseVM() {

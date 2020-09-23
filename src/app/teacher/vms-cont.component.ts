@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { TeamService } from '../services/team.service';
 import { Subscription } from 'rxjs';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { UpdateVMDialogComponent } from './update-vm-dialog.component';
 import { FormControl, Validators } from '@angular/forms';
 import { NavigationEnd, Router } from '@angular/router';
@@ -14,6 +14,7 @@ import { Team } from '../models/team.model';
 import { VM } from '../models/vm.model';
 import { Student } from '../models/student.model';
 import { Resources } from '../models/resources.model';
+import { OpenVmDialogComponent } from '../open-vm-dialog.component';
 
 @Component({
   selector: 'app-vms-cont',
@@ -208,6 +209,20 @@ export class VmsContComponent implements OnDestroy {
       width: '400px',
       data: {students: students}
     });
+  }
+
+  showOpenVM(vm: VM) {
+    console.log("Sono in showVMDialog")
+    this.subscriptions.add(this.vmService.getVMImage(vm).subscribe(img => {
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.width = '98vw';
+      dialogConfig.maxWidth = '98vw';
+      dialogConfig.height = '98vh';
+      dialogConfig.data = img;
+  
+      let dialogRef = this.dialog.open(OpenVmDialogComponent, dialogConfig);
+      this.subscriptions.add(dialogRef.afterClosed().subscribe());
+    }))
   }
 
   ngOnDestroy(){
