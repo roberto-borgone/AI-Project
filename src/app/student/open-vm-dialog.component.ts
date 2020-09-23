@@ -18,4 +18,8 @@ export class OpenVmDialogComponent implements OnInit {
   ngOnInit () {
     this.imageSource = this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${this.data}`);
   }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 }
