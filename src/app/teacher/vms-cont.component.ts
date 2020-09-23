@@ -139,7 +139,7 @@ export class VmsContComponent implements OnDestroy {
         this.maxActiveVM.reset()
       }
       
-      console.log("Created")
+      //console.log("Created")
 
     }));
     
@@ -195,7 +195,7 @@ export class VmsContComponent implements OnDestroy {
   showInfo(open: boolean){
     
     if(open === true){
-      console.log("Aperto")
+      //console.log("Aperto")
       this.dialogInfo = this.dialog.open(DialogInfo);
     } else if(open === false){
       this.dialogInfo.close();
@@ -212,7 +212,7 @@ export class VmsContComponent implements OnDestroy {
   }
 
   showOpenVM(vm: VM) {
-    console.log("Sono in showVMDialog")
+    //console.log("Sono in showVMDialog")
     this.subscriptions.add(this.vmService.getVMImage(vm).subscribe(img => {
       const dialogConfig = new MatDialogConfig();
       dialogConfig.width = '98vw';

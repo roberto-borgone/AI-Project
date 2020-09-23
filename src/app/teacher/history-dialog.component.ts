@@ -36,6 +36,8 @@ export class HistoryDialogComponent {
   buttonDisable: boolean;
   isDisabledSetVote: boolean;
   isDisabledFileUpload: boolean;
+  isButtonDisabledOn: boolean;
+  isButtonDisabledOff: boolean;
 
   constructor(public dialogHistory: MatDialogRef<HistoryDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData, private assignmentService: AssignmentService, private dialog: MatDialog) {
@@ -52,6 +54,8 @@ export class HistoryDialogComponent {
         this.isDisabledVoto = true;
         this.isDisabledSetVote = true;
         this.isDisabledFileUpload = true;
+        this.isButtonDisabledOff = true;
+        this.isButtonDisabledOn = true;
       }
 
       
@@ -107,6 +111,8 @@ export class HistoryDialogComponent {
             this.isDisabledSetVote = true;
             this.isDisabledLode = true;
             this.isDisabledFileUpload = true;
+            this.isButtonDisabledOff = true;
+            this.isButtonDisabledOn = true;
             //this.assignmentService.getStudentHistory(this.data.lastWork.consegnaId, this.data.lastWork.studentId).subscribe(history => this.dataSource = new MatTableDataSource(history))
             this.dialogHistory.close();
           }

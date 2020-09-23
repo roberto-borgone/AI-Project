@@ -25,8 +25,8 @@ export class WorkDialogComponent {
 
   constructor(public dialogRef: MatDialogRef<WorkDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: LastWork[], private assignmentService: AssignmentService, private dialog: MatDialog) {
-      console.log("Sono nel costruttore");
-      console.log(data)
+      //console.log("Sono nel costruttore");
+      //console.log(data)
       this.dataSource = new MatTableDataSource(data)
       this.dataSource.paginator = this.paginator
      }
@@ -37,15 +37,15 @@ export class WorkDialogComponent {
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    console.log(filterValue);
+    //console.log(filterValue);
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   showHistory(lastWork : LastWork) {
-    console.log("showHistory in work-dialog.ts")
-    console.log(lastWork);
+    //console.log("showHistory in work-dialog.ts")
+    //console.log(lastWork);
     this.subscriptions.add(this.assignmentService.getStudentHistory(lastWork.consegnaId, lastWork.studentId).subscribe(history => {
-      console.log(history); 
+      //console.log(history); 
 
       const dialogConfig = new MatDialogConfig();
       dialogConfig.width = '80%';

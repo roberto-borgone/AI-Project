@@ -3,11 +3,11 @@
 <br>
 <mat-form-field style="margin-right: 20px;" color="primary" appearance="fill">
     <mat-label>Data di scadenza</mat-label>
-    <input matInput type="datetime-local" [formControl]="data.dueDate">
+    <input matInput type="datetime-local" [formControl]="data.dueDate" (change)="onChangeDate()">
 </mat-form-field>
 <button [disabled]="!isValid" class="button" mat-button color="primary" (click)="onClick()"><mat-icon>file_upload</mat-icon> {{testo}}</button>
 <input type="file" id="imageUpload" accept="image/*"(change)="handleImageSelect($event)" style="display:none;">
 <p class="error">{{data.error}}</p>
 <br>
-<button mat-raised-button color="primary" [mat-dialog-close]="data" [disabled]="isDisabled" >Crea</button>
+<button mat-raised-button color="primary" [mat-dialog-close]="data" [disabled]="isDisabled">Crea</button>
 <button mat-raised-button (click)="onNoClick()">Annulla</button>

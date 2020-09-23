@@ -46,7 +46,7 @@ export class WorksDialogComponent {
       this.works.paginator = this.paginator;
       this.lastWork = new MatTableDataSource(data.lastWorkData)
 
-      if(data.lastWorkData[0].updateable == false || (data.lastWorkData[0].status != 'RIVISTO' && data.lastWorkData[0].status != 'LETTO')) {
+      if(data.lastWorkData[0].updateable == false || data.lastWorkData[0].status == 'CONSEGNATO'|| (data.lastWorkData[0].status != 'RIVISTO' && data.lastWorkData[0].status != 'LETTO')) {
         this.isDisabledFileUpload = true;
         this.testoButton = "Consegna disabilitata"
       }
@@ -89,6 +89,8 @@ export class WorksDialogComponent {
           lastWorkArray.push(res);
           console.log(lastWorkArray);
           this.lastWork = new MatTableDataSource(lastWorkArray);
+          this.isDisabledFileUpload = true;
+          this.testoButton = "Consegna disabilitata"
         }))
       }))
     }));
