@@ -80,7 +80,7 @@
   <button mat-raised-button 
           color="primary" 
           [mat-dialog-close]="data" 
-          [disabled]="data.courseName.invalid || data.courseAcronimo.invalid || data.courseMin.invalid || data.courseMax.invalid || data.courseEnabled.invalid || data.courseNameVM.invalid || data.courseVersionVM.invalid">
+          [disabled]="data.courseName.invalid || data.courseAcronimo.invalid || data.courseMin.invalid || data.courseMax.invalid || data.courseEnabled.invalid || data.courseNameVM.invalid || data.courseVersionVM.invalid || data.courseMin.value > data.courseMax.value">
           Crea
   </button>
   <button mat-raised-button (click)="onNoClick()">Annulla</button>

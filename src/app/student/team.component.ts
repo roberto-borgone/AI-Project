@@ -59,8 +59,8 @@ export class TeamComponent {
 
   @Input()set _studentInProposal(inProposal: Student[]){
     this.studentInProposal = new MatTableDataSource(inProposal)
-    this.studentInProposal.sort = this.sort4
-    this.studentInProposal.paginator = this.paginator4
+    this.studentInProposal.sort = this.sort3
+    this.studentInProposal.paginator = this.paginator3
   }
 
   @Input()
@@ -73,8 +73,8 @@ export class TeamComponent {
   @Input()
   set _proposal(propose: Proposal[]){
     this.teamProposal = new MatTableDataSource(propose)
-    this.teamProposal.sort = this.sort3
-    this.teamProposal.paginator = this.paginator3
+    this.teamProposal.sort = this.sort4
+    this.teamProposal.paginator = this.paginator4
   }
 
 

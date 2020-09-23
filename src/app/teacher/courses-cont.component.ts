@@ -113,7 +113,16 @@ export class CoursesContComponent implements OnDestroy {
 
         // nested observables.. i could have found a more elegant solution to this
         this.subscriptions.add(this.courseService.update(new Course(course.name, result.mcourseAcronimo.value, result.mcourseMin.value, result.mcourseMax.value, course.enabled))
-        .subscribe(result => {this.getCourses()}))
+        .subscribe(result => {
+          this.getCourses()
+          this.mcourseAcronimo.reset()
+          this.mcourseMin.reset()
+          this.mcourseMax.reset()
+        }))
+      }else if(!result){
+        this.mcourseAcronimo.reset()
+        this.mcourseMin.reset()
+        this.mcourseMax.reset()
       }
     }));
   }
