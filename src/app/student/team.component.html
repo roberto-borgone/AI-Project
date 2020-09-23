@@ -120,7 +120,7 @@
 
     <div class="table-container" *ngIf="!this.auth.token.group">
         <h2>Proposte a gruppi</h2>
-        <table mat-table [dataSource]="teamProposal" matSort #sort1="matSort">
+        <table mat-table [dataSource]="teamProposal" matSort #sort4="matSort">
           
           <ng-container matColumnDef="nomegruppo">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Gruppo </th>
@@ -162,7 +162,7 @@
           <tr mat-header-row *matHeaderRowDef="colsToDisplayProposal; sticky: true"></tr>
           <tr mat-row *matRowDef="let row; columns: colsToDisplayProposal;"></tr>
         </table>
-        <mat-paginator #pag1 [pageSize]="5"
+        <mat-paginator #pag4 [pageSize]="5"
                    [pageSizeOptions]="[5, 10, 25, 100]"
                    showFirstLastButtons="true">
         </mat-paginator>

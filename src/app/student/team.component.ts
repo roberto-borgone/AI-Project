@@ -34,6 +34,12 @@ export class TeamComponent {
   @ViewChild('pag3', {read: MatPaginator}) 
   paginator3: MatPaginator
 
+  @ViewChild('sort4', {read: MatSort, static: true})
+  sort4: MatSort
+
+  @ViewChild('pag4', {read: MatPaginator}) 
+  paginator4: MatPaginator
+
   myTeam: MatTableDataSource<Student>
   enrolledStudents: MatTableDataSource<Student>
   studentInProposal: MatTableDataSource<Student>
@@ -53,8 +59,8 @@ export class TeamComponent {
 
   @Input()set _studentInProposal(inProposal: Student[]){
     this.studentInProposal = new MatTableDataSource(inProposal)
-    this.studentInProposal.sort = this.sort
-    this.studentInProposal.paginator = this.paginator
+    this.studentInProposal.sort = this.sort4
+    this.studentInProposal.paginator = this.paginator4
   }
 
   @Input()
@@ -92,10 +98,8 @@ export class TeamComponent {
   }
 
   teamUpSelected(){
-    if(this.selection.selected.length != 0){
-      this.onTeamUp.emit(this.selection.selected)
-      this.selection = new SelectionModel<Student>(true, [])
-    }
+    this.onTeamUp.emit(this.selection.selected)
+    this.selection = new SelectionModel<Student>(true, [])
   }
 
   toggleSelectionRow(event: Event, student: Student) {
