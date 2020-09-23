@@ -6,11 +6,11 @@
     </button>
     <input type="file" id="imageUpload" accept="image/*"(change)="handleImageSelect($event)" style="display:none;">
 
-    <button *ngIf = "buttonDisable" mat-raised-button color="accent" (click)="disable()">
+    <button *ngIf = "buttonDisable" mat-raised-button color="accent" [disabled] = "isButtonDisabledOff" (click)="disable()">
       Riabilita consegne
     </button>
 
-    <button *ngIf = "!buttonDisable" mat-raised-button color="primary"  (click)="disable()">
+    <button *ngIf = "!buttonDisable" mat-raised-button color="primary" [disabled] = "isButtonDisabledOn" (click)="disable()">
       Disabilita consegne
     </button>
     <br>

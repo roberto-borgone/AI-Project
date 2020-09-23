@@ -37,6 +37,10 @@ export class NewAssignmentDialogComponent implements OnInit {
     fileUpload.click();
   }
 
+  onChangeDate() {
+    this.isDisabled = false
+  }
+
   handleImageSelect(event: any) {
     console.log("Sono in handleImageSelect");
     var files = event.target.files; // FileList object
@@ -44,6 +48,7 @@ export class NewAssignmentDialogComponent implements OnInit {
     this.data.file = file;
     this.testo = "Consegna caricata"
     this.isValid = false
-    this.isDisabled = false
+    if(this.data.dueDate.value!='')
+      this.isDisabled = false
   }
 }
