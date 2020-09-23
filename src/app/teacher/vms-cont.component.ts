@@ -97,7 +97,9 @@ export class VmsContComponent implements OnDestroy {
 
     let dialogRef = this.dialog.open(UpdateVMDialogComponent, {
       width: '400px',
-      data: {maxRAM: this.maxRAM, maxDisk: this.maxDisk, maxVCPU: this.maxVCPU, maxActiveVM: this.maxActiveVM, maxTotVM: this.maxTotVM, updateVMInvalid: this.updateVMInvalid}
+      data: {maxRAM: this.maxRAM, maxDisk: this.maxDisk, maxVCPU: this.maxVCPU, maxActiveVM: this.maxActiveVM, maxTotVM: this.maxTotVM, updateVMInvalid: this.updateVMInvalid,
+        placeholders: {maxRAM: team.maxRAM, maxDisk: team.maxDisk, maxVCPU: team.maxVCPU, maxActiveVM: team.maxActiveVM, maxTotVM: team.maxTotVM}
+      }
     });
 
     this.subscriptions.add(dialogRef.afterClosed().subscribe(result => {
@@ -146,11 +148,13 @@ export class VmsContComponent implements OnDestroy {
 
     let dialogRef = this.dialog.open(UpdateVMDialogComponent, {
       width: '400px',
-      data: {maxRAM: this.maxRAM, maxDisk: this.maxDisk, maxVCPU: this.maxVCPU, maxActiveVM: this.maxActiveVM, maxTotVM: this.maxTotVM, updateVMInvalid: this.updateVMInvalid, message : this.message}
+      data: {maxRAM: this.maxRAM, maxDisk: this.maxDisk, maxVCPU: this.maxVCPU, maxActiveVM: this.maxActiveVM, maxTotVM: this.maxTotVM, updateVMInvalid: this.updateVMInvalid, message : this.message,
+        placeholders: {maxRAM: this.courseService.currentCourse.maxRAM, maxDisk: this.courseService.currentCourse.maxDisk, maxVCPU: this.courseService.currentCourse.maxVirtualCPU, maxActiveVM: this.courseService.currentCourse.maxActiveVM, maxTotVM: this.courseService.currentCourse.maxTotVM}
+      }
     });
 
     this.subscriptions.add(dialogRef.afterClosed().subscribe(result => {
-      if(result && result.maxRAM.valid, result.maxDisk.valid, result.maxVCPU.valid, result.maxActiveVM.valid, result.maxTotVM.valid){
+      if(result && result.maxRAM.valid && result.maxDisk.valid && result.maxVCPU.valid && result.maxActiveVM.valid && result.maxTotVM.valid){
 
         // nested observables.. i could have found a more elegant solution to this
         this.subscriptions.add(this.teamService.updateCourseVM(result.maxRAM.value, result.maxDisk.value, result.maxVCPU.value, result.maxActiveVM.value, result.maxTotVM.value)

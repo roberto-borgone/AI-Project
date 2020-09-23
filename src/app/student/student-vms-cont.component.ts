@@ -80,7 +80,7 @@ export class StudentVmsContComponent implements OnDestroy{
 
     let dialogRef = this.dialog.open(SettingsVmDialogComponent, {
       width: '400px',
-      data: {ram: this.ram, disk: this.disk, vCPU: this.vCPU, invalid: this.invalid, message: this.message}
+      data: {ram: this.ram, disk: this.disk, vCPU: this.vCPU, invalid: this.invalid, message: this.message, vm: vm}
     });
 
     this.subscriptions.add(dialogRef.afterClosed().subscribe(result => {

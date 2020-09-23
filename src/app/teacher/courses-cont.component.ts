@@ -105,7 +105,7 @@ export class CoursesContComponent implements OnDestroy {
   openDialogModifyCourse(course: Course): void {
     let dialogRef = this.dialog.open(ModifyCourseDialogComponent, {
       width: '400px',
-      data: {mcourseAcronimo: this.mcourseAcronimo, mcourseMin: this.mcourseMin, mcourseMax: this.mcourseMax}
+      data: {mcourseAcronimo: this.mcourseAcronimo, mcourseMin: this.mcourseMin, mcourseMax: this.mcourseMax, course: course}
     });
 
     this.subscriptions.add(dialogRef.afterClosed().subscribe(result => {

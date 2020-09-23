@@ -2,27 +2,27 @@
 <div mat-dialog-content>
   <mat-form-field>
     <mat-label>Max quantità di RAM (GB)</mat-label>
-    <input matInput type="number" placeholder="1" [formControl]="data.maxRAM" required>
+    <input matInput type="number" [placeholder]="data.placeholders.maxRAM" [formControl]="data.maxRAM" required>
     <mat-error *ngIf="data.maxRAM.invalid">{{getErrorMessageMaxRAM(data.maxRAM)}}</mat-error>
   </mat-form-field>
   <mat-form-field>
     <mat-label>Max quantità di Disk (GB)</mat-label>
-    <input matInput type="number" placeholder="1" [formControl]="data.maxDisk" required>
+    <input matInput type="number" [placeholder]="data.placeholders.maxDisk" [formControl]="data.maxDisk" required>
     <mat-error *ngIf="data.maxDisk.invalid">{{getErrorMessageMaxDisk(data.maxDisk)}}</mat-error>
   </mat-form-field>
   <mat-form-field>
     <mat-label>Max quantità di VCPU</mat-label>
-    <input matInput type="number" placeholder="1" [formControl]="data.maxVCPU" required>
+    <input matInput type="number" [placeholder]="data.placeholders.maxVCPU" [formControl]="data.maxVCPU" required>
     <mat-error *ngIf="data.maxVCPU.invalid">{{getErrorMessageMaxVCPU(data.maxVCPU)}}</mat-error>
   </mat-form-field>
   <mat-form-field>
     <mat-label>Max numero di VM attive</mat-label>
-    <input matInput type="number" placeholder="1" [formControl]="data.maxActiveVM" required>
+    <input matInput type="number" [placeholder]="data.placeholders.maxActiveVM" [formControl]="data.maxActiveVM" required>
     <mat-error *ngIf="data.maxActiveVM.invalid">{{getErrorMessageMaxActiveVM(data.maxActiveVM)}}</mat-error>
   </mat-form-field>
   <mat-form-field>
     <mat-label>Max numero totale di VM</mat-label>
-    <input matInput type="number" placeholder="1" [formControl]="data.maxTotVM" required>
+    <input matInput type="number" [placeholder]="data.placeholders.maxTotVM" [formControl]="data.maxTotVM" required>
     <mat-error *ngIf="data.maxTotVM.invalid">{{getErrorMessageMaxTotVM(data.maxTotVM)}}</mat-error>
   </mat-form-field>
   <mat-error *ngIf="data.updateVMInvalid">{{getMessage()}}</mat-error>

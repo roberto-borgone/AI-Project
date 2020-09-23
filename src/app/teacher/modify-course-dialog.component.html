@@ -1,17 +1,18 @@
 <h2 mat-dialog-title>Modifica corso</h2>
 <div mat-dialog-content>
   <mat-form-field>
-    <input matInput placeholder="Acronimo" [formControl]="data.mcourseAcronimo" required>
+    <mat-label>Acronimo</mat-label>
+    <input matInput [placeholder]="data.course.acronimo" [formControl]="data.mcourseAcronimo" required>
     <mat-error *ngIf="data.mcourseAcronimo.invalid">{{getErrorMessageAcronimo(data.mcourseAcronimo)}}</mat-error>
   </mat-form-field>
   <mat-form-field>
     <mat-label>Min</mat-label>
-    <input matInput type="number" placeholder="1" [formControl]="data.mcourseMin" required>
+    <input matInput type="number" [placeholder]="data.course.min" [formControl]="data.mcourseMin" required>
     <mat-error *ngIf="data.mcourseMin.invalid">{{getErrorMessageMin(data.mcourseMin)}}</mat-error>
   </mat-form-field>
   <mat-form-field>
     <mat-label>Max</mat-label>
-    <input matInput type="number" placeholder="1" [formControl]="data.mcourseMax" required>
+    <input matInput type="number" [placeholder]="data.course.max" [formControl]="data.mcourseMax" required>
     <mat-error *ngIf="data.mcourseMax.invalid">{{getErrorMessageMax(data.mcourseMax)}}</mat-error>
   </mat-form-field>
 </div>

@@ -2,11 +2,13 @@ import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormControl } from '@angular/forms';
+import { Course } from '../models/course.model';
 
 export interface DialogData {
   mcourseAcronimo: FormControl;
   mcourseMin: FormControl;
-  mcourseMax: FormControl; 
+  mcourseMax: FormControl;
+  course: Course 
 }
 
 @Component({

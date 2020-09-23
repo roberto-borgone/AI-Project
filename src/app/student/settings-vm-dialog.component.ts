@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { VM } from '../models/vm.model';
 
 export interface DialogData {
   ram: FormControl;
@@ -9,6 +10,7 @@ export interface DialogData {
   vCPU: FormControl;
   invalid: boolean; 
   message: String;
+  vm: VM
 }
 
 @Component({
