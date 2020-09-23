@@ -165,7 +165,7 @@ export class VmService {
 
     let PATH = 'https://localhost:4200/api/API/vms';
 
-    return this.http.get<string>(PATH + '/' + vm.id + '/getVM')
+    return this.http.get(PATH + '/' + vm.id + '/getVM', {responseType: 'text'})
     .pipe(
       catchError( err => {
         console.error(err)

@@ -121,7 +121,7 @@ export class StudentVmsContComponent implements OnDestroy{
 
     let dialogRef = this.dialog.open(SettingsVmDialogComponent, {
       width: '400px',
-      data: {ram: this.ram, disk: this.disk, vCPU: this.vCPU, invalid: this.invalid, message: this.message}
+      data: {ram: this.ram, disk: this.disk, vCPU: this.vCPU, invalid: this.invalid, message: this.message, vm: new VM(0, -1, -1, -1, false, '', 0, [])}
     });
 
     this.subscriptions.add(dialogRef.afterClosed().subscribe(result => {
@@ -190,8 +190,9 @@ export class StudentVmsContComponent implements OnDestroy{
     console.log("Sono in showVMDialog")
     this.subscriptions.add(this.vmService.getVMImage(vm).subscribe(img => {
       const dialogConfig = new MatDialogConfig();
-      dialogConfig.width = '98%';
-      dialogConfig.height = '70%';
+      dialogConfig.width = '98vw';
+      dialogConfig.maxWidth = '98vw';
+      dialogConfig.height = '98vh';
       dialogConfig.data = img;
   
       let dialogRef = this.dialog.open(OpenVmDialogComponent, dialogConfig);
